@@ -11,8 +11,8 @@ namespace ProjectZephyr
 
         public void Move()
         {
-            var TargetVector = inputHandler.InputVector.x;
-            //transform.position.x +=TargetVector;
+            var TargetVector = inputHandler.InputVector;
+            transform.position += (new Vector3(TargetVector.x,TargetVector.y))*Time.deltaTime;
             //var MovementVector = MoveTowardTarget(TargetVector.normalized);
             //RotateTowardMovementVector(MovementVector);
         }
