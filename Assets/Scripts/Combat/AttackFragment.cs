@@ -10,7 +10,7 @@ namespace ProjectZephyr
         protected const string animationName = "Attack";
         public AnimatorOverrideController animatorOverride;
 
-        public float damageMultiplier = 0.70f;
+        public float damageMultiplier = 1f;
 
         public AttackFragment(GameObject o, string AnimatorPath) 
         {
