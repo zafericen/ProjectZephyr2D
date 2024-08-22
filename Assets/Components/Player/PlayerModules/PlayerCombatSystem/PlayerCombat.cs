@@ -7,7 +7,6 @@ namespace ProjectZephyr
     public class PlayerCombat : MonoBehaviour
     {
         [SerializeField] private GameObject weaponPrefab;
-        [SerializeField] private Transform weaponParent;
 
         public WeaponBase weapon { get; set; }
 
@@ -24,7 +23,7 @@ namespace ProjectZephyr
        
         private void Start()
         {
-            GameObject weaponObject = Instantiate(weaponPrefab, weaponParent);
+            GameObject weaponObject = Instantiate(weaponPrefab,this.transform);
             weapon = weaponObject.GetComponent<WeaponBase>();
             weapon.InitializeWeapon(gameObject);
         }

@@ -12,7 +12,7 @@ namespace ProjectZephyr
         {
             var h = Input.GetAxis("Horizontal");
             var v = Input.GetAxis("Vertical");
-            InputVector = new Vector2(h, v);
+            InputVector = new Vector2(h, 0);
 
             MousePosition = Input.mousePosition;
         }

@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 8205385416877806655}
   - component: {fileID: 2750873260274640305}
   - component: {fileID: 7113644328319931296}
+  - component: {fileID: 8829690751716502594}
+  - component: {fileID: 1682194368876287375}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -84,11 +86,11 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 7.0709634
+  m_UseAutoMass: 0
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -154,6 +156,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slideSpeed: 20
+--- !u!114 &8829690751716502594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6505969055839902895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b5fddd25cb7594685113e07194a32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 6418945125598597700, guid: 551537c55ce943640b5cabdcc9aa165c, type: 3}
+--- !u!114 &1682194368876287375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6505969055839902895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4d7707b02127448b96806065908442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 300
 --- !u!1 &8571014928495302199
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,9 +19,10 @@ namespace ProjectZephyr
 
         public virtual void OnExit()
         {
+            busy = false;
         }
 
-        public bool IsBusy()
+        public virtual bool IsBusy()
         {
             return busy;
         }

@@ -8,11 +8,16 @@ namespace ProjectZephyr
         [SerializeField] private float rotationSpeed;
         [SerializeField] private Camera cam;
         [SerializeField] private InputHandler inputHandler;
+        Rigidbody2D rb;
 
+        void Start ()
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
         public void Move()
         {
             var TargetVector = inputHandler.InputVector;
-            transform.position += (new Vector3(TargetVector.x,TargetVector.y))*Time.deltaTime;
+            rb.velocity = new Vector2(TargetVector.x,TargetVector.y);
             //var MovementVector = MoveTowardTarget(TargetVector.normalized);
             //RotateTowardMovementVector(MovementVector);
         }

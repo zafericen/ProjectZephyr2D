@@ -36,12 +36,17 @@ namespace ProjectZephyr
 
             foreach (var connection in current.connections)
             {
-                if (connection.Check())
+                if (connection.Check() && !GetState(connection.stateName).IsBusy())
                 {
                     ChangeState(connection.stateName);
                     break;
                 }
             }
+        }
+
+        private State GetState(string name)
+        {
+            return states[name];
         }
 
         public void AddState(string name, State state)
