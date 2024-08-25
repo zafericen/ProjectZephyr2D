@@ -14,7 +14,7 @@ namespace ProjectZephyr
         public void Dodge()
         {
             rb.velocity = Vector2.zero;
-            transform.position += transform.right * slideSpeed * Time.deltaTime;
+            transform.position += transform.right*Mathf.Sign(transform.localScale.x) * slideSpeed * Time.deltaTime;
         }
     }
 }

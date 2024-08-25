@@ -9,6 +9,7 @@ namespace ProjectZephyr
         [SerializeField] private Camera cam;
         [SerializeField] private InputHandler inputHandler;
         Rigidbody2D rb;
+        bool facingRight = true;
 
         void Start ()
         {
@@ -17,10 +18,30 @@ namespace ProjectZephyr
         public void Move()
         {
             var TargetVector = inputHandler.InputVector;
-            rb.velocity = new Vector2(TargetVector.x,TargetVector.y);
+            if((TargetVector.x > 0 && !facingRight) || (TargetVector.x < 0 && facingRight))
+            {
+                FlipDirection();
+            }
+            rb.velocity = new Vector2(TargetVector.x*moveSpeed,rb.velocity.y);
             //var MovementVector = MoveTowardTarget(TargetVector.normalized);
             //RotateTowardMovementVector(MovementVector);
         }
+
+        public void Stop()
+        {
+            rb.velocity = Vector2.zero;
+        }
+
+        void FlipDirection()
+        {
+            Vector3 currScale = transform.localScale;
+            currScale.x *= -1;
+            transform.localScale = currScale;
+
+            facingRight = !facingRight;
+        }
+
+
 
         //private void RotateTowardMovementVector(Vector3 movementVector)
         //{

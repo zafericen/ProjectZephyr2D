@@ -23,6 +23,12 @@ namespace ProjectZephyr
             movement.Move();
         }
 
+        public override void OnExit()
+        {
+            base.OnExit();
+            //movement.Stop();
+        }
+
         public override void playStateAnimation()
         {
             animator.Play("Running");

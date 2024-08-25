@@ -10,8 +10,8 @@ namespace ProjectZephyr
 
         private void Update()
         {
-            var h = Input.GetAxis("Horizontal");
-            var v = Input.GetAxis("Vertical");
+            var h = Input.GetAxisRaw("Horizontal");
+            var v = Input.GetAxisRaw("Vertical");
             InputVector = new Vector2(h, 0);
 
             MousePosition = Input.mousePosition;
