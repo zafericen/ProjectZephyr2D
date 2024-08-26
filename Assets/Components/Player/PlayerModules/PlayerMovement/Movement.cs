@@ -27,11 +27,6 @@ namespace ProjectZephyr
             //RotateTowardMovementVector(MovementVector);
         }
 
-        public void Stop()
-        {
-            rb.velocity = Vector2.zero;
-        }
-
         void FlipDirection()
         {
             Vector3 currScale = transform.localScale;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpSpeed;
     Rigidbody2D rb;
 
     private void Start()
@@ -13,12 +13,17 @@ public class PlayerJump : MonoBehaviour
     }
     public void Jump()
     {
-        rb.AddForce((new Vector2(rb.velocity.x, jumpForce)));
+        rb.velocity = ((new Vector2(rb.velocity.x, jumpSpeed)));
+    }
+
+    public void StopJump()
+    {
+        rb.velocity = (new Vector2(rb.velocity.x, 0));
     }
 
     public bool IsOnGround()
     {
-        if (Mathf.Approximately(rb.velocity.y, 0)) return true;
+        if (Mathf.Approximately(rb.velocity.y, 0) && rb.GetContacts(GetComponents<CapsuleCollider2D>()) > 0) return true;
         return false;
     }
 }

@@ -26,7 +26,6 @@ namespace ProjectZephyr
         public override void OnExit()
         {
             base.OnExit();
-            //movement.Stop();
         }
 
         public override void playStateAnimation()

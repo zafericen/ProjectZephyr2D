@@ -29,13 +29,19 @@ namespace ProjectZephyr
 
         public override void OnUpdate()
         {
-            if (jumping.IsOnGround())
+            if (jumping.IsOnGround() || !Input.GetKey(KeyCode.C))
             {
                 busy = false;
             }
         }
 
-        
+        public override void OnExit()
+        {
+            base.OnExit();
+            jumping.StopJump();
+        }
+
+
 
         public override void playStateAnimation()
         {
