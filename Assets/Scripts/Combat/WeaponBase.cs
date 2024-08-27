@@ -20,11 +20,11 @@ namespace ProjectZephyr
             currentFragment.Perform();
         }
 
-        public virtual void InitializeWeapon(GameObject o)
+        public virtual void InitializeWeapon(GameObject attackPerformer)
         {
-            InitializeNormalAttackFragment(o);
-            InitializeSpecialAttackFragment(o);
-            InitializeWeaponArtFragment(o);
+            InitializeNormalAttackFragment(attackPerformer);
+            InitializeSpecialAttackFragment(attackPerformer);
+            InitializeWeaponArtFragment(attackPerformer);
         }
 
         public bool IsAttacking()
@@ -37,9 +37,9 @@ namespace ProjectZephyr
             return false;
         }
 
-        protected abstract void InitializeNormalAttackFragment(GameObject o);
-        protected abstract void InitializeSpecialAttackFragment(GameObject o);
-        protected abstract void InitializeWeaponArtFragment(GameObject o);
+        protected abstract void InitializeNormalAttackFragment(GameObject attackPerformer);
+        protected abstract void InitializeSpecialAttackFragment(GameObject attackPerformer);
+        protected abstract void InitializeWeaponArtFragment(GameObject attackPerformer);
 
         protected abstract void DealDamage(Health health);
 

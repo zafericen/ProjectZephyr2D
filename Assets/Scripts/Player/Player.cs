@@ -24,6 +24,7 @@ namespace ProjectZephyr
             stateMachine.AddState(nameof(PlayerSpecialAttackState), new PlayerSpecialAttackState(gameObject));
             stateMachine.AddState(nameof(PlayerWeaponArtState), new PlayerWeaponArtState(gameObject));
             stateMachine.AddState(nameof(PlayerJumpState), new PlayerJumpState(gameObject));
+            stateMachine.AddState(nameof(PlayerAbilityState), new PlayerAbilityState(gameObject));
 
             stateMachine.ChangeState(nameof(PlayerIdleState));
         }

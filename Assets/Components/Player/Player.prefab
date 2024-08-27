@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7113644328319931296}
   - component: {fileID: 8829690751716502594}
   - component: {fileID: 1682194368876287375}
+  - component: {fileID: 5911709331377286512}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -182,6 +183,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSpeed: 10
+--- !u!114 &5911709331377286512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6505969055839902895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6817a51188590b942aa5570157ddc1b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotPrefab: {fileID: 7401049114578183601, guid: 24f10ed7bf8687d4cb5d13613638824b, type: 3}
 --- !u!1 &8571014928495302199
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,10 +12,10 @@ namespace ProjectZephyr
 
         public float damageMultiplier = 1f;
 
-        public AttackFragment(GameObject o, string AnimatorPath) 
+        public AttackFragment(GameObject attackPerformer, string AnimatorPath) 
         {
-            attackPerformer = o;
-            animator = o.GetComponentInChildren<Animator>();
+            this.attackPerformer = attackPerformer;
+            animator = attackPerformer.GetComponentInChildren<Animator>();
             LoadAnimator(AnimatorPath);
         }
 
