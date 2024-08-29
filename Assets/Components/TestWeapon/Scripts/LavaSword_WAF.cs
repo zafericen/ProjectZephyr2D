@@ -12,7 +12,7 @@ namespace ProjectZephyr
 
         public override void ApplyLogic()
         {
-            animator.Play(animationName, 0, 0.0f);
+            animator.Play(animationName, 0, 0.5f);
         }
 
     }

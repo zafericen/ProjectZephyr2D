@@ -1,0 +1,35 @@
+Game Scope:
+	- 2D side scroller:
+		-- Level design tanrılara layık olmalı (hep dungeon geziyormuş gibi hissettirmemeli)
+		-- Keşif hissinin ve Ability kullanıma uygun bir ortam olması lazım
+
+	- Augment Sistemi (bosslar öldürüldükten sonra gelecek, her bir bosun tek augmenti kullanılabilecek):
+		-- Belli noktalarda tekrar değiştirilebilir ve kullanılabilir
+		-- Oyundan çıkarsa ilk çıkacak mekanik
+	
+	- Open World(herhangi bir bossa oyunu en başında ulaşılabilecek):
+		-- Her bossa her an erişebiliyoruz, son boss çok güçlü seni yok ediyor
+		-- Bossların karakteristik movesetleri, domainleri ve özellikleri var
+	
+	- Ability Sistemi(birden çok durum için kullanılabilir, esnek olmalı):
+		-- Abilityler her an değiştirilebilecek mi yoksa belli noktalardan mı alınabilecek(GameTeste kaldı)
+		-- Etrafta sabit noktalardan ve/veya düşmanlardan bulunacaklar, düşme RNG yok
+		-- Güçleri tek başlarına kullanımda değil kombo potansiyalinde yatacak
+	
+	- Silahların herbirinin 1 tane rolü olacak(karma rolleri olabilir):
+		-- Carry(Hızlı gezinip hasar verdikçe kendini korur)
+		-- Tank(Az hasar alır ve hasar yedikçe vurur)
+		-- Support(kendi işini başkasına yaptırır **Warlock,Summoner,Necromencer**)
+		*** Silahların hepsi kendine has olacak
+		
+	-Level base progession yok, toollar(silah,ability,augment) artıcak:
+		-- İlerleme hissini azaltmaması açısından tüm dünya sabit bir şekilde durup değişmeyecek
+		-- Progression kombo rahatlığıyla oyuncuya aktarılacak
+
+
+Demo Scope:
+	- Tek Boss Chamber**(Değiştirilebilir):
+		-- Silah ve yetenekleri deneyecek basit düşmanlar bossa giderken karşılaşılsın
+	- 4 Silah
+	- 5 ability
+	- Basic yol ve level tasarımı(abilityleri kukllanabileceğimiz)

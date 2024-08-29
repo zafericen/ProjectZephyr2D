@@ -27,7 +27,9 @@ public class TestWeapon : WeaponBase
     {
         weaponArtFragments = new List<AttackFragment>
         {
-            new LavaSword_WAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/WA_1.overrideController")
+            new LavaSword_WAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/WA_1.overrideController"),
+            new LavaSword_WAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/SA_1.overrideController"),
+            new LavaSword_WAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/SA_2.overrideController")
         };
     }
 

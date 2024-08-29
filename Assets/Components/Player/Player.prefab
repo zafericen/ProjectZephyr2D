@@ -87,11 +87,11 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 0.045472175
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85088d00c66eb9c48932ec6fd78bb9e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  rotationSpeed: 2
+  moveSpeed: 2
+  rotationSpeed: 1
   cam: {fileID: 0}
   inputHandler: {fileID: 2950607650155928475}
 --- !u!114 &2750873260274640305
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47dc557b880c5448bf36a75f6b33478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideSpeed: 20
+  slideSpeed: 5
 --- !u!114 &8829690751716502594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4d7707b02127448b96806065908442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 10
+  jumpSpeed: 8
 --- !u!114 &5911709331377286512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1314435876, guid: 0ecf03961c5925046b943cb8bea3c213, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

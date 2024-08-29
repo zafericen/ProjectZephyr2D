@@ -1,0 +1,31 @@
+Archangel of Death:
+
+- Tasarımı genel olarak Malthael gibi olmalı. Biraz Sauron esintisi eklenebilir.
+- Grim Reaper tarzı büyük bir Orak kullanacak. Two-handed Mace.
+- Orak tasarlanırken Malthael'in çift orağı ve Lich King'in Frostmourne'u birleşimi bir tarz yapılabilir. Orakta mutlaka kurukafa olmalı ve üzerinde Runelar olmalı. Runelar için internetten Göktürkçe yazı yazma toolu kullanılabilir. Rastgele semboller yerine kendimizden bir şeyler katmış oluruz. Üzerinde ölümle alakalı anlamlı bir söz yazılmalı.
+- Tema olarak siyah ateş ve ruhları simgelemek için de gri sis kullanılacak.
+- Özellikleri genel olarak oyuncudan can çalma, mob spawnlama ve engellenmesi çok zor olan karanlık alevler olacak.
+- Oyuncuya çeşitli debufflar vermesi de sağlanabilir.
+
+
+Player Abilityleri: (Ortalama canı 100 olarak aldım)
+- Fireball: Hedefe büyük bir alev topu atar. Hedefe ulaşana kadar değdiği her hedefe 10 hasar verir ve asıl hedefe 50 hasar verir. Yanabilen hedefleri yakmaya başlar ve söndürülene kadar her saniye 5 hasar verir. Etraftaki yanabilen hedeflere zaman içinde sıçrar. (Ortamdaki eşyalar dahil) Cooldown: 3dk
+
+- Black Flames: Yukarıdaki karakterin bölgesinden ya da kendisinden düşmeli. Seçilen hedefi karanlık alevler içinde bırakır. Her saniye hedefin canından %10 düşer. (Tam can baz alınır). Hedefin yanabilir bir hedef olmasına gerek yoktur. (Etraftaki objeler de hedef alınabilir.) Engellemenin tek yolu rakibin kendi üzerindeki bir veya tüm debuffları kaldıran bir öellik kullanmasıdır. Cooldown: 10dk
+
+- Lightning Strike: Oyuncu bir ayine başlar ve bu süre zarfında vulnerable olur. (5 saniye) Hedeflenen alana gökten yıldırım indirir ve alandaki her hedefe 30 hasar verir. Alan içindeki her iletken için +10 bonus alır. (Düşmanların iletken olup olmama durumu da dahil.) Canı yarıdan fazla inen düşmanlar 5 saniyelik stun yer. Cooldown: 5dk
+
+- Swords of Judgement: Hedefe gökten ışıktan yapılma ruhani kılıç kümesi yağar. Seçilen hedef 8 saniye stun yer. Hedefteki bütün debuffları kaldırır. Eğer hedef ışık hasarı alabiliyorsa canının %50 sini kaybeder. Cooldown: 6dk
+
+- Wall of Fire: Oyuncu önüne alevden bir duvar çeker. Bu duvara değen herkes 20 hasar alır ve knockback yer. Duvar 8 saniye boyunca durur. Cooldown: 3dk
+
+- Tornado: Oyuncu bu özelliğe kullandığı sürece hedeflenen yerde bir hortum oluşturur. Hedeflenen yer üzerindeki sabitlenmemiş objeleri havaya uçurur ve alanın yakınındaki objeleri iter. Hortumdan düşen canlılar fall damage alabiliyorsa alırlar. Kullanma sınırı maksimum 1 dakikadır. Kullanılan saniye başına iki saniye cooldown alır. Oyuncu isabet alırsa interrupt edilir.
+
+- Essence Drain: Hedeften kullanıldğı saniye başına 10 can emer. Interrupt edilene kadar devam ettirilebilir. Hedefe %20 yavaşlatma debuffı atar. Cooldown: 3dk
+
+- Teleport: Mesafeye karar vermedim. Seçilen alana oyuncu aniden ışınlanır. Işınlanılan yerdeki mobları interrupt eder. Cooldown: 10 saniye
+
+- Mark of …: Oyuncu yakınındaki bir yere … şeklinde bir mühür bırakır. İstedği zaman haritanın herhangi bir yerinden bu mührün olduğu yere ışınlanabilir. Işınlandıktan sonra mühür kaybolur. Tekrar yerleştirilmesi gerekir. Aynı anda sadece bir mühür bulunabilir. Bu mühür belki NPC'ler üzerine de konulabilir? Mühre aniden ışınlanılmaz. 5 saniyelik bir ayin süresi vardır ve interrupt edilebilir.
+
+
+

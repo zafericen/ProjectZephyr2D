@@ -1,0 +1,13 @@
+GGJ:
+ - Açıklanmamış hala (muhtemelen ocak ayı)
+Ludum Dare:
+ - 4-7 ekim
+Brackeys Game Jam:
+ - 8-15 eylül
+Pirate Software:
+ - 17-31 ocak
+Mini jam:
+ - 30 ağustos - 2 eylül
+GameOff:
+ - 1 kasım-2 aralık
+----- baya farklı temalı jam var detayları istenirse konuşulur efendim

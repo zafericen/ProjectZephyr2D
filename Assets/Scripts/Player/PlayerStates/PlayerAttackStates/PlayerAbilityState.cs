@@ -20,5 +20,9 @@ namespace ProjectZephyr
             base.OnEnter();
             ability.AbilityAttack();
         }
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+        }
     }
 }

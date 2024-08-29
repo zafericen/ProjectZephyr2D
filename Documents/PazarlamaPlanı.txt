@@ -1,0 +1,14 @@
+Pazarlama Planı:
+	Demonun oyunculara tanıtılması için ve canlı geri dönüş alınması için oyun ve oyuncu fuarlarına katılım sağlama yada
+	buraya katılan insanlarla görüşme. Yayıncılarla iletişime geçip oyunun farkındalığını arttırma.
+
+	Sosyal medyayı takımla birlikte aktif kullanarak sıcak bir dev ve takım ortamı sunarak insanların ilgisini ve sorularını çekme
+
+	Pazarda bulabildiğimiz oyun alakalı ödüllere başvurarak hem insanlarla tanışma hem de oyunun farkındalığını arttırma
+
+	kickstarter üzerinden oyunun reklamını yapma
+
+	Satış ve Dağıtım Kanallarını Oluşturma:
+		Steam üzerinden satış yapma ve steam farkındalık tokenlerini dikkatli bir şekilde kullanma
+		Humble bumble ve itch.io üzerinden steam key satma ve gamejolt üzerinden demo servisi sunma
+		Eğer oyuna yukarıdaki adımdan yüksek ilgi gelirse belli fiziksel veya koleksiyoncu versiyonu sunma

@@ -1,0 +1,34 @@
+---------------------KOD---------------------
+küçük:
+	-input sistem(sadece klavye mouse için)
+orta:
+	-input sistem(kontroller desteği ve diğer sistemler)
+	-yeni mekanikler için stateler
+	-2d için hareket ve base sistemlerin revizyonu
+	-connection revize(kontrol amaçlı)
+büyük:
+	-state system revizyon(spesifikasyonu şuan yok, olunca parçalara ayrılır)
+	-savaş sistemi revizyonu(attack fragment hariç???)
+	-2d animasyon sistemi incelenip uygunsa geçirilecek
+devasa:
+	-enemy ve boss ai sistemi
+	-weapon sistemi ve augment sistemi
+
+---------------------GameDesign---------------------
+-Savaş sistemi:
+	silahlar nasıl davranacak
+	karakterin saldırı olarak sınırları ve yapabilicekleri
+
+-Harita:
+	dünya neye benzeyecek(hangi oyundan çalıcaz)
+	archangel domainleri neye benzeyecek(genel konseptleri ne olmalı)
+	open world konsepti nasıl sağlanacak(yatay mı dikey mi yoksa ikisnin ortasımı)
+
+-Düşmanlar:
+	yan bosslar hangi sıklıkta ve ne kadar impactfull olacak
+	düşmanlar hangi sıklıkta ve ne kadar güçlü olacak(bullet sponge yada seğrek ancak korkulası)
+---------------------Hikaye---------------------
+-Karakter tasarımı ve  motifleri yapılacak
+-Archangel konsepti ve domain özellikleri belirlenecek
+-Ruvouria büyük bi soru işareti o halledilmeli
+-Son boss kim???

@@ -1,0 +1,147 @@
+*************
+domino Ventures
+v-play ventures
+boğaziçi ventures
+*************
+udo games
+hesp games
+*************
+SALI 19.30(Benim için 17.30)
+Kendimize bir slogan bulmalıyız.
+iş fikri- yenilikçi yönü- teklonojik yönü- değer önerisi
+değer önerisi(biz kendimiz ne sunuyoruz)
+pazar analizi(dünya -- türkiye)
+fiyatlandırma
+*************
+demonun yapılması:
+	-temel sistemlerin işlevselliğe geçmesi
+	-sanat-tasarımın demo için tamamlanması
+	-oyun içi görselliğin oluşturulması
+beta çıkışı:
+	-silah/boss sayı ve çeşitliliğinin arttırılması
+	-görsel dizaynın netleşmesi ve kullanılması
+	-kalan sistemlerin oluşturulması yada ihtiyaca göre güncellenmesi
+	-temel hikaye ve amaçların belirlenmesi ve uygulanması
+	-ses ve müzik sistmelerinin oluşturulması
+erken erişim çıkışı:
+	-silah/boss sayı ve işlevselliğinin çıkışa yakın düzeye getirilmesi
+	-görsel dizayn üzerinde geri dönüşlere göre gerekli değişimler yapılması
+	-hikaye üzerine gelen geri dönüşlere göre gerekli değişimler yapılması
+	-ses ve müzik sistemlerinin netleşmesi ve kullanılması
+	-kapalı betada raporlanan hataların temizlenmesi
+çıkış:
+	-beta ve erken erişimde alınan geri dönüşümlere göre genel özel değişimler yapılması
+	-son silah ve bossların eklenmesi
+	-tüm sistemlerin kitlenmesi ve test edilmesi
+	-raporlanan ve bulunan hataların giderilmesi	
+
+*************
+kapakta oyun olduğu belli olucak
+iş fikrinde neden böyle bir oyun yapma ihtiyacı duyduğumuzu anlatıyoruz(bizi ayıran temel ihtiyaçlar)
+ekip kısmını samimiyeti yüksek bir fotoğrafla desteklenmeli
+değer önerisi görselleştirilebilir
+pazar analizlerinde yazı olsa bile grafikleştirilmeli(oyun türünün payları da yapılmalı)
+
+maliyet hesaplaması:
+	-extensive bi şekilde kiradır çalışan fiyatıdır vergidir. Bunlar alınıp aylık masraf hesaplanır. Sonra çıkan sonucu 3le çarpıcaz. Bu bizim
+birim maaliyetimiz.(1. birim maaliyet 2. birim reklam 3. birim kâr)
+
+***************
+pazar maaliyet-yukarıdaki gibi
+rakip analizi tr-dünya
+satış planı
+
+12 kasım 19.00
+***************
+pazar maaliyet:
+	ekipman maaliyeti(bir kereden sonra her yıl 1/10 u ödenecek):
+		geliştirici bilgisayarları: 40.000*5
+		server maaliyeti: 10.000
+		çizim tabletleri: 3.000 * 4
+		genel bilgisayarlar: 15.000*5
+	yazılım maliyetleri(aylık): 5.000 tl  
+	teknokent kira: 10.500 tl(kişi başı 7 metrekare)-30.000 tl(kişi başı 20 metrekare)
+	genel ofis giderleri: 30.000tl
+	çalışan maaş: 23.000 - 30.000 tl brüt maaş
+	çalışan yemek-ulaşım: 3.000 yemek, 1.500 ulaşım
+
+rakip analizi:
+	türkiyede rakip olarak aynı türden fazla oyun olmadığından(emin değilim bi araştırmak lazım) daha çok türkiyede çıkıp global
+		veya yerel olarak başarılar yakalamış oyuna bakmalıyız.
+	dünyada steam verilerinden hades ve benzeri oyunların verileri bize yeter gibi.
+
+pazar analizi:
+	steam db verileri alıp excel yada başka bi uygulamada grafiğe dönüştürmeliyiz(pandas falan güzel olabilir).
+	oyun türünün payı yazılmalı ve türkiye ve dünyada oyunun payı ve oynayan kişilerin oranları yazılmalı.
+**************
+gökhan için
+
+
+	rakip analizi:
+		türkiyede rakip olarak aynı türden yada türkiyede çıkıp global
+			veya yerel olarak başarılar yakalamış oyunlardan küme oluşturup gelirleri ve satışları grafikleştirilmeli.
+	pazar analizi:
+		dünya tüm oyunların genel geliri, satışı
+		dünyada ayrı ayrı sonra birleşik bi şekilde rouge-like souls-like oyunların geliri, satışı
+		türkiye oyunların geliri satışı(opsiyonel)
+		türkiyede ayrı ayrı sonra birleşik bi şekilde rouge-like souls-like oyunların geliri, satışı(opsiyonel)
+**************
+heap games(Ahmet Şentürk)
+marine games(Buket Özceylan)
+**************
+23 kasım saat 19.30(17.30)
+oyunun modüler olması durumunu belirt(satış düşmeyecek).
+tablo karmaşık olmuş daha genel sayılar yazılmalı.
+
+pazarlama planı 12-24 ay
+satış planı revize
+swot analizi
+canvas iş modeli tablosu
+pazar analizi dünya revize
+rekabet analizi tablolaştırılmalı(arıcılardan direk çal)
+***************
+2 aralık 19.00(17.00)
+müşteri segmentasyonu ve hedef müşteriler
+
+***************
+yatırımcı slaytı için zaman ve ciro ve satışlara önem gösterilecek
+asansör cümle:
+	problemin ne olduğu
+	problemi kimin yaşadığı
+	problemi çözerken kullandığınız inovasyonu anlatan 1 cümle
+	hedef kitle
+***************
+10 aralık 18.00(16.00)
+
+pazarlama planı:
+	kronoloji
+	sorumlusu değil sorumlu ekip üyesi
+	maaliyeti yaz
+	sadece 12 ay
+iş fikri:
+	mitolojik temaları içeren ve benimseyen oyunumuz aksiyon macera türünün bir kolu olan rougelike sınıfında oyunculara
+		kendi dünyasını şekillendirme fırsatı sunuyor.
+swot analizi:
+	slaytın sonu
+ekstra rouge souls slaytı:
+	giriş değiştirilebilir
+maaliyet planı:
+	tamamen dolar
+pazar analizi:
+	yukarıda global aşağıda steam genel
+	sayfa sayısını düşür
+rekabet analizi (revize):
+	project zepyhr kısmının bizim olduğu belli olsun
+	tercih noktalarını rekabet analizi içine detaylı yazmak gerekli
+satış planlaması:
+	geçtiği yıl yazmalı
+	dipnot koyulmalı
+	1m yanına yıldız at, açıklama yaz
+	yılı belirt
+özgünlük önemli değil oynanış önemli:
+	starcraft örneği
+****************
+maaliyeti yerine harcama bütçesi yada daha açıklayıcı bir kelime
+pazar maaliyeini genel maaliyete ekle
+
+kanvas başlık farklı renk ve yazılanlarla aralarında boşluk olacak

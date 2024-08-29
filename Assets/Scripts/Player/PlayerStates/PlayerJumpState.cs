@@ -29,7 +29,7 @@ namespace ProjectZephyr
 
         public override void OnUpdate()
         {
-            if (jumping.IsOnGround() || !Input.GetKey(KeyCode.C))
+            if (jumping.IsOnGround())
             {
                 busy = false;
             }
