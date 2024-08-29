@@ -69,6 +69,4 @@ namespace ProjectZephyr
             return current is ExitState;
         }
     }
-
-
 }
