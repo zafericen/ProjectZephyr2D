@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using ProjectZephyr;
+using System;
 
 public enum InputType
 {
@@ -18,64 +19,89 @@ public enum AttackInputType
     None
 }
 
-public struct InputContext
+public struct InputContext : IComparable<InputContext>, IEquatable<InputContext>
 {
     public InputType type;
+    public InputActionPhase holdType;
     public Vector2 inputVector;
+    public int CompareTo(InputContext other)
+    {
+        return -type.CompareTo(other.type);
+    }
+
+    public bool Equals(InputContext other)
+    {
+        return type.Equals(other.type);
+    }
 }
 
 public class InputHandler : MonoSingleton<InputHandler>
 {
-    public PlayerInputActions playerInputActions { get; private set; }
-    InputContext buffer;
-    Timer timer = new Timer();
-    float fadingTime = 5f;
+    public PlayerInput playerInputActions { get; private set; }
+
+    private InputContext[] buffer = new InputContext[50];
+    InputContext lastContext;
 
     private void Awake()
     {
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Movement.Enable();
-        playerInputActions.Movement.Jump.started += Jump_started;
-        playerInputActions.Movement.Walking.started += Walking_started;
-        playerInputActions.Movement.Dodging.started += Dodging_started;
+        playerInputActions = GetComponent<PlayerInput>();
         
     }
 
     private void Update()
     {
-        if(buffer.type != InputType.None)Debug.Log(buffer.type);
+        AddToBuffer(ConsumeInput());
     }
 
-    private void Dodging_started(InputAction.CallbackContext context)
+    public void DodgingCall(InputAction.CallbackContext context)
     {
-        buffer = new InputContext { type = InputType.Dodge, inputVector = Vector2.zero };
-        timer.Reset();
+        lastContext = new InputContext { type = InputType.Dodge, holdType = context.phase };
     }
 
-    private void Walking_started(InputAction.CallbackContext context)
+    public void WalkingCall(InputAction.CallbackContext context)
     {
         var value = context.ReadValue<Vector2>();
-        buffer = new InputContext { type = InputType.Walk, inputVector = value };
-        timer.Reset();
+        lastContext = new InputContext { type = InputType.Walk, holdType = context.phase ,inputVector = value };
     }
 
-    private void Jump_started(InputAction.CallbackContext context)
+    public void JumpingCall(InputAction.CallbackContext context)
     {
-        buffer = new InputContext {type = InputType.Jump, inputVector = Vector2.zero};
-        timer.Reset();
+        lastContext = new InputContext { type = InputType.Jump, holdType = context.phase };
     }
 
-    public bool CheckInput(InputType type)
+    public bool CheckInput(InputType type, InputActionPhase actionPhase) 
     {
-        if (timer.Seconds() > fadingTime) ConsumeInput();
-
-        return type == buffer.type;
+        var input = GetInput(type,actionPhase);
+        if (input.type != InputType.None) return true;
+        return false;
+    }
+    public InputContext GetInput(InputType type, InputActionPhase actionPhase)
+    {
+        for (int i = 0; i < buffer.Length; i++)
+        {
+            if (buffer[i].type == type && buffer[i].holdType == actionPhase)
+            {
+                var returnValue = buffer[i];
+                buffer[i].holdType = InputActionPhase.Disabled;
+                return returnValue;
+            }
+        }
+        return new InputContext { type = InputType.None };
     }
 
     public InputContext ConsumeInput()
     {
-        var returnBuffer = buffer;
-        buffer = new InputContext { type = InputType.None, inputVector = Vector2.zero };
-        return returnBuffer;
+        var returnContext = lastContext;
+        lastContext = new InputContext { type = InputType.None, holdType = InputActionPhase.Disabled};
+        return returnContext;
+    }
+
+    private void AddToBuffer(InputContext inputContext)
+    {
+        for (int i = 0; i < buffer.Length-1; i++)
+        {
+            buffer[i + 1] = buffer[i];
+        }
+        buffer[0] = inputContext;
     }
 }
