@@ -15,6 +15,7 @@ namespace ProjectZephyr
         public override void OnEnter()
         {
             base.OnEnter();
+            InputHandler.instance.ConsumeInput();
             playStateAnimation();
         }
 

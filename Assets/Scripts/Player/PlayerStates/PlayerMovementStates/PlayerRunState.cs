@@ -14,7 +14,7 @@ namespace ProjectZephyr
 
         public override void OnUpdate()
         {
-            if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+            if (!movement.IsMoving())
             {
                 busy = false;
                 return;

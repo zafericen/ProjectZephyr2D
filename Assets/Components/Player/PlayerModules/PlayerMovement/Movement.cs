@@ -7,7 +7,7 @@ namespace ProjectZephyr
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotationSpeed;
         [SerializeField] private Camera cam;
-        [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private PlayerInputHandler inputHandler;
         Rigidbody2D rb;
         bool facingRight = true;
 
@@ -17,7 +17,7 @@ namespace ProjectZephyr
         }
         public void Move()
         {
-            var TargetVector = inputHandler.InputVector;
+            var TargetVector = inputHandler.inputVector;
             if((TargetVector.x > 0 && !facingRight) || (TargetVector.x < 0 && facingRight))
             {
                 FlipDirection();
@@ -25,6 +25,15 @@ namespace ProjectZephyr
             rb.velocity = new Vector2(TargetVector.x*moveSpeed,rb.velocity.y);
             //var MovementVector = MoveTowardTarget(TargetVector.normalized);
             //RotateTowardMovementVector(MovementVector);
+        }
+
+        public bool IsMoving()
+        {
+            if(Mathf.Approximately(inputHandler.inputVector.x ,0))
+            {
+                return false;
+            }
+            else { return true; }
         }
 
         void FlipDirection()

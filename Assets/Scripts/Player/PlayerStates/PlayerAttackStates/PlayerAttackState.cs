@@ -10,7 +10,6 @@ namespace ProjectZephyr
     public class PlayerAttackState : PlayerStateBase
     {
         private StateMachine attacksStateMachine;
-        //TODO: Add mapping from movement to attacks
         public PlayerAttackState(GameObject o) : base(o)
         {
             attacksStateMachine = new StateMachine();

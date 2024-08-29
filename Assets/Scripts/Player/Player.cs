@@ -29,7 +29,6 @@ namespace ProjectZephyr
         private void Update()
         {
             stateMachine.Run();
-            Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
 
             current = stateMachine.current.GetType().Name;
         }
