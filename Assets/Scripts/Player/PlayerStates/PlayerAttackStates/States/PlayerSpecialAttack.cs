@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ProjectZephyr
 {
 
-    public partial class PlayerSpecialAttackState : PlayerAttackStateBase
+    public partial class PlayerSpecialAttackState : AttackStatesBase
     {
         public PlayerSpecialAttackState(GameObject o) : base(o)
         {

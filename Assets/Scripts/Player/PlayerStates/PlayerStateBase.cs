@@ -23,8 +23,9 @@ namespace ProjectZephyr
             base.OnExit();
         }
 
-        public virtual void playStateAnimation() 
-        { 
+        public virtual void playStateAnimation()
+        {
+
         }
 
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace ProjectZephyr
@@ -5,14 +6,14 @@ namespace ProjectZephyr
 
     public class StateMachine
     {
-        private Dictionary<string, State> states = new Dictionary<string, State>()
+        private Dictionary<Type, State> states = new Dictionary<Type, State>()
         {
-            {nameof(ExitState), new ExitState()},
+            {typeof(ExitState), new ExitState()},
         };
 
         public State current;
 
-        public StateMachine(string starterStateName)
+        public StateMachine(Type starterStateName)
         { 
             current = states[starterStateName];
             current.OnEnter();
@@ -20,13 +21,15 @@ namespace ProjectZephyr
 
         public StateMachine()
         {
-            current = states[nameof(ExitState)];
+            current = states[typeof(ExitState)];
         }
 
-        public void ChangeState(string name)
+        public void ChangeState(Type type)
         {
             current.OnExit();
-            current = states[name];
+            StateContext context = current.GiveContext();
+            current = states[type];
+            current.TakeContext(context);
             current.OnEnter();
         }
 
@@ -36,30 +39,35 @@ namespace ProjectZephyr
 
             foreach (var connection in current.connections)
             {
-                if (connection.Check() && !GetState(connection.stateName).IsBusy())
+                if (connection.Check() && DoesStateExists(connection.stateType) && !GetState(connection.stateType).IsBusy())
                 {
-                    ChangeState(connection.stateName);
+                    ChangeState(connection.stateType);
                     break;
                 }
             }
         }
 
-        private State GetState(string name)
+        private State GetState(Type type)
         {
-            return states[name];
+            return states[type];
         }
 
-        public void AddState(string name, State state)
+        private bool DoesStateExists(Type type)
         {
-            states.Add(name, state);
+            return states.ContainsKey(type);
         }
 
-        public void RemoveState(string name)
+        public void AddState(Type type, State state)
         {
-            states.Remove(name);
+            states.Add(type, state);
         }
 
-        public void AddConnection(string where, Connection connection)
+        public void RemoveState(Type type)
+        {
+            states.Remove(type);
+        }
+
+        public void AddConnection(Type where, Connection connection)
         {
             states[where].AddConnection(connection);
         }

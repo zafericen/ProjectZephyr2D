@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ProjectZephyr
 {
 
-    public partial class PlayerWeaponArtState : PlayerAttackStateBase
+    public partial class PlayerWeaponArtState : AttackStatesBase
     {
         public PlayerWeaponArtState(GameObject o) : base(o)
         {

@@ -17,16 +17,13 @@ namespace ProjectZephyr
 
         private void Start()
         {
-            stateMachine.AddState(nameof(PlayerIdleState), new PlayerIdleState(gameObject));
-            stateMachine.AddState(nameof(PlayerRunState), new PlayerRunState(gameObject));
-            stateMachine.AddState(nameof(PlayerDodgeState), new PlayerDodgeState(gameObject));
-            stateMachine.AddState(nameof(PlayerNormalAttackState), new PlayerNormalAttackState(gameObject));
-            stateMachine.AddState(nameof(PlayerSpecialAttackState), new PlayerSpecialAttackState(gameObject));
-            stateMachine.AddState(nameof(PlayerWeaponArtState), new PlayerWeaponArtState(gameObject));
-            stateMachine.AddState(nameof(PlayerJumpState), new PlayerJumpState(gameObject));
-            stateMachine.AddState(nameof(PlayerAbilityState), new PlayerAbilityState(gameObject));
+            stateMachine.AddState(typeof(PlayerIdleState), new PlayerIdleState(gameObject));
+            stateMachine.AddState(typeof(PlayerRunState), new PlayerRunState(gameObject));
+            stateMachine.AddState(typeof(PlayerDodgeState), new PlayerDodgeState(gameObject));
+            stateMachine.AddState(typeof(PlayerJumpState), new PlayerJumpState(gameObject));
+            stateMachine.AddState(typeof(PlayerAttackState), new PlayerAttackState(gameObject));
 
-            stateMachine.ChangeState(nameof(PlayerIdleState));
+            stateMachine.ChangeState(typeof(PlayerIdleState));
         }
 
         private void Update()

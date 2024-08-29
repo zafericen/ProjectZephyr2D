@@ -1,30 +1,36 @@
+using System.Timers;
 using UnityEngine;
 
 namespace ProjectZephyr
 {
 
-    public partial class PlayerNormalAttackState : PlayerAttackStateBase
+    public abstract class AttackStatesBase : PlayerStateBase
     {
-        public PlayerNormalAttackState(GameObject o) : base(o)
+        protected PlayerCombat combat;
+
+        protected AttackStatesBase(GameObject o) : base(o)
         {
+            combat = o.GetComponent<PlayerCombat>();
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            combat.NormalAttack();
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
+            if (!combat.weapon.IsAttacking())
+            {
+                busy = false;
+            }
         }
 
         public override void OnExit()
         {
             base.OnExit();
         }
-
     }
 
 }

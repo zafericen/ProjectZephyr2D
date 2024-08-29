@@ -12,15 +12,20 @@ namespace ProjectZephyr
         XHigh,
     }
 
+    public struct StateContext
+    {
+        public Type typeOfState;
+    }
+
     public class Connection : IComparable<Connection>
     { 
-        public string stateName { get; }
+        public Type stateType { get; }
         private Func<bool> check;
         private Priority priority;
 
-        public Connection(Func<bool> check, string stateName, Priority priority = Priority.Medium)
+        public Connection(Func<bool> check, Type stateType ,Priority priority = Priority.Medium)
         {
-            this.stateName = stateName;
+            this.stateType = stateType;
             this.check = check;
             this.priority = priority;
         }

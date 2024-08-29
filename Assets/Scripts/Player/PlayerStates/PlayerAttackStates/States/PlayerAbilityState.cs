@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-    public partial class PlayerAbilityState : PlayerAttackStateBase
+    public partial class PlayerAbilityState : AttackStatesBase
     {
         Ability ability;
         public PlayerAbilityState(GameObject o) : base(o)

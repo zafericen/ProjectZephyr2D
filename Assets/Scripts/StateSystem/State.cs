@@ -6,6 +6,7 @@ namespace ProjectZephyr
     public class State
     {
         protected bool busy;
+        protected StateContext context;
         public PriorityList<Connection> connections { get; } = new PriorityList<Connection>();
 
         public virtual void OnEnter()
@@ -30,6 +31,17 @@ namespace ProjectZephyr
         public void AddConnection(Connection connection)
         {
             connections.Add(connection);
+        }
+
+        public void TakeContext(StateContext context)
+        {
+            this.context = context;
+        }
+
+        public StateContext GiveContext()
+        {
+            StateContext context = new StateContext {typeOfState =  this.GetType()};
+            return context;
         }
 
         public virtual void InitialConnections()
