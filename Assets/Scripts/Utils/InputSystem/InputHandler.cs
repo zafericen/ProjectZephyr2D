@@ -39,7 +39,7 @@ public class InputHandler : MonoSingleton<InputHandler>
 {
     public PlayerInput playerInputActions { get; private set; }
 
-    private InputContext[] buffer = new InputContext[50];
+    public InputContext[] buffer = new InputContext[20];
     InputContext lastContext;
 
     private void Awake()
@@ -50,7 +50,9 @@ public class InputHandler : MonoSingleton<InputHandler>
 
     private void Update()
     {
+        
         AddToBuffer(ConsumeInput());
+
     }
 
     public void DodgingCall(InputAction.CallbackContext context)
@@ -60,8 +62,7 @@ public class InputHandler : MonoSingleton<InputHandler>
 
     public void WalkingCall(InputAction.CallbackContext context)
     {
-        var value = context.ReadValue<Vector2>();
-        lastContext = new InputContext { type = InputType.Walk, holdType = context.phase ,inputVector = value };
+        lastContext = new InputContext { type = InputType.Walk, holdType = context.phase ,inputVector = context.ReadValue<Vector2>() };
     }
 
     public void JumpingCall(InputAction.CallbackContext context)
@@ -77,12 +78,12 @@ public class InputHandler : MonoSingleton<InputHandler>
     }
     public InputContext GetInput(InputType type, InputActionPhase actionPhase)
     {
-        for (int i = 0; i < buffer.Length; i++)
+        for (int i = buffer.Length-1; i >= 0; i--)
         {
             if (buffer[i].type == type && buffer[i].holdType == actionPhase)
             {
                 var returnValue = buffer[i];
-                buffer[i].holdType = InputActionPhase.Disabled;
+                //buffer[i].holdType = InputActionPhase.Disabled;
                 return returnValue;
             }
         }
@@ -92,15 +93,19 @@ public class InputHandler : MonoSingleton<InputHandler>
     public InputContext ConsumeInput()
     {
         var returnContext = lastContext;
+        if(lastContext.holdType == InputActionPhase.Canceled)
+        {
+
         lastContext = new InputContext { type = InputType.None, holdType = InputActionPhase.Disabled};
+        }
         return returnContext;
     }
 
     private void AddToBuffer(InputContext inputContext)
     {
-        for (int i = 0; i < buffer.Length-1; i++)
+        for (int i = buffer.Length-1; i > 0; i--)
         {
-            buffer[i + 1] = buffer[i];
+            buffer[i] = buffer[i-1];
         }
         buffer[0] = inputContext;
     }

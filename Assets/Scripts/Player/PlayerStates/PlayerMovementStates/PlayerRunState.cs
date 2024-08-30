@@ -14,13 +14,13 @@ namespace ProjectZephyr
 
         public override void OnUpdate()
         {
+            movement.Move();
             if (!movement.IsMoving())
             {
                 busy = false;
                 return;
             }
 
-            movement.Move();
         }
 
         public override void OnExit()
