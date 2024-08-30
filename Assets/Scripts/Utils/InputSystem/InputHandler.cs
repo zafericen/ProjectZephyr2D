@@ -16,17 +16,28 @@ public enum InputType
 
 public enum AttackInputType
 {
-    None
+    None,
+    Normal,
+    Special,
+    WeaponArt,
+    Ability
 }
 
 public struct InputContext : IComparable<InputContext>, IEquatable<InputContext>
 {
     public InputType type;
+    public AttackInputType attackType;
     public InputActionPhase holdType;
     public Vector2 inputVector;
     public int CompareTo(InputContext other)
     {
         return -type.CompareTo(other.type);
+    }
+
+    public static InputContext EmptyContext()
+    {
+        return new InputContext { type = InputType.None, attackType = AttackInputType.None, 
+            holdType = InputActionPhase.Disabled, inputVector = Vector2.zero };
     }
 
     public bool Equals(InputContext other)
@@ -39,35 +50,68 @@ public class InputHandler : MonoSingleton<InputHandler>
 {
     public PlayerInput playerInputActions { get; private set; }
 
-    public InputContext[] buffer = new InputContext[20];
-    InputContext lastContext;
+    public InputContext[] buffer = new InputContext[15];
+    InputContext lastContext = new InputContext { };
 
     private void Awake()
     {
         playerInputActions = GetComponent<PlayerInput>();
         
+        
     }
 
     private void Update()
     {
-        
         AddToBuffer(ConsumeInput());
-
     }
 
     public void DodgingCall(InputAction.CallbackContext context)
     {
-        lastContext = new InputContext { type = InputType.Dodge, holdType = context.phase };
+        lastContext.type = InputType.Dodge; 
+        lastContext.holdType = context.phase;
+        lastContext.inputVector = Vector2.zero;
     }
 
     public void WalkingCall(InputAction.CallbackContext context)
     {
-        lastContext = new InputContext { type = InputType.Walk, holdType = context.phase ,inputVector = context.ReadValue<Vector2>() };
+        lastContext.type = InputType.Walk; 
+        lastContext.holdType = context.phase; 
+        lastContext.inputVector = context.ReadValue<Vector2>();
     }
 
     public void JumpingCall(InputAction.CallbackContext context)
     {
-        lastContext = new InputContext { type = InputType.Jump, holdType = context.phase };
+        lastContext.type = InputType.Jump; 
+        lastContext.holdType = context.phase;
+        lastContext.inputVector = Vector2.zero;
+    }
+
+    public void NormalAttackCall(InputAction.CallbackContext context)
+    {
+        lastContext.type = InputType.Attack;
+        lastContext.holdType = context.phase;
+        lastContext.attackType = AttackInputType.Normal;
+    }
+
+    public void SpecialAttackCall(InputAction.CallbackContext context)
+    {
+        lastContext.type = InputType.Attack;
+        lastContext.holdType = context.phase;
+        lastContext.attackType = AttackInputType.Special;
+    }
+
+    public void WeaponArtCall(InputAction.CallbackContext context)
+    {
+        lastContext.type = InputType.Attack;
+        lastContext.holdType = context.phase;
+        lastContext.attackType = AttackInputType.WeaponArt;
+    }
+
+    public void AbilityCall(InputAction.CallbackContext context)
+    {
+        lastContext.type = InputType.Attack;
+        lastContext.holdType = context.phase;
+        lastContext.attackType = AttackInputType.Ability;
     }
 
     public bool CheckInput(InputType type, InputActionPhase actionPhase) 
@@ -87,16 +131,19 @@ public class InputHandler : MonoSingleton<InputHandler>
                 return returnValue;
             }
         }
-        return new InputContext { type = InputType.None };
+        return InputContext.EmptyContext();
     }
 
-    public InputContext ConsumeInput()
+    private InputContext ConsumeInput()
     {
         var returnContext = lastContext;
         if(lastContext.holdType == InputActionPhase.Canceled)
         {
 
-        lastContext = new InputContext { type = InputType.None, holdType = InputActionPhase.Disabled};
+            lastContext.type = InputType.None; 
+            lastContext.holdType = InputActionPhase.Disabled;
+            lastContext.attackType = AttackInputType.None;
+            lastContext.inputVector = Vector2.zero;
         }
         return returnContext;
     }

@@ -3,11 +3,11 @@ using UnityEngine;
 namespace ProjectZephyr
 {
 
-    public partial class PlayerRunState : PlayerStateBase
+    public partial class PlayerWalkState : PlayerStateBase
     {
         private Movement movement;
 
-        public PlayerRunState(GameObject o) : base(o)
+        public PlayerWalkState(GameObject o) : base(o)
         {
             movement = o.GetComponent<Movement>();
         }
@@ -33,5 +33,6 @@ namespace ProjectZephyr
             animator.Play("Running");
         }
         
+
     }
 }

@@ -40,7 +40,6 @@ namespace ProjectZephyr
 
         public StateContext GiveContext()
         {
-            StateContext context = new StateContext {typeOfState =  this.GetType()};
             return context;
         }
 

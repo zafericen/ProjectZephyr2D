@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ProjectZephyr
 {
@@ -15,13 +16,7 @@ namespace ProjectZephyr
         public override void OnEnter()
         {
             base.OnEnter();
-            InputHandler.instance.ConsumeInput();
             playStateAnimation();
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
         }
 
         public virtual void playStateAnimation()

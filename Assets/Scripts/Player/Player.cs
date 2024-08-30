@@ -18,7 +18,7 @@ namespace ProjectZephyr
         private void Start()
         {
             stateMachine.AddState(typeof(PlayerIdleState), new PlayerIdleState(gameObject));
-            stateMachine.AddState(typeof(PlayerRunState), new PlayerRunState(gameObject));
+            stateMachine.AddState(typeof(PlayerWalkState), new PlayerWalkState(gameObject));
             stateMachine.AddState(typeof(PlayerDodgeState), new PlayerDodgeState(gameObject));
             stateMachine.AddState(typeof(PlayerJumpState), new PlayerJumpState(gameObject));
             stateMachine.AddState(typeof(PlayerAttackState), new PlayerAttackState(gameObject));

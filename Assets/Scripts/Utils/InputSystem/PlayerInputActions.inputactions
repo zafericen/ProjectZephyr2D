@@ -2,22 +2,13 @@
     "name": "PlayerInputActions",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Player",
             "id": "0bc1a067-4887-40ee-887a-0fae9c3c8d32",
             "actions": [
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "22e8999f-7f81-425c-bce4-85662b0852c6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Walking",
                     "type": "Value",
-                    "id": "de49f794-5d2c-4def-81d5-29d9bd27f2ac",
+                    "id": "e05f1375-9f3a-4d35-b42c-97f5e7fe375b",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -26,7 +17,52 @@
                 {
                     "name": "Dodging",
                     "type": "Button",
-                    "id": "3579c6ec-6a0c-40fb-8a8b-30ccc78fa1e5",
+                    "id": "3fd4e0f4-85e0-43d8-b213-58e8aec3e95f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "b18b4fd8-3167-4f8c-9703-9566002b9de0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NormalAttack",
+                    "type": "Button",
+                    "id": "b8e79fa7-495a-4484-8c61-845dce5b0b59",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialAttack",
+                    "type": "Button",
+                    "id": "37f4f70c-ff57-4f28-88b6-b2b76eb440e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WeaponArt",
+                    "type": "Button",
+                    "id": "e0a15ef0-4bd4-43bd-86a4-c926c3b49c40",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability",
+                    "type": "Button",
+                    "id": "99df94ed-37f3-47ae-a7df-5d31520f7b64",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -35,19 +71,8 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "6241fc98-2bcc-4161-b04d-b22863fd805d",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "2D Vector",
-                    "id": "3adf9281-0832-4f21-9ca1-108b0dd58a05",
+                    "id": "26b2b191-9aea-4b7d-9df0-4c226af91916",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -58,7 +83,7 @@
                 },
                 {
                     "name": "up",
-                    "id": "8e1d9ba5-15b6-46a0-a055-2506e4a91a29",
+                    "id": "c879e5bb-a313-4896-bf03-a9ae025143e9",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -69,7 +94,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "c0edd493-2570-49a5-91fe-2998c990cf16",
+                    "id": "a5f91744-899c-42e0-b384-e55ec2ab4488",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -80,7 +105,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "839d9528-6bdd-4a5d-b1bf-b2910e61fb1e",
+                    "id": "5e8e4137-2672-4b9f-a434-063294048d5d",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -91,7 +116,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "241b164d-8524-47a4-ad69-46879f0f861f",
+                    "id": "97128a0f-e93f-4ce1-953e-0e37d6594971",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -102,12 +127,67 @@
                 },
                 {
                     "name": "",
-                    "id": "898259fb-f28d-4b13-aabd-f0fa5c2fa61f",
+                    "id": "54a1faea-fd04-4d8e-b504-8f6e3891fe32",
                     "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Dodging",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32e7686a-4ec9-4f54-82a0-467258a06556",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f93b58e8-32f7-471d-a350-98b135b9cf20",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NormalAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40bf95ee-ad3b-4bcf-9a50-832051ef474a",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c2f07a3-847c-408c-b071-42e02e090482",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponArt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "537fa93b-090b-4a5d-a212-93462b5be5d3",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

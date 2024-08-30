@@ -25,6 +25,9 @@ namespace ProjectZephyr
             base.OnExit();
         }
 
+        protected override void SetStateInput()
+        {
+            stateInputType = AttackInputType.Normal;
+        }
     }
-
 }

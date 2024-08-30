@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,8 +22,14 @@ namespace ProjectZephyr
 
         public void Perform()
         {
-            OverrideAnimator();            
+            OverrideAnimator();
+            PlayAnimator();
             ApplyLogic();
+        }
+
+        private void PlayAnimator()
+        {
+            animator.Play(animationName, 0, 0);
         }
 
         public void OverrideAnimator()

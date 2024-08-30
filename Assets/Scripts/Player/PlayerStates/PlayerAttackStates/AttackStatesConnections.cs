@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ProjectZephyr
 {
@@ -11,10 +12,13 @@ namespace ProjectZephyr
     {
         public override void InitialConnections()
         {
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Mouse0), typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Mouse1), typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Q), typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.N), typeof(PlayerAbilityState)));
+            var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
+
+
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState),Priority.Low));
         }
     }
@@ -24,10 +28,13 @@ namespace ProjectZephyr
 
         public override void InitialConnections()
         {
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Mouse0), typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Mouse1), typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Q), typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.N), typeof(PlayerAbilityState)));
+            var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
+
+
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState), Priority.Low));
 
         }
@@ -37,10 +44,13 @@ namespace ProjectZephyr
     {
         public override void InitialConnections()
         {
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Mouse0), typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Mouse1), typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Q), typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.N), typeof(PlayerAbilityState)));
+            var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
+
+
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState), Priority.Low));
 
         }
@@ -50,10 +60,13 @@ namespace ProjectZephyr
     {
         public override void InitialConnections()
         {
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Mouse0), typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Mouse1), typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.Q), typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => !busy && Input.GetKey(KeyCode.N), typeof(PlayerAbilityState)));
+            var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
+
+
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState), Priority.Low));
         }
     }

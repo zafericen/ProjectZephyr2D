@@ -9,7 +9,7 @@ public class GuıDebugger : MonoBehaviour
         for (int i = 0; i < InputHandler.instance.buffer.Length; i++)
         {
             
-            GUI.Label(new Rect(100*i , 60, 50, 50), InputHandler.instance.buffer[i].type.ToString() + " : " + InputHandler.instance.buffer[i].holdType.ToString());
+            GUI.Label(new Rect(100*i , 50, 100, 100), InputHandler.instance.buffer[i].type.ToString() + " : " + InputHandler.instance.buffer[i].holdType.ToString()+ " : " + InputHandler.instance.buffer[i].attackType.ToString());
         }
     }
 

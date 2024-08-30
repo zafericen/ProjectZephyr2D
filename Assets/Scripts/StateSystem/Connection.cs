@@ -15,6 +15,7 @@ namespace ProjectZephyr
     public struct StateContext
     {
         public Type typeOfState;
+        public InputContext inputContext;
     }
 
     public class Connection : IComparable<Connection>

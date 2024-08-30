@@ -42,7 +42,6 @@ namespace ProjectZephyr
         }
 
 
-
         public override void playStateAnimation()
         {
             animator.Play("Jumping");

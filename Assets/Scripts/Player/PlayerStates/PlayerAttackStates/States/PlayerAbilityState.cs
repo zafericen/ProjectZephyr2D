@@ -24,5 +24,11 @@ namespace ProjectZephyr
         {
             base.OnUpdate();
         }
+
+        protected override void SetStateInput()
+        {
+            stateInputType = AttackInputType.Ability;
+        }
+
     }
 }

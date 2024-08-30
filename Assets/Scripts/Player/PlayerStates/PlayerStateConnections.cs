@@ -11,24 +11,24 @@ namespace ProjectZephyr
         {
             var inputHandler = InputHandler.instance;
 
-            connections.Add(new Connection(() => !busy &&
-            inputHandler.CheckInput(InputType.Walk,InputActionPhase.Performed), typeof(PlayerRunState)));
-            connections.Add(new Connection(() => !busy && inputHandler.CheckInput(InputType.Dodge,InputActionPhase.Performed), typeof(PlayerDodgeState)));
-            connections.Add(new Connection(() => inputHandler.CheckInput(InputType.Jump, InputActionPhase.Performed), typeof(PlayerJumpState)));
-            connections.Add(new Connection(() => !busy && inputHandler.CheckInput(InputType.Attack, InputActionPhase.Performed), typeof(PlayerAttackState)));
+            connections.Add(new Connection(() => !busy && 
+            (context.inputContext = inputHandler.GetInput(InputType.Walk,InputActionPhase.Performed)).type != InputType.None, typeof(PlayerWalkState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Dodge, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerDodgeState)));
+            connections.Add(new Connection(() => (context.inputContext = inputHandler.GetInput(InputType.Jump, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerJumpState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Attack, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerAttackState)));
         }
     }
 
-    public partial class PlayerRunState
+    public partial class PlayerWalkState
     {
         public override void InitialConnections()
         {
             var inputHandler = InputHandler.instance;
 
             connections.Add(new Connection(() => !busy, typeof(PlayerIdleState), Priority.XLow));
-            connections.Add(new Connection(() => inputHandler.CheckInput(InputType.Dodge, InputActionPhase.Performed), typeof(PlayerDodgeState)));
-            connections.Add(new Connection(() => inputHandler.CheckInput(InputType.Jump, InputActionPhase.Performed), typeof(PlayerJumpState)));
-            connections.Add(new Connection(() => inputHandler.CheckInput(InputType.Attack, InputActionPhase.Performed), typeof(PlayerAttackState)));
+            connections.Add(new Connection(() => (context.inputContext = inputHandler.GetInput(InputType.Dodge, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerDodgeState)));
+            connections.Add(new Connection(() => (context.inputContext = inputHandler.GetInput(InputType.Jump, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerJumpState)));
+            connections.Add(new Connection(() => (context.inputContext = inputHandler.GetInput(InputType.Attack, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerAttackState)));
 
         }
     }
@@ -41,11 +41,11 @@ namespace ProjectZephyr
             var inputHandler = InputHandler.instance;
 
             connections.Add(new Connection(() => !busy &&
-            inputHandler.CheckInput(InputType.Walk, InputActionPhase.Performed), typeof(PlayerRunState)));
+            (context.inputContext = inputHandler.GetInput(InputType.Walk, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerWalkState)));
             connections.Add(new Connection(() => !busy, typeof(PlayerIdleState), Priority.XLow));
-            connections.Add(new Connection(() => !busy && inputHandler.CheckInput(InputType.Dodge, InputActionPhase.Performed), typeof(PlayerDodgeState)));
-            connections.Add(new Connection(() => !busy && inputHandler.CheckInput(InputType.Jump, InputActionPhase.Performed), typeof(PlayerJumpState)));
-            connections.Add(new Connection(() => !busy && inputHandler.CheckInput(InputType.Attack, InputActionPhase.Performed), typeof(PlayerAttackState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Dodge, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerDodgeState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Jump, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerJumpState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Attack, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerAttackState)));
 
         }
     }
@@ -57,10 +57,24 @@ namespace ProjectZephyr
             var inputHandler = InputHandler.instance;
 
             connections.Add(new Connection(() => !busy, typeof(PlayerIdleState), Priority.XLow));
-            connections.Add(new Connection(() => !busy && inputHandler.CheckInput(InputType.Walk, InputActionPhase.Performed), typeof(PlayerRunState)));
-            connections.Add(new Connection(() => !busy && inputHandler.CheckInput(InputType.Dodge, InputActionPhase.Performed), typeof(PlayerDodgeState)));
-            connections.Add(new Connection(() => !busy && inputHandler.CheckInput(InputType.Jump, InputActionPhase.Performed), typeof(PlayerJumpState)));
-            connections.Add(new Connection(() => !busy && inputHandler.CheckInput(InputType.Attack, InputActionPhase.Performed), typeof(PlayerAttackState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Walk, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerWalkState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Dodge, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerDodgeState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Jump, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerJumpState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Attack, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerAttackState)));
+
+        }
+    }
+
+    public partial class PlayerAttackState { 
+        public override void InitialConnections()
+        {
+            var inputHandler = InputHandler.instance;
+
+            connections.Add(new Connection(() => !busy, typeof(PlayerIdleState), Priority.XLow));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Walk, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerWalkState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Dodge, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerDodgeState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Jump, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerJumpState)));
+            connections.Add(new Connection(() => !busy && (context.inputContext = inputHandler.GetInput(InputType.Attack, InputActionPhase.Performed)).type != InputType.None, typeof(PlayerAttackState)));
 
         }
     }

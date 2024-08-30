@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-    public class PlayerAttackState : PlayerStateBase
+    public partial class PlayerAttackState : PlayerStateBase
     {
         private StateMachine attacksStateMachine;
         public PlayerAttackState(GameObject o) : base(o)
@@ -23,7 +23,18 @@ namespace ProjectZephyr
         public override void OnEnter()
         {
             base.OnEnter();
-            attacksStateMachine.ChangeState(context.typeOfState);
+
+            Type type = typeof(ExitState);
+
+            switch (context.inputContext.attackType)
+            {
+                case AttackInputType.Normal: type = typeof(PlayerNormalAttackState); break;
+                case AttackInputType.Special: type = typeof(PlayerSpecialAttackState); break;
+                case AttackInputType.WeaponArt: type = typeof(PlayerWeaponArtState); break;
+                case AttackInputType.Ability: type = typeof(PlayerAbilityState); break;
+            }
+
+            attacksStateMachine.ChangeState(type);
         }
 
         public override void OnUpdate()
@@ -34,8 +45,6 @@ namespace ProjectZephyr
             {
                 busy = false;
             }
-
         }
-
     }
 }

@@ -1,12 +1,14 @@
 using System.Timers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ProjectZephyr
 {
 
-    public abstract class AttackStatesBase : PlayerStateBase
+    public abstract class AttackStatesBase : MonoState
     {
         protected PlayerCombat combat;
+        protected AttackInputType stateInputType;
 
         protected AttackStatesBase(GameObject o) : base(o)
         {
@@ -31,6 +33,8 @@ namespace ProjectZephyr
         {
             base.OnExit();
         }
+
+        protected abstract void SetStateInput();
     }
 
 }

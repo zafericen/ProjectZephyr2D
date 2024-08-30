@@ -23,6 +23,11 @@ namespace ProjectZephyr
         public override void OnExit()
         {
         }
+
+        protected override void SetStateInput()
+        {
+            stateInputType = AttackInputType.Special;
+        }
     }
 
 }
