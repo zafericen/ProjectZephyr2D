@@ -43,27 +43,21 @@ namespace ProjectZephyr
             Attack(weapon.weaponArtFragments, AttackType.WEAPON_ART);
         }
 
-        protected virtual void CheckComboEnd()
+        public virtual void ResetAttackFragments()
         {
-            if (timer.Seconds() > 1 + lastFragmentTime)
+
+            foreach (var fragmentList in weapon.attackFragments)
             {
-                for(int i = 0; i < weapon.fragmentIndices.Count; ++i)
-                {
-                    weapon.fragmentIndices[i] = 0;
-                }
+                fragmentList.currentNode = null;
             }
         }
 
-        private void Attack(List<AttackFragment> fragments, AttackType type)
+        private void Attack(CurcilarLinkedList<AttackFragment> fragments, AttackType type)
         {
-            CheckComboEnd();
             timer.Reset();
-            int index = weapon.fragmentIndices[(int)type];
-            weapon.Attack(fragments[index]);
-            lastFragmentTime = fragments[index].FragmentTime();
+            var fragment = weapon.attackFragments[(int)type].GetNext();
+            weapon.Attack(fragment.Value);
 
-            weapon.fragmentIndices[(int)type] += 1;
-            weapon.fragmentIndices[(int)type] %= fragments.Count;
         }
     }
     

@@ -27,9 +27,10 @@ namespace ProjectZephyr
             ApplyLogic();
         }
 
-        private void PlayAnimator()
+        protected virtual void PlayAnimator()
         {
             animator.Play(animationName, 0, 0);
+
         }
 
         public void OverrideAnimator()

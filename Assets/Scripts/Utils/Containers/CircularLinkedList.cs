@@ -8,6 +8,7 @@ namespace ProjectZephyr
 {
     public class CurcilarLinkedList<T> : LinkedList<T>
     {
+        public LinkedListNode<T> currentNode;
         public CurcilarLinkedList(IEnumerable<T> collection) : base(collection)
         {
         }
@@ -19,14 +20,15 @@ namespace ProjectZephyr
             }
         }
 
-        public LinkedListNode<T> GetNext(LinkedListNode<T> curr)
+        public LinkedListNode<T> GetNext()
         {
-            if (curr == null)
+            if (currentNode == null)
             {
-                return First;
+                currentNode = First;
             }
-            curr = curr.Next ?? First;
-            return curr;
+            currentNode = currentNode.Next ?? First;
+            
+            return currentNode;
         }
 
     }
