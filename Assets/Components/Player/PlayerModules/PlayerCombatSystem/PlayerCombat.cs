@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ProjectZephyr
@@ -12,21 +13,18 @@ namespace ProjectZephyr
     }
     public class PlayerCombat : MonoBehaviour
     {
-        [SerializeField] private GameObject weaponPrefab;
-
         public WeaponBase weapon { get; set; }
 
 
         private Timer timer = new Timer();
 
         private float lastFragmentTime = 0;
-       
+
         private void Start()
         {
-            GameObject weaponObject = Instantiate(weaponPrefab,this.transform);
-            weapon = weaponObject.GetComponent<WeaponBase>();
-            weapon.InitializeWeapon(gameObject);
+            ChangeWeapon(PlayerWeaponSlots.instance.GetWeapon());
         }
+
         public virtual void CheckComboEnd()
         {
             if (timer.Seconds() > lastFragmentTime + 0.3)
@@ -47,6 +45,32 @@ namespace ProjectZephyr
 
             lastFragmentTime = fragment.Value.FragmentTime();
             Debug.Log(lastFragmentTime);
+        }
+
+        public void ChangeWeapon(GameObject weaponPrefab)
+        {
+            DropWeapon();
+            AssignWeapon(weaponPrefab);
+        }
+
+        private void DropWeapon()
+        {
+            if(weapon == null)
+            {
+                return;
+            }
+
+            var toDestroy = weapon;
+            weapon = null;
+            Destroy(toDestroy.gameObject);
+
+        }
+
+        private void AssignWeapon(GameObject weaponPrefab)
+        {
+            GameObject weaponObject = Instantiate(weaponPrefab, transform);
+            weapon = weaponObject.GetComponent<WeaponBase>();
+            weapon.InitializeWeapon(gameObject);
         }
     }
     
