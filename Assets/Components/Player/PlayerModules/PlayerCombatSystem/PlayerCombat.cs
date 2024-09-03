@@ -4,18 +4,18 @@ using UnityEngine;
 namespace ProjectZephyr
 {
 
+    public enum AttackType
+    {
+        NORMAL_ATTACK,
+        SPECIAL_ATTACK,
+        WEAPON_ART,
+    }
     public class PlayerCombat : MonoBehaviour
     {
         [SerializeField] private GameObject weaponPrefab;
 
         public WeaponBase weapon { get; set; }
 
-        private enum AttackType
-        {
-            NORMAL_ATTACK,
-            SPECIAL_ATTACK,
-            WEAPON_ART,
-        }
 
         private Timer timer = new Timer();
 
@@ -27,37 +27,26 @@ namespace ProjectZephyr
             weapon = weaponObject.GetComponent<WeaponBase>();
             weapon.InitializeWeapon(gameObject);
         }
-
-        public virtual void NormalAttack()
+        public virtual void CheckComboEnd()
         {
-            Attack(weapon.normalAttackFragments, AttackType.NORMAL_ATTACK);
-        }
-
-        public virtual void SpecialAttack()
-        {
-            Attack(weapon.specialAttackFragments, AttackType.SPECIAL_ATTACK);
-        }
-
-        public virtual void WeaponArt()
-        {
-            Attack(weapon.weaponArtFragments, AttackType.WEAPON_ART);
-        }
-
-        public virtual void ResetAttackFragments()
-        {
-
-            foreach (var fragmentList in weapon.attackFragments)
+            if (timer.Seconds() > lastFragmentTime + 0.3)
             {
-                fragmentList.currentNode = null;
+                foreach (var fragmentList in weapon.attackFragments)
+                {
+                    fragmentList.currentNode = null;
+                }
             }
         }
 
-        private void Attack(CurcilarLinkedList<AttackFragment> fragments, AttackType type)
+        public void Attack(AttackType type)
         {
+            CheckComboEnd();
             timer.Reset();
             var fragment = weapon.attackFragments[(int)type].GetNext();
             weapon.Attack(fragment.Value);
 
+            lastFragmentTime = fragment.Value.FragmentTime();
+            Debug.Log(lastFragmentTime);
         }
     }
     

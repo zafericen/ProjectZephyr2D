@@ -25,9 +25,13 @@ namespace ProjectZephyr
             if (currentNode == null)
             {
                 currentNode = First;
+
             }
-            currentNode = currentNode.Next ?? First;
-            
+            else
+            {
+                currentNode = currentNode.Next ?? First;
+            }
+
             return currentNode;
         }
 

@@ -12,7 +12,7 @@ namespace ProjectZephyr
         public override void OnEnter()
         {
             base.OnEnter();
-            combat.SpecialAttack();
+            combat.Attack(AttackType.SPECIAL_ATTACK);
         }
 
         public override void OnUpdate()
