@@ -1,69 +1,76 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ProjectZephyr
 {
 
+    public enum AttackType
+    {
+        NORMAL_ATTACK,
+        SPECIAL_ATTACK,
+        WEAPON_ART,
+    }
     public class PlayerCombat : MonoBehaviour
     {
-        [SerializeField] private GameObject weaponPrefab;
-
         public WeaponBase weapon { get; set; }
 
-        private enum AttackType
-        {
-            NORMAL_ATTACK,
-            SPECIAL_ATTACK,
-            WEAPON_ART,
-        }
 
         private Timer timer = new Timer();
 
         private float lastFragmentTime = 0;
-       
+
         private void Start()
         {
-            GameObject weaponObject = Instantiate(weaponPrefab,this.transform);
-            weapon = weaponObject.GetComponent<WeaponBase>();
-            weapon.InitializeWeapon(gameObject);
+            ChangeWeapon(PlayerWeaponSlots.instance.GetWeapon());
         }
 
-        public virtual void NormalAttack()
+        public virtual void CheckComboEnd()
         {
-            Attack(weapon.normalAttackFragments, AttackType.NORMAL_ATTACK);
-        }
-
-        public virtual void SpecialAttack()
-        {
-            Attack(weapon.specialAttackFragments, AttackType.SPECIAL_ATTACK);
-        }
-
-        public virtual void WeaponArt()
-        {
-            Attack(weapon.weaponArtFragments, AttackType.WEAPON_ART);
-        }
-
-        protected virtual void CheckComboEnd()
-        {
-            if (timer.Seconds() > 1 + lastFragmentTime)
+            if (timer.Seconds() > lastFragmentTime + 0.3)
             {
-                for(int i = 0; i < weapon.fragmentIndices.Count; ++i)
+                foreach (var fragmentList in weapon.attackFragments)
                 {
-                    weapon.fragmentIndices[i] = 0;
+                    fragmentList.currentNode = null;
                 }
             }
         }
 
-        private void Attack(List<AttackFragment> fragments, AttackType type)
+        public void Attack(AttackType type)
         {
             CheckComboEnd();
             timer.Reset();
-            int index = weapon.fragmentIndices[(int)type];
-            weapon.Attack(fragments[index]);
-            lastFragmentTime = fragments[index].FragmentTime();
+            var fragment = weapon.attackFragments[(int)type].GetNext();
+            weapon.Attack(fragment.Value);
 
-            weapon.fragmentIndices[(int)type] += 1;
-            weapon.fragmentIndices[(int)type] %= fragments.Count;
+            lastFragmentTime = fragment.Value.FragmentTime();
+            Debug.Log(lastFragmentTime);
+        }
+
+        public void ChangeWeapon(GameObject weaponPrefab)
+        {
+            DropWeapon();
+            AssignWeapon(weaponPrefab);
+        }
+
+        private void DropWeapon()
+        {
+            if(weapon == null)
+            {
+                return;
+            }
+
+            var toDestroy = weapon;
+            weapon = null;
+            Destroy(toDestroy.gameObject);
+
+        }
+
+        private void AssignWeapon(GameObject weaponPrefab)
+        {
+            GameObject weaponObject = Instantiate(weaponPrefab, transform);
+            weapon = weaponObject.GetComponent<WeaponBase>();
+            weapon.InitializeWeapon(gameObject);
         }
     }
     

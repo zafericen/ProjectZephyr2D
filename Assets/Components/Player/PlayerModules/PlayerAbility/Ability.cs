@@ -5,48 +5,41 @@ using UnityEngine;
 
 public class Ability : MonoBehaviour
 {
-    [SerializeField] private GameObject slotPrefab;
-
-    public AbilitySlotBase slot { get; set; }
-
-
-    private Timer timer = new Timer();
-
-    private float lastFragmentTime = 0;
+    private AbilityHolderBase ability = null;
 
     private void Start()
     {
-        GameObject weaponObject = Instantiate(slotPrefab, this.transform);
-        slot = weaponObject.GetComponent<AbilitySlotBase>();
-        slot.InitializeAbilities(gameObject);
+        ChangeAbility(AbilitySlot.instance.GetAbility());
     }
 
-    public virtual void AbilityAttack()
+    public void AbilityAttack()
     {
-        Attack(slot.abilityFragments);
+        ability.UseAbility();
     }
 
-
-    protected virtual void CheckComboEnd()
+    public void ChangeAbility(GameObject abilityPrefab)
     {
-        if (timer.Seconds() > 1 + lastFragmentTime)
+        RemoveAbility();
+        AssignAbility(abilityPrefab);
+    }
+
+    private void RemoveAbility()
+    {
+        if (ability == null)
         {
-            for (int i = 0; i < slot.fragmentIndices; ++i)
-            {
-                slot.fragmentIndices = 0;
-            }
+            return;
         }
+
+        var toDestroy = ability;
+        ability = null;
+        Destroy(toDestroy.gameObject);
+
     }
 
-    private void Attack(List<AttackFragment> fragments)
+    private void AssignAbility(GameObject abilityPrefab)
     {
-        CheckComboEnd();
-        timer.Reset();
-        int index = slot.fragmentIndices;
-        slot.Attack(fragments[index]);
-        lastFragmentTime = fragments[index].FragmentTime();
-
-        slot.fragmentIndices += 1;
-        slot.fragmentIndices %= fragments.Count;
+        GameObject HolderObject = Instantiate(abilityPrefab, transform);
+        ability = HolderObject.GetComponent<AbilityHolderBase>();
+        ability.InitializeHolder(gameObject);
     }
 }

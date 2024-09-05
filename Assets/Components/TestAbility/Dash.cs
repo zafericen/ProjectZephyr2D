@@ -11,7 +11,6 @@ public class Dash : AbilityFragment
 
     public override void ApplyLogic()
     {
-        animator.Play(animationName, 0, 0.0f);
         attackPerformer.GetComponent<Rigidbody2D>().velocity = new Vector2
             (5*Mathf.Sign(attackPerformer.transform.localScale.x), 5);  
     }

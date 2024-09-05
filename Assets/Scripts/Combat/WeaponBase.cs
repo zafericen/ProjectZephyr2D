@@ -6,11 +6,11 @@ namespace ProjectZephyr
 
     public abstract class WeaponBase: MonoBehaviour
     {
-        public List<AttackFragment> normalAttackFragments { get; protected set; }
-        public List<AttackFragment> specialAttackFragments { get; protected set; }
-        public List<AttackFragment> weaponArtFragments { get; protected set; }
+        public CurcilarLinkedList<AttackFragment> normalAttackFragments { get; protected set; }
+        public CurcilarLinkedList<AttackFragment> specialAttackFragments { get; protected set; }
+        public CurcilarLinkedList<AttackFragment> weaponArtFragments { get; protected set; }
 
-        public List<int> fragmentIndices { get; protected set; } = new List<int>() {0, 0, 0};
+        public List<CurcilarLinkedList<AttackFragment>> attackFragments { get; protected set; }
 
         public AttackFragment currentFragment { get; set; } = null;
 
@@ -25,6 +25,11 @@ namespace ProjectZephyr
             InitializeNormalAttackFragment(attackPerformer);
             InitializeSpecialAttackFragment(attackPerformer);
             InitializeWeaponArtFragment(attackPerformer);
+
+            attackFragments = new List<CurcilarLinkedList<AttackFragment>>
+            {
+                normalAttackFragments, specialAttackFragments, weaponArtFragments
+            };
         }
 
         public bool IsAttacking()
