@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilitySlot : MonoSingleton<AbilitySlot>
+public class AbilitySlot: MonoSingleton<AbilitySlot>
 {
     public List<GameObject> abilityHolders;
 
