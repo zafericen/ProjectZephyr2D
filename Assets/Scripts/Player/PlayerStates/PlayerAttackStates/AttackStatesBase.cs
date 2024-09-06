@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 namespace ProjectZephyr
 {
 
-    public abstract class AttackStatesBase : MonoState
+    public abstract class AttackStatesBase : PlayerStateBase
     {
         protected PlayerCombat combat;
         protected AttackInputType stateInputType;

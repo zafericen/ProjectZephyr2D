@@ -19,6 +19,12 @@ namespace ProjectZephyr
             playStateAnimation();
         }
 
+        public virtual bool ValidateInputAndUpdateContext(InputContext compareContext)
+        {
+            return !(sendContext.inputContext = 
+                InputHandler.instance.GetInput(compareContext.type, compareContext.holdType)).Equals(InputContext.EmptyContext());
+        }
+
         public virtual void playStateAnimation()
         {
 

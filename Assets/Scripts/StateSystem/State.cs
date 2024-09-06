@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ProjectZephyr
 {
@@ -6,7 +7,9 @@ namespace ProjectZephyr
     public class State
     {
         protected bool busy;
-        protected StateContext context;
+        protected StateContext recieveContext;
+        protected StateContext sendContext;
+
         public PriorityList<Connection> connections { get; } = new PriorityList<Connection>();
 
         public virtual void OnEnter()
@@ -35,12 +38,12 @@ namespace ProjectZephyr
 
         public void TakeContext(StateContext context)
         {
-            this.context = context;
+            this.recieveContext = context;
         }
 
         public StateContext GiveContext()
         {
-            return context;
+            return sendContext;
         }
 
         public virtual void InitialConnections()
@@ -55,6 +58,7 @@ namespace ProjectZephyr
             InitialConnections();
         }
     }
+
 
     public class ExitState : State
     {

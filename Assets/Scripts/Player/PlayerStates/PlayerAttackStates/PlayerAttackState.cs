@@ -26,7 +26,7 @@ namespace ProjectZephyr
 
             Type type = typeof(ExitState);
 
-            switch (context.inputContext.attackType)
+            switch (recieveContext.inputContext.attackType)
             {
                 case AttackInputType.Normal: type = typeof(PlayerNormalAttackState); break;
                 case AttackInputType.Special: type = typeof(PlayerSpecialAttackState); break;

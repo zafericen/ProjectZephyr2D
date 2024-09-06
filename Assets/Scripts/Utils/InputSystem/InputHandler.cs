@@ -42,22 +42,45 @@ public struct InputContext : IComparable<InputContext>, IEquatable<InputContext>
 
     public bool Equals(InputContext other)
     {
-        return type.Equals(other.type);
+        return type.Equals(other.type) && holdType.Equals(other.holdType);
     }
 }
 
 public class InputHandler : MonoSingleton<InputHandler>
 {
+
+    private Dictionary<Type, InputContext> stateToInputContextMap = new Dictionary<Type, InputContext>
+        {
+            { typeof(PlayerIdleState), InputContext.EmptyContext() },
+            { typeof(PlayerWalkState), new InputContext { type = InputType.Walk, holdType = InputActionPhase.Performed } },
+            { typeof(PlayerJumpState), new InputContext { type = InputType.Jump, holdType = InputActionPhase.Performed } },
+            { typeof(PlayerDodgeState), new InputContext { type = InputType.Dodge, holdType = InputActionPhase.Performed } },
+            { typeof(PlayerAttackState), new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed } },
+        };
+
     public PlayerInput playerInputActions { get; private set; }
 
-    public InputContext[] buffer = new InputContext[15];
+    public InputContext[] buffer = new InputContext[12];
     InputContext lastContext = new InputContext { };
 
     private void Awake()
     {
         playerInputActions = GetComponent<PlayerInput>();
-        
-        
+    }
+
+    public InputContext PlayerStateTypeToInputContext(Type type)
+    {
+        InputContext returnContext = InputContext.EmptyContext();
+
+
+        if (!stateToInputContextMap.ContainsKey(type))
+        {
+            return returnContext;
+        }
+
+        returnContext = stateToInputContextMap[type];
+
+        return returnContext;
     }
 
     private void Update()
@@ -69,13 +92,15 @@ public class InputHandler : MonoSingleton<InputHandler>
     {
         lastContext.type = InputType.Dodge; 
         lastContext.holdType = context.phase;
+        lastContext.attackType = AttackInputType.None;
         lastContext.inputVector = Vector2.zero;
     }
 
     public void WalkingCall(InputAction.CallbackContext context)
     {
         lastContext.type = InputType.Walk; 
-        lastContext.holdType = context.phase; 
+        lastContext.holdType = context.phase;
+        lastContext.attackType = AttackInputType.None;
         lastContext.inputVector = context.ReadValue<Vector2>();
     }
 
@@ -83,6 +108,7 @@ public class InputHandler : MonoSingleton<InputHandler>
     {
         lastContext.type = InputType.Jump; 
         lastContext.holdType = context.phase;
+        lastContext.attackType = AttackInputType.None;
         lastContext.inputVector = Vector2.zero;
     }
 
@@ -122,6 +148,10 @@ public class InputHandler : MonoSingleton<InputHandler>
     }
     public InputContext GetInput(InputType type, InputActionPhase actionPhase)
     {
+        if(type == InputType.None && actionPhase == InputActionPhase.Disabled)
+        {
+            return InputContext.EmptyContext();
+        }
         for (int i = buffer.Length-1; i >= 0; i--)
         {
             if (buffer[i].type == type && buffer[i].holdType == actionPhase)
