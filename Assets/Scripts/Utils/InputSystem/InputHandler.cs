@@ -63,9 +63,14 @@ public class InputHandler : MonoSingleton<InputHandler>
     public InputContext[] buffer = new InputContext[12];
     InputContext lastContext = new InputContext { };
 
+
+    PlayerMovementInputHandler movementInputHandler;
+
     private void Awake()
     {
         playerInputActions = GetComponent<PlayerInput>();
+
+        movementInputHandler = new PlayerMovementInputHandler();
     }
 
     public InputContext PlayerStateTypeToInputContext(Type type)
@@ -85,7 +90,7 @@ public class InputHandler : MonoSingleton<InputHandler>
 
     private void Update()
     {
-        AddToBuffer(ConsumeInput());
+        AddToBuffer(movementInputHandler.GetAvaliableInput());
     }
 
     public void DodgingCall(InputAction.CallbackContext context)
@@ -152,7 +157,7 @@ public class InputHandler : MonoSingleton<InputHandler>
         {
             return InputContext.EmptyContext();
         }
-        for (int i = buffer.Length-1; i >= 0; i--)
+        for (int i = 0; i < buffer.Length; i++)
         {
             if (buffer[i].type == type && buffer[i].holdType == actionPhase)
             {
@@ -187,3 +192,118 @@ public class InputHandler : MonoSingleton<InputHandler>
         buffer[0] = inputContext;
     }
 }
+
+public class PlayerMovementInputHandler : PlayerInputActions.IMovementActions
+{
+    List<InputContext> inputStack;
+
+    PlayerInputActions inputActions;
+
+    private Dictionary<InputType, InputAction> typeToInputMap;
+
+
+    public PlayerMovementInputHandler()
+    {
+
+
+        inputActions = new PlayerInputActions();
+        inputActions.Movement.Enable();
+        inputActions.Movement.AddCallbacks(this);
+        
+        inputStack = new List<InputContext>
+        {
+            InputContext.EmptyContext()
+        };
+
+
+        typeToInputMap = new Dictionary<InputType, InputAction>
+        {
+            { InputType.Walk, inputActions.Movement.Walking},
+            { InputType.Dodge, inputActions.Movement.Dodging},
+            { InputType.Jump, inputActions.Movement.Jump},
+        };
+    }
+
+    void AddToStack(InputContext inputContext)
+    {
+        if (!inputStack.Exists(x => x.Equals(inputContext)))
+        {
+            inputStack.Add(inputContext);
+            return;
+        }
+
+        var locatedInput = inputStack.Find(x => x.Equals(inputContext));
+
+        locatedInput = inputContext;
+    }
+
+    InputContext RemoveFromStack()
+    {
+        for (int i = inputStack.Count - 1; i > 0; i--)
+        {
+            if (typeToInputMap[(inputStack[i].type)].phase == InputActionPhase.Waiting)
+            {
+                inputStack.RemoveAt(i);
+            }
+            else
+            {
+                return inputStack[i];
+            }
+        }
+
+        return inputStack[0];
+    }
+
+    public InputContext GetAvaliableInput()
+    {
+        return RemoveFromStack();
+    }
+
+    public void OnDodging(InputAction.CallbackContext context)
+    {
+        InputContext addContext = new InputContext
+        {
+            type = InputType.Dodge,
+            holdType = context.phase,
+            attackType = AttackInputType.None,
+            inputVector = Vector2.zero
+        };
+
+        AddToStack(addContext);
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        InputContext addContext = new InputContext
+        {
+            type = InputType.Jump,
+            holdType = context.phase,
+            attackType = AttackInputType.None,
+            inputVector = Vector2.zero
+        };
+
+        AddToStack(addContext);
+    }
+
+    public void OnWalking(InputAction.CallbackContext context)
+    {
+        InputContext addContext = new InputContext
+        {
+            type = InputType.Walk,
+            holdType = context.phase,
+            attackType = AttackInputType.None,
+            inputVector = context.ReadValue<Vector2>()
+        };
+
+        AddToStack(addContext);
+    }
+}
+
+//public interface IBackTrackableInput
+//{
+//    List<InputContext> inputStack { get; set; }
+
+//    PlayerInputActions inputActions { get; set; }
+
+//    private Dictionary<InputType, InputAction> typeToInputMap { get; set; }
+//}
