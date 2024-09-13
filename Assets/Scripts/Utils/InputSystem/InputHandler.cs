@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using ProjectZephyr;
 using System;
+using System.Linq;
 
 public enum InputType
 {
@@ -42,13 +43,12 @@ public struct InputContext : IComparable<InputContext>, IEquatable<InputContext>
 
     public bool Equals(InputContext other)
     {
-        return type.Equals(other.type) && holdType.Equals(other.holdType);
+        return type.Equals(other.type) && holdType.Equals(other.holdType) && attackType.Equals(other.attackType);
     }
 }
 
-public class InputHandler : MonoSingleton<InputHandler>
+public class InputHandler : MonoSingleton<InputHandler>, IBackTrackableInput
 {
-
     private Dictionary<Type, InputContext> stateToInputContextMap = new Dictionary<Type, InputContext>
         {
             { typeof(PlayerIdleState), InputContext.EmptyContext() },
@@ -57,20 +57,20 @@ public class InputHandler : MonoSingleton<InputHandler>
             { typeof(PlayerDodgeState), new InputContext { type = InputType.Dodge, holdType = InputActionPhase.Performed } },
             { typeof(PlayerAttackState), new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed } },
         };
-
-    public PlayerInput playerInputActions { get; private set; }
+    public List<InputContext> inputStack { get; set; }
+    public PlayerInputActions inputActions { get; set; }
 
     public InputContext[] buffer = new InputContext[12];
     InputContext lastContext = new InputContext { };
 
 
-    PlayerMovementInputHandler movementInputHandler;
 
     private void Awake()
     {
-        playerInputActions = GetComponent<PlayerInput>();
+        InitializeInputActions();
 
-        movementInputHandler = new PlayerMovementInputHandler();
+        InitializeStack();
+
     }
 
     public InputContext PlayerStateTypeToInputContext(Type type)
@@ -90,59 +90,7 @@ public class InputHandler : MonoSingleton<InputHandler>
 
     private void Update()
     {
-        AddToBuffer(movementInputHandler.GetAvaliableInput());
-    }
-
-    public void DodgingCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Dodge; 
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.None;
-        lastContext.inputVector = Vector2.zero;
-    }
-
-    public void WalkingCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Walk; 
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.None;
-        lastContext.inputVector = context.ReadValue<Vector2>();
-    }
-
-    public void JumpingCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Jump; 
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.None;
-        lastContext.inputVector = Vector2.zero;
-    }
-
-    public void NormalAttackCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Attack;
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.Normal;
-    }
-
-    public void SpecialAttackCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Attack;
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.Special;
-    }
-
-    public void WeaponArtCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Attack;
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.WeaponArt;
-    }
-
-    public void AbilityCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Attack;
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.Ability;
+        AddToBuffer(RemoveFromStack());
     }
 
     public bool CheckInput(InputType type, InputActionPhase actionPhase) 
@@ -191,40 +139,8 @@ public class InputHandler : MonoSingleton<InputHandler>
         }
         buffer[0] = inputContext;
     }
-}
 
-public class PlayerMovementInputHandler : PlayerInputActions.IMovementActions
-{
-    List<InputContext> inputStack;
-
-    PlayerInputActions inputActions;
-
-    private Dictionary<InputType, InputAction> typeToInputMap;
-
-
-    public PlayerMovementInputHandler()
-    {
-
-
-        inputActions = new PlayerInputActions();
-        inputActions.Movement.Enable();
-        inputActions.Movement.AddCallbacks(this);
-        
-        inputStack = new List<InputContext>
-        {
-            InputContext.EmptyContext()
-        };
-
-
-        typeToInputMap = new Dictionary<InputType, InputAction>
-        {
-            { InputType.Walk, inputActions.Movement.Walking},
-            { InputType.Dodge, inputActions.Movement.Dodging},
-            { InputType.Jump, inputActions.Movement.Jump},
-        };
-    }
-
-    void AddToStack(InputContext inputContext)
+    public void AddToStack(InputContext inputContext)
     {
         if (!inputStack.Exists(x => x.Equals(inputContext)))
         {
@@ -237,11 +153,11 @@ public class PlayerMovementInputHandler : PlayerInputActions.IMovementActions
         locatedInput = inputContext;
     }
 
-    InputContext RemoveFromStack()
+    public InputContext RemoveFromStack()
     {
         for (int i = inputStack.Count - 1; i > 0; i--)
         {
-            if (typeToInputMap[(inputStack[i].type)].phase == InputActionPhase.Waiting)
+            if (GetInputActionByInputContext(inputStack[i]).phase == InputActionPhase.Waiting)
             {
                 inputStack.RemoveAt(i);
             }
@@ -254,9 +170,155 @@ public class PlayerMovementInputHandler : PlayerInputActions.IMovementActions
         return inputStack[0];
     }
 
-    public InputContext GetAvaliableInput()
+    public void InitializeInputActions()
     {
-        return RemoveFromStack();
+        inputActions = new PlayerInputActions();
+
+        var movementInputHandler = new PlayerMovementInputHandler(this);
+        var attackInputHandler = new PlayerAttackInputHandler(this);
+
+    }
+
+    public void InitializeStack()
+    {
+        inputStack = new List<InputContext>
+        {
+            InputContext.EmptyContext()
+        };
+    }
+
+    public InputAction GetInputActionByInputContext(InputContext context)
+    {
+        if(context.type == InputType.Walk)
+        {
+            return inputActions.Movement.Walking;
+        }
+        else if(context.type == InputType.Dodge)
+        {
+            return inputActions.Movement.Dodging;
+        }
+        else if(context.type == InputType.Jump)
+        {
+            return inputActions.Movement.Jump;
+        }
+        else if(context.type == InputType.Attack && context.attackType == AttackInputType.Ability)
+        {
+            return inputActions.Attack.Ability;
+        }
+        else if (context.type == InputType.Attack && context.attackType == AttackInputType.Normal)
+        {
+            return inputActions.Attack.NormalAttack;
+        }
+        else if (context.type == InputType.Attack && context.attackType == AttackInputType.Special)
+        {
+            return inputActions.Attack.SpecialAttack;
+        }
+        else if (context.type == InputType.Attack && context.attackType == AttackInputType.WeaponArt)
+        {
+            return inputActions.Attack.WeaponArt;
+        }
+        else
+        {
+            return null;
+        }
+    }
+}
+
+
+public class PlayerAttackInputHandler : PlayerInputActions.IAttackActions, IInputActionAddable
+{
+    public IBackTrackableInput trackableInput {  get; set; }
+
+    Vector2 lookDir;
+    public PlayerAttackInputHandler(IBackTrackableInput trackableInput)
+    {
+        this.trackableInput = trackableInput;
+        lookDir = Vector2.zero;
+        InitializeInputActionMaps();
+    }
+
+    public void InitializeInputActionMaps()
+    {
+        trackableInput.inputActions.Attack.Enable();
+        trackableInput.inputActions.Attack.AddCallbacks(this);
+    }
+
+    public void OnLookDir(InputAction.CallbackContext context)
+    {
+        if(context.canceled == true)
+        {
+            lookDir = Vector2.zero;
+            return;
+        }
+
+        lookDir = context.ReadValue<Vector2>();
+    }
+
+    public void OnAbility(InputAction.CallbackContext context)
+    {
+        InputContext addContext = new()
+        {
+            type = InputType.Attack,
+            holdType = context.phase,
+            attackType = AttackInputType.Ability,
+            inputVector = lookDir,
+        };
+
+        trackableInput.AddToStack(addContext);
+    }
+
+    public void OnNormalAttack(InputAction.CallbackContext context)
+    {
+        InputContext addContext = new InputContext
+        {
+            type = InputType.Attack,
+            holdType = context.phase,
+            attackType = AttackInputType.Normal,
+            inputVector = lookDir,
+        };
+        trackableInput.AddToStack(addContext);
+    }
+
+    public void OnSpecialAttack(InputAction.CallbackContext context)
+    {
+        InputContext addContext = new InputContext
+        {
+            type = InputType.Attack,
+            holdType = context.phase,
+            attackType = AttackInputType.Special,
+            inputVector = lookDir,
+        };
+        trackableInput.AddToStack(addContext);
+    }
+
+    public void OnWeaponArt(InputAction.CallbackContext context)
+    {
+        InputContext addContext = new InputContext
+        {
+            type = InputType.Attack,
+            holdType = context.phase,
+            attackType = AttackInputType.WeaponArt,
+            inputVector = lookDir,
+        };
+        trackableInput.AddToStack(addContext);
+    }
+}
+public class PlayerMovementInputHandler: PlayerInputActions.IMovementActions, IInputActionAddable
+{    
+    public IBackTrackableInput trackableInput { get; set; }
+    
+    public PlayerMovementInputHandler(IBackTrackableInput trackableInput)
+    {
+        this.trackableInput = trackableInput;
+
+        InitializeInputActionMaps();
+    }
+
+
+    public void InitializeInputActionMaps()
+    {
+        trackableInput.inputActions.Movement.Enable();
+        trackableInput.inputActions.Movement.AddCallbacks(this);
     }
 
     public void OnDodging(InputAction.CallbackContext context)
@@ -268,8 +330,7 @@ public class PlayerMovementInputHandler : PlayerInputActions.IMovementActions
             attackType = AttackInputType.None,
             inputVector = Vector2.zero
         };
-
-        AddToStack(addContext);
+        trackableInput.AddToStack(addContext);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -282,7 +343,7 @@ public class PlayerMovementInputHandler : PlayerInputActions.IMovementActions
             inputVector = Vector2.zero
         };
 
-        AddToStack(addContext);
+        trackableInput.AddToStack(addContext);
     }
 
     public void OnWalking(InputAction.CallbackContext context)
@@ -295,15 +356,36 @@ public class PlayerMovementInputHandler : PlayerInputActions.IMovementActions
             inputVector = context.ReadValue<Vector2>()
         };
 
-        AddToStack(addContext);
+        trackableInput.AddToStack(addContext);
     }
+
 }
 
-//public interface IBackTrackableInput
-//{
-//    List<InputContext> inputStack { get; set; }
+public interface IBackTrackableInput: IPlayerInputActionable
+{
+    List<InputContext> inputStack { get; set; }
 
-//    PlayerInputActions inputActions { get; set; }
 
-//    private Dictionary<InputType, InputAction> typeToInputMap { get; set; }
-//}
+    InputAction GetInputActionByInputContext(InputContext context);
+
+    void InitializeStack();
+
+    void AddToStack(InputContext inputContext);
+    
+    InputContext RemoveFromStack();
+    
+}
+
+public interface IPlayerInputActionable
+{
+    PlayerInputActions inputActions { get; set; }
+
+    void InitializeInputActions();
+}
+
+public interface IInputActionAddable
+{
+    IBackTrackableInput trackableInput {  get; set; }
+
+    void InitializeInputActionMaps();
+}
