@@ -4,51 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using ProjectZephyr;
 using System;
+using System.Linq;
 
-public enum InputType
+public class InputHandler : MonoSingleton<InputHandler>, IBackTrackableInput
 {
-    None,
-    Walk,
-    Jump,
-    Dodge,
-    Attack
-}
-
-public enum AttackInputType
-{
-    None,
-    Normal,
-    Special,
-    WeaponArt,
-    Ability
-}
-
-public struct InputContext : IComparable<InputContext>, IEquatable<InputContext>
-{
-    public InputType type;
-    public AttackInputType attackType;
-    public InputActionPhase holdType;
-    public Vector2 inputVector;
-    public int CompareTo(InputContext other)
-    {
-        return -type.CompareTo(other.type);
-    }
-
-    public static InputContext EmptyContext()
-    {
-        return new InputContext { type = InputType.None, attackType = AttackInputType.None, 
-            holdType = InputActionPhase.Disabled, inputVector = Vector2.zero };
-    }
-
-    public bool Equals(InputContext other)
-    {
-        return type.Equals(other.type) && holdType.Equals(other.holdType);
-    }
-}
-
-public class InputHandler : MonoSingleton<InputHandler>
-{
-
     private Dictionary<Type, InputContext> stateToInputContextMap = new Dictionary<Type, InputContext>
         {
             { typeof(PlayerIdleState), InputContext.EmptyContext() },
@@ -57,15 +16,22 @@ public class InputHandler : MonoSingleton<InputHandler>
             { typeof(PlayerDodgeState), new InputContext { type = InputType.Dodge, holdType = InputActionPhase.Performed } },
             { typeof(PlayerAttackState), new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed } },
         };
-
-    public PlayerInput playerInputActions { get; private set; }
+    public InputStack<InputContext> inputStack { get; set; }
+    public PlayerInputActions inputActions { get; set; }
+    public NonHashableMap<InputContext, InputAction> inputContextToInputActionMap { get; set; }
 
     public InputContext[] buffer = new InputContext[12];
     InputContext lastContext = new InputContext { };
 
+
+
     private void Awake()
     {
-        playerInputActions = GetComponent<PlayerInput>();
+        InitializeInputActions();
+
+        InitializeStack();
+
+        InitializeInputContextToInputActionMap();
     }
 
     public InputContext PlayerStateTypeToInputContext(Type type)
@@ -85,59 +51,7 @@ public class InputHandler : MonoSingleton<InputHandler>
 
     private void Update()
     {
-        AddToBuffer(ConsumeInput());
-    }
-
-    public void DodgingCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Dodge; 
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.None;
-        lastContext.inputVector = Vector2.zero;
-    }
-
-    public void WalkingCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Walk; 
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.None;
-        lastContext.inputVector = context.ReadValue<Vector2>();
-    }
-
-    public void JumpingCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Jump; 
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.None;
-        lastContext.inputVector = Vector2.zero;
-    }
-
-    public void NormalAttackCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Attack;
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.Normal;
-    }
-
-    public void SpecialAttackCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Attack;
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.Special;
-    }
-
-    public void WeaponArtCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Attack;
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.WeaponArt;
-    }
-
-    public void AbilityCall(InputAction.CallbackContext context)
-    {
-        lastContext.type = InputType.Attack;
-        lastContext.holdType = context.phase;
-        lastContext.attackType = AttackInputType.Ability;
+        AddToBuffer(inputStack.RemoveFromStack(x => GetInputActionByContext(x).phase == InputActionPhase.Waiting));
     }
 
     public bool CheckInput(InputType type, InputActionPhase actionPhase) 
@@ -152,7 +66,7 @@ public class InputHandler : MonoSingleton<InputHandler>
         {
             return InputContext.EmptyContext();
         }
-        for (int i = buffer.Length-1; i >= 0; i--)
+        for (int i = 0; i < buffer.Length; i++)
         {
             if (buffer[i].type == type && buffer[i].holdType == actionPhase)
             {
@@ -164,19 +78,6 @@ public class InputHandler : MonoSingleton<InputHandler>
         return InputContext.EmptyContext();
     }
 
-    private InputContext ConsumeInput()
-    {
-        var returnContext = lastContext;
-        if(lastContext.holdType == InputActionPhase.Canceled)
-        {
-
-            lastContext.type = InputType.None; 
-            lastContext.holdType = InputActionPhase.Disabled;
-            lastContext.attackType = AttackInputType.None;
-            lastContext.inputVector = Vector2.zero;
-        }
-        return returnContext;
-    }
 
     private void AddToBuffer(InputContext inputContext)
     {
@@ -185,5 +86,41 @@ public class InputHandler : MonoSingleton<InputHandler>
             buffer[i] = buffer[i-1];
         }
         buffer[0] = inputContext;
+    }
+
+    public void InitializeInputActions()
+    {
+        inputActions = new PlayerInputActions();
+
+        var movementInputHandler = new PlayerMovementInputHandler(this);
+        var attackInputHandler = new PlayerAttackInputHandler(this);
+
+    }
+
+    public void InitializeStack()
+    {
+        inputStack = new InputStack<InputContext>
+        {
+            InputContext.EmptyContext()
+        };
+    }
+
+    InputAction GetInputActionByContext(InputContext context)
+    {
+        return inputContextToInputActionMap.GetValue(context);
+    }
+
+    public void InitializeInputContextToInputActionMap()
+    {
+        inputContextToInputActionMap = new NonHashableMap<InputContext, InputAction>()
+        {
+            { new InputContext{type = InputType.Walk, attackType = AttackInputType.None}, inputActions.Movement.Walking},
+            { new InputContext{type = InputType.Jump, attackType = AttackInputType.None}, inputActions.Movement.Jump },
+            { new InputContext{type = InputType.Dodge, attackType = AttackInputType.None}, inputActions.Movement.Dodging },
+            { new InputContext{type = InputType.Attack, attackType = AttackInputType.Normal}, inputActions.Attack.NormalAttack },
+            { new InputContext{type = InputType.Attack, attackType = AttackInputType.Special}, inputActions.Attack.SpecialAttack},
+            { new InputContext{type = InputType.Attack, attackType = AttackInputType.WeaponArt}, inputActions.Attack.WeaponArt},
+            { new InputContext{type = InputType.Attack, attackType = AttackInputType.Ability}, inputActions.Attack.Ability}
+        };
     }
 }

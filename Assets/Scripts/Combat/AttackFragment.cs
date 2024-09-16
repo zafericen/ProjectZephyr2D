@@ -20,7 +20,7 @@ namespace ProjectZephyr
             LoadAnimator(AnimatorPath);
         }
 
-        public void Perform()
+        public virtual void Perform()
         {
             OverrideAnimator();
             PlayAnimator();

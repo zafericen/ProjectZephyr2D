@@ -10,7 +10,6 @@ public class TestWeapon : WeaponBase
         normalAttackFragments = new CurcilarLinkedList<AttackFragment>( new List<AttackFragment>
         {
             new LavaSword_NAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/NA_1.overrideController"),
-            new LavaSword_NAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/NA_2.overrideController")
         });
     }
 
@@ -19,7 +18,6 @@ public class TestWeapon : WeaponBase
         specialAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
         {
             new LavaSword_SAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/SA_1.overrideController"),
-            new LavaSword_SAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/SA_2.overrideController")
         });
     }
 
@@ -28,7 +26,6 @@ public class TestWeapon : WeaponBase
         weaponArtFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
         {
             new LavaSword_WAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/WA_1.overrideController"),
-            new LavaSword_WAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/SA_2.overrideController")
         });
     }
 
