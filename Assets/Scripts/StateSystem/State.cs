@@ -1,64 +1,44 @@
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace ProjectZephyr
 {
 
+    public enum StateStatus
+    {
+        Run,
+        Success,
+        Failure,
+    }
+
+    public class MachineContext
+    {
+        public Type lastState;
+        public GameObject owner;
+    }
+
     public class State
     {
-        protected bool busy;
-        protected StateContext recieveContext;
-        protected StateContext sendContext;
+        public StateStatus status { get; internal set; }
 
-        public PriorityList<Connection> connections { get; } = new PriorityList<Connection>();
-
-        public virtual void OnEnter()
+        public virtual void OnEnter(MachineContext context)
         {
-            busy = true;
+            status = StateStatus.Run;
         }
 
         public virtual void OnUpdate()
         {
         }
 
-        public virtual void OnExit()
+        public virtual void OnExit(MachineContext context)
         {
-            busy = false;
-        }
-
-        public virtual bool IsBusy()
-        {
-            return busy;
-        }
-
-        public void AddConnection(Connection connection)
-        {
-            connections.Add(connection);
-        }
-
-        public void TakeContext(StateContext context)
-        {
-            this.recieveContext = context;
-        }
-
-        public StateContext GiveContext()
-        {
-            return sendContext;
-        }
-
-        public virtual void InitialConnections()
-        {
+            context.lastState = GetType();
         }
     }
 
-    public class MonoState : State
+    public class EnterState : State
     {
-        public MonoState(GameObject o)
-        {
-            InitialConnections();
-        }
     }
-
 
     public class ExitState : State
     {

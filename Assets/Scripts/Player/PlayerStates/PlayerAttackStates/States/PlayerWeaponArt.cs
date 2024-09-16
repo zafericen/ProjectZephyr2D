@@ -5,13 +5,10 @@ namespace ProjectZephyr
 
     public partial class PlayerWeaponArtState : AttackStatesBase
     {
-        public PlayerWeaponArtState(GameObject o) : base(o)
-        {
-        }
 
-        public override void OnEnter()
+        public override void OnEnter(MachineContext context)
         {
-            base.OnEnter();
+            base.OnEnter(context);
             combat.Attack(AttackType.WEAPON_ART);
         }
 
@@ -20,9 +17,9 @@ namespace ProjectZephyr
             base.OnUpdate();
         }
 
-        public override void OnExit()
+        public override void OnExit(MachineContext context)
         {
-            base.OnExit();
+            base.OnExit(context);
         }
 
         protected override void SetStateInput()

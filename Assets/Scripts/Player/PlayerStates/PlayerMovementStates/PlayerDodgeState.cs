@@ -7,26 +7,20 @@ namespace ProjectZephyr
     {
         private DodgeRoll dodgeRoll;
 
-        public PlayerDodgeState(GameObject o) : base(o)
+        public override void OnEnter(MachineContext context)
         {
-            dodgeRoll = o.GetComponent<DodgeRoll>();
-        }
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
+            base.OnEnter(context);
+            dodgeRoll = owner.GetComponent<DodgeRoll>();
             Debug.Log("girdi");
         }
         public override void OnUpdate()
         {
             if ((animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f && animator.GetCurrentAnimatorStateInfo(0).IsName("Dodging")))
             {
-                busy = false;
+                status = StateStatus.Success;
             }
             dodgeRoll.Dodge();
         }
-
-
 
         public override void playStateAnimation()
         {

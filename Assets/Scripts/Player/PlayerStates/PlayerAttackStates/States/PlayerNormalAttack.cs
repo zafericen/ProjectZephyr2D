@@ -5,24 +5,11 @@ namespace ProjectZephyr
 
     public partial class PlayerNormalAttackState : AttackStatesBase
     {
-        public PlayerNormalAttackState(GameObject o) : base(o)
-        {
-        }
 
-        public override void OnEnter()
+        public override void OnEnter(MachineContext context)
         {
-            base.OnEnter();
+            base.OnEnter(context);
             combat.Attack(AttackType.NORMAL_ATTACK);
-        }
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
         }
 
         protected override void SetStateInput()

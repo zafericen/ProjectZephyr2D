@@ -1,80 +1,54 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace ProjectZephyr
 {
 
-    public class StateMachine
+    public class StateMachine : MonoBehaviour
     {
-        private Dictionary<Type, State> states = new Dictionary<Type, State>()
+        [SerializeField]
+        private StateGraph graph;
+
+        private MachineContext context;
+
+        void Start()
         {
-            {typeof(ExitState), new ExitState()},
-        };
-
-        public State current;
-
-        public StateMachine(Type starterStateName)
-        { 
-            current = states[starterStateName];
-            current.OnEnter();
-        }
-
-        public StateMachine()
-        {
-            current = states[typeof(ExitState)];
-        }
-
-        public void ChangeState(Type type)
-        {
-            current.OnExit();
-            StateContext context = current.GiveContext();
-            current = states[type];
-            current.TakeContext(context);
-            current.OnEnter();
-        }
-
-        public void Run()
-        {
-            current.OnUpdate();
-
-            foreach (var connection in current.connections)
+            if (graph == null)
             {
-                if (connection.Check() && DoesStateExists(connection.stateType) && !GetState(connection.stateType).IsBusy())
+                graph = new StateGraph();
+            }
+
+            context.owner = gameObject;
+        }
+
+        void Update()
+        {
+            graph.currentNode.state.OnUpdate();
+
+            foreach (var link in graph.currentNode.links)
+            {
+                if (link.Check() && graph.currentNode.state.status == StateStatus.Success)
                 {
-                    ChangeState(connection.stateType);
-                    break;
+                    ChangeState(link.destination);
                 }
             }
         }
 
-        private State GetState(Type type)
+        public void ChangeState<T>() where T : State
         {
-            return states[type];
+            ChangeState(typeof(T));
         }
 
-        private bool DoesStateExists(Type type)
+        public void ChangeState(Type stateType)
         {
-            return states.ContainsKey(type);
+            graph.currentNode.state.OnExit(context);
+            graph.SetState(stateType);
+            graph.currentNode.state.OnEnter(context);
         }
 
-        public void AddState(Type type, State state)
-        {
-            states.Add(type, state);
-        }
-
-        public void RemoveState(Type type)
-        {
-            states.Remove(type);
-        }
-
-        public void AddConnection(Type where, Connection connection)
-        {
-            states[where].AddConnection(connection);
-        }
-
-        public bool IsExit()
-        {
-            return current is ExitState;
-        }
     }
+
 }

@@ -1,30 +1,22 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 
 namespace ProjectZephyr
 {
-
-    public abstract class PlayerStateBase : State
+    public class BossStateBase : State
     {
         protected Animator animator;
-        protected GameObject owner;
+        protected GameObject o;
 
         public override void OnEnter(MachineContext context)
         {
             base.OnEnter(context);
-            owner = context.owner;
-            animator = owner.GetComponent<Animator>();
+            o = context.owner;
+            animator = o.GetComponent<Animator>();
             playStateAnimation();
         }
 
         public virtual void playStateAnimation()
         {
-
         }
-
     }
-
 }
-
-
-

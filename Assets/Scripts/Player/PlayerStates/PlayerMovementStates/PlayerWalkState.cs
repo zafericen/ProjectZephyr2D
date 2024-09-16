@@ -7,9 +7,10 @@ namespace ProjectZephyr
     {
         private Movement movement;
 
-        public PlayerWalkState(GameObject o) : base(o)
+        public override void OnEnter(MachineContext context)
         {
-            movement = o.GetComponent<Movement>();
+            base.OnEnter(context);
+            movement = owner.GetComponent<Movement>();
         }
 
         public override void OnUpdate()
@@ -17,15 +18,10 @@ namespace ProjectZephyr
             movement.Move();
             if (!movement.IsMoving())
             {
-                busy = false;
+                status = StateStatus.Success;
                 return;
             }
 
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
         }
 
         public override void playStateAnimation()

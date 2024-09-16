@@ -5,13 +5,9 @@ namespace ProjectZephyr
 
     public partial class PlayerSpecialAttackState : AttackStatesBase
     {
-        public PlayerSpecialAttackState(GameObject o) : base(o)
+        public override void OnEnter(MachineContext context)
         {
-        }
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
+            base.OnEnter(context);
             combat.Attack(AttackType.SPECIAL_ATTACK);
         }
 
@@ -20,7 +16,7 @@ namespace ProjectZephyr
             base.OnUpdate();
         }
 
-        public override void OnExit()
+        public override void OnExit(MachineContext context)
         {
         }
 

@@ -10,14 +10,10 @@ namespace ProjectZephyr
         protected PlayerCombat combat;
         protected AttackInputType stateInputType;
 
-        protected AttackStatesBase(GameObject o) : base(o)
+        public override void OnEnter(MachineContext context)
         {
-            combat = o.GetComponent<PlayerCombat>();
-        }
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
+            base.OnEnter(context);
+            combat = owner.GetComponent<PlayerCombat>();
         }
 
         public override void OnUpdate()
@@ -25,13 +21,13 @@ namespace ProjectZephyr
             base.OnUpdate();
             if (!combat.weapon.IsAttacking())
             {
-                busy = false;
+                status = StateStatus.Success;
             }
         }
 
-        public override void OnExit()
+        public override void OnExit(MachineContext context)
         {
-            base.OnExit();
+            base.OnExit(context);
         }
 
         protected abstract void SetStateInput();

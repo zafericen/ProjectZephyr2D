@@ -10,20 +10,10 @@ namespace ProjectZephyr
     {
         private PlayerJump jumping;
 
-        public PlayerJumpState(GameObject o) : base(o)
+        public override void OnEnter(MachineContext context)
         {
-            jumping = o.GetComponent<PlayerJump>();
-        }
-
-        public override bool IsBusy()
-        {
-            busy = !jumping.IsOnGround();
-            return base.IsBusy();
-        }
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
+            base.OnEnter(context);
+            jumping = owner.GetComponent<PlayerJump>();
             jumping.Jump();
         }
 
@@ -31,13 +21,13 @@ namespace ProjectZephyr
         {
             if (jumping.IsOnGround())
             {
-                busy = false;
+                status = StateStatus.Success;
             }
         }
 
-        public override void OnExit()
+        public override void OnExit(MachineContext context)
         {
-            base.OnExit();
+            base.OnExit(context);
             jumping.StopJump();
         }
 
