@@ -1,17 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class Dash : AbilityFragment
+public class Dash : Ability
 {
-    public Dash(GameObject o, string AnimatorPath) : base(o, AnimatorPath)
+    public float dashSpeed = 10f;
+    public float dashDuration = 0.2f;
+
+    protected override void ActivateAbility(GameObject user)
     {
+        Rigidbody2D rb = user.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            // Start the dash
+            Vector2 dashDirection = new Vector2(Mathf.Sign(user.transform.localScale.x), 0);
+            rb.velocity = dashDirection * dashSpeed;
+
+            // Stop the dash after the duration
+            user.GetComponent<MonoBehaviour>().StartCoroutine(StopDash(rb));
+        }
     }
 
-    public override void ApplyLogic()
+    private IEnumerator StopDash(Rigidbody2D rb)
     {
-        attackPerformer.GetComponent<Rigidbody2D>().velocity = new Vector2
-            (5*Mathf.Sign(attackPerformer.transform.localScale.x), 5);  
+        yield return new WaitForSeconds(dashDuration);
+        rb.velocity = Vector2.zero;
     }
 }

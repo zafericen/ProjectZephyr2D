@@ -1,25 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace ProjectZephyr
 {
     public partial class PlayerAbilityState : AttackStatesBase
     {
-        Ability ability;
+        private AbilityHolder abilityHolder;
+        private GameObject player;
+
         public PlayerAbilityState(GameObject o) : base(o)
         {
-            ability = o.GetComponent<Ability>();
+            player = o; // Store the reference to the game object
+            abilityHolder = player.GetComponent<AbilityHolder>(); // Get the AbilityHolder component from the player
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            ability.AbilityAttack();
+            // Check if AbilityHolder and the player reference are valid
+            if (abilityHolder != null && player != null)
+            {
+                abilityHolder.UseAbility(player);  // Pass the stored player object as the user
+            }
         }
+
         public override void OnUpdate()
         {
             base.OnUpdate();
@@ -29,6 +33,5 @@ namespace ProjectZephyr
         {
             stateInputType = AttackInputType.Ability;
         }
-
     }
 }

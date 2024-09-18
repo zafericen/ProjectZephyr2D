@@ -1,45 +1,47 @@
-using ProjectZephyr;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ability : MonoBehaviour
 {
-    private AbilityHolderBase ability = null;
+    public float cooldownTime = 1f;  // Default cooldown
+    private bool isOnCooldown = false;
+
+    private AbilityHolder abilityHolder;
 
     private void Start()
     {
-        ChangeAbility(AbilitySlot.instance.GetAbility());
+        abilityHolder = GetComponent<AbilityHolder>();
     }
 
-    public void AbilityAttack()
+    private void Update()
     {
-        ability.UseAbility();
-    }
-
-    public void ChangeAbility(GameObject abilityPrefab)
-    {
-        RemoveAbility();
-        AssignAbility(abilityPrefab);
-    }
-
-    private void RemoveAbility()
-    {
-        if (ability == null)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            return;
+            abilityHolder.UseAbility(gameObject);
         }
-
-        var toDestroy = ability;
-        ability = null;
-        Destroy(toDestroy.gameObject);
-
     }
 
-    private void AssignAbility(GameObject abilityPrefab)
+    // Use this method to trigger the ability
+    public void TryActivate(GameObject user)
     {
-        GameObject HolderObject = Instantiate(abilityPrefab, transform);
-        ability = HolderObject.GetComponent<AbilityHolderBase>();
-        ability.InitializeHolder(gameObject);
+        if (!isOnCooldown)
+        {
+            ActivateAbility(user);
+            StartCooldown();
+        }
     }
+
+    // Start the cooldown after activation
+    private void StartCooldown()
+    {
+        isOnCooldown = true;
+        Invoke(nameof(ResetCooldown), cooldownTime);
+    }
+
+    private void ResetCooldown()
+    {
+        isOnCooldown = false;
+    }
+
+    // Each ability will implement its own behavior here
+    protected virtual void ActivateAbility(GameObject user) { }
 }
