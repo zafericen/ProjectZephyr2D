@@ -28,10 +28,4 @@ public class TestWeapon : WeaponBase
             new LavaSword_WAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/WA_1.overrideController"),
         });
     }
-
-    protected override void DealDamage(Health health)
-    {
-        health.TakeDamage(20 * currentFragment.damageMultiplier, DamageType.NORMAL_DAMAGE);
-        Debug.Log("Attacked");
-    }
 }
