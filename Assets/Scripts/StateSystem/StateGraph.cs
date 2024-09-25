@@ -63,7 +63,7 @@ public class SGNode
 [CustomEditor(typeof(StateGraph))]
 public class StateGraph: Editor
 {
-    private Dictionary<Type, SGNode> stateMap = new Dictionary<Type, SGNode>
+    protected Dictionary<Type, SGNode> stateMap = new Dictionary<Type, SGNode>
     {
         { typeof(EnterState), new SGNode(new EnterState()) },
         { typeof(ExitState), new SGNode(new ExitState()) },
