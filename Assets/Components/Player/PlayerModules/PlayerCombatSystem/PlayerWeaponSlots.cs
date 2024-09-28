@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerWeaponSlots : MonoSingleton<PlayerWeaponSlots>
 {
     public List<GameObject> slots;
+    public int currSlot;
 
 
     public GameObject GetWeapon()
     {
-        return slots[0];
+        return slots[currSlot];
     }
 
 }
