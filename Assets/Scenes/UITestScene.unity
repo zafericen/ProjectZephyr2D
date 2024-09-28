@@ -378,6 +378,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridElement (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 544496062}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WeaponChange, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8409753595082410467, guid: 5027d54b276712244883f363f84c07c6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -747,6 +771,30 @@ PrefabInstance:
     - target: {fileID: 3845667059775353836, guid: 5027d54b276712244883f363f84c07c6, type: 3}
       propertyPath: m_Name
       value: GridElement (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 544496062}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WeaponChange, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8409753595082410467, guid: 5027d54b276712244883f363f84c07c6, type: 3}
       propertyPath: m_Pivot.x
@@ -1514,6 +1562,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridElement (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 544496062}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WeaponChange, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8409753595082410467, guid: 5027d54b276712244883f363f84c07c6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1725,6 +1797,26 @@ PrefabInstance:
     - target: {fileID: 3845667059775353836, guid: 5027d54b276712244883f363f84c07c6, type: 3}
       propertyPath: m_Name
       value: GridElement (0)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 544496062}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WeaponChange, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507679283697792719, guid: 5027d54b276712244883f363f84c07c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8409753595082410467, guid: 5027d54b276712244883f363f84c07c6, type: 3}
       propertyPath: m_Pivot.x

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Sword : WeaponBase
 {
+    //adapt to WeaponBase
     public Sprite weaponSprite;
     protected override void InitializeNormalAttackFragment(GameObject o)
     {

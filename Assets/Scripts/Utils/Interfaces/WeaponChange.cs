@@ -55,12 +55,10 @@ public class WeaponChange : MonoBehaviour
 
         string componentName = weapon.name;
 
-        // Get the type of the component using reflection
         Type type = Type.GetType(componentName);
 
         if (type != null)
         {
-            // Use reflection to get the component of that type
             Component component = weapon.GetComponent(type);
 
             if (component != null)
@@ -68,13 +66,11 @@ public class WeaponChange : MonoBehaviour
                 var weaponSpriteField = type.GetField("weaponSprite");
                 if (weaponSpriteField != null)
                 {
-                    // Set the sprite of the current weapon image
                     weaponImage.sprite = (Sprite)weaponSpriteField.GetValue(component);
                 }
             }
         }
 
-        // Set the alpha of the weapon image to 1
         Color tempColor = weaponImage.color;
         tempColor.a = 1f;
         weaponImage.color = tempColor;
@@ -83,5 +79,16 @@ public class WeaponChange : MonoBehaviour
     public void OpenWeaponSelection()
     {
         gameCanvas.transform.GetChild(0).gameObject.SetActive(true);
+    }
+    public void CloseWeaponSelection()
+    {
+        gameCanvas.transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+    public void SelectWeapon(int weaponIndex) {
+        weaponSlots.currSlot = weaponIndex;
+        UpdateCurrentWeapon();
+        //update weapon on player (PlayerCombat.cs)
+        CloseWeaponSelection();
     }
 }
