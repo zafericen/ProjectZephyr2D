@@ -11,7 +11,7 @@ public class Flail : WeaponBase
     {
         normalAttackFragments = new CurcilarLinkedList<AttackFragment>( new List<AttackFragment>
         {
-            new LavaSword_NAF(o,"Assets/Components/Flail/AnimatorOverrideControllers/NA_1.overrideController"),
+            new Flail_NAF(o,"Assets/UIComponents/Flail/AnimatorOverrideControllers/NA_1.overrideController"),
         });
     }
 
@@ -19,7 +19,7 @@ public class Flail : WeaponBase
     {
         specialAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
         {
-            new LavaSword_SAF(o,"Assets/Components/Flail/AnimatorOverrideControllers/SA_1.overrideController"),
+            new Flail_SAF(o,"Assets/UIComponents/Flail/AnimatorOverrideControllers/SA_1.overrideController"),
         });
     }
 
@@ -27,7 +27,7 @@ public class Flail : WeaponBase
     {
         weaponArtFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
         {
-            new LavaSword_WAF(o,"Assets/Components/Flail/AnimatorOverrideControllers/WA_1.overrideController"),
+            new Flail_WAF(o,"Assets/UIComponents/Flail/AnimatorOverrideControllers/WA_1.overrideController"),
         });
     }
 

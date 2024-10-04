@@ -7,13 +7,15 @@ using System;
 
 public class WeaponChange : MonoBehaviour
 {
-    public PlayerWeaponSlots weaponSlots;
-    public GameObject gameCanvas;
+    [SerializeField] private PlayerWeaponSlots weaponSlots;
+    [SerializeField] private GameObject gameCanvas;
 
     void Start()
     {
+        weaponSlots = PlayerWeaponSlots.instance;
+
         UpdateCurrentWeapon();
-        for (int i = 0; i < weaponSlots.slots.Count; i++) {
+        for (int i = 0; i < weaponSlots.NumberOfSlots(); i++) {
             AddWeaponToSlot(i);
         }
     }
@@ -22,7 +24,7 @@ public class WeaponChange : MonoBehaviour
     {
         Image currentWeaponImage = gameCanvas.transform.GetChild(1).GetChild(1).GetComponent<Image>();
 
-        GameObject weapon = weaponSlots.slots[weaponSlots.currSlot];
+        GameObject weapon = weaponSlots.GetCurrentWeapon();
 
         string componentName = weapon.name;
 
@@ -51,7 +53,9 @@ public class WeaponChange : MonoBehaviour
     {
         Image weaponImage = gameCanvas.transform.GetChild(0).GetChild(weaponIndex).GetChild(0).GetComponent<Image>();
 
-        GameObject weapon = weaponSlots.slots[weaponIndex];
+
+        weaponSlots.ChangeCurrentIndex(weaponIndex);
+        GameObject weapon = weaponSlots.GetCurrentWeapon();
 
         string componentName = weapon.name;
 
@@ -78,17 +82,19 @@ public class WeaponChange : MonoBehaviour
 
     public void OpenWeaponSelection()
     {
+        InputHandler.instance.DisableAllInputMaps();
         gameCanvas.transform.GetChild(0).gameObject.SetActive(true);
     }
     public void CloseWeaponSelection()
     {
         gameCanvas.transform.GetChild(0).gameObject.SetActive(false);
+        InputHandler.instance.EnableAllInputMaps();
     }
 
     public void SelectWeapon(int weaponIndex) {
-        weaponSlots.currSlot = weaponIndex;
+        weaponSlots.ChangeCurrentIndex(weaponIndex);
         UpdateCurrentWeapon();
-        //update weapon on player (PlayerCombat.cs)
+        weaponSlots.SetChangeWeaponFlag(true);
         CloseWeaponSelection();
     }
 }

@@ -11,7 +11,7 @@ public class Sword : WeaponBase
     {
         normalAttackFragments = new CurcilarLinkedList<AttackFragment>( new List<AttackFragment>
         {
-            new LavaSword_NAF(o,"Assets/Components/Sword/AnimatorOverrideControllers/NA_1.overrideController"),
+            new LavaSword_NAF(o,"Assets/UIComponents/Sword/AnimatorOverrideControllers/NA_1.overrideController"),
         });
     }
 
@@ -19,7 +19,7 @@ public class Sword : WeaponBase
     {
         specialAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
         {
-            new LavaSword_SAF(o,"Assets/Components/Sword/AnimatorOverrideControllers/SA_1.overrideController"),
+            new LavaSword_SAF(o,"Assets/UIComponents/Sword/AnimatorOverrideControllers/SA_1.overrideController"),
         });
     }
 
@@ -27,7 +27,7 @@ public class Sword : WeaponBase
     {
         weaponArtFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
         {
-            new LavaSword_WAF(o,"Assets/Components/Sword/AnimatorOverrideControllers/WA_1.overrideController"),
+            new LavaSword_WAF(o,"Assets/UIComponents/Sword/AnimatorOverrideControllers/WA_1.overrideController"),
         });
     }
 
