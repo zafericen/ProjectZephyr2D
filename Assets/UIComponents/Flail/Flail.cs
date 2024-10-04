@@ -31,9 +31,5 @@ public class Flail : WeaponBase
         });
     }
 
-    protected override void DealDamage(Health health)
-    {
-        health.TakeDamage(20 * currentFragment.damageMultiplier, DamageType.NORMAL_DAMAGE);
-        Debug.Log("Attacked");
-    }
+    
 }
