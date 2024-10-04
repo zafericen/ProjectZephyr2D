@@ -6,11 +6,22 @@ public class PlayerAnimationEventHandler : MonoBehaviour, IInvincible, IAttackin
 {
     bool isInvincible;
     bool isAttacking;
+    SimpleFlash simpleFlash;
+
+    private void Start()
+    {
+        simpleFlash = GetComponent<SimpleFlash>();
+    }
 
     public void Attacking()
     {
         isAttacking = true;
         Debug.Log(isAttacking);
+    }
+
+    public void Flash()
+    {
+        simpleFlash.Flash();
     }
 
     public bool IsAttacking()

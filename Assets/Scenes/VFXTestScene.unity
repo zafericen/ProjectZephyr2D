@@ -506,19 +506,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 4f23f8e2e652550498561511b78bcc54, type: 2}
   duration: 0.3
---- !u!114 &1541831235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541831229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7cbac53bb6e13d4a91bb7ee0a7cfa09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashEffect: {fileID: 1541831234}
 --- !u!1 &1712790320
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,9 +854,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8571014928495302199, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1541831235}
     - targetCorrespondingSourceObject: {fileID: 8571014928495302199, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1541831234}
