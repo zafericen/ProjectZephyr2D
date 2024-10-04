@@ -17,7 +17,6 @@ public class PlayerAttackInputHandler : PlayerInputActions.IAttackActions, IInpu
 
     public void InitializeInputActionMaps()
     {
-        trackableInput.inputActions.Attack.Enable();
         trackableInput.inputActions.Attack.AddCallbacks(this);
     }
 
@@ -95,7 +94,6 @@ public class PlayerMovementInputHandler : PlayerInputActions.IMovementActions, I
 
     public void InitializeInputActionMaps()
     {
-        trackableInput.inputActions.Movement.Enable();
         trackableInput.inputActions.Movement.AddCallbacks(this);
     }
 

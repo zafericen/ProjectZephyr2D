@@ -15,14 +15,19 @@ namespace ProjectZephyr
     {
         public WeaponBase weapon { get; set; }
 
+        public string weaponType;
 
         private Timer timer = new Timer();
 
         private float lastFragmentTime = 0;
 
-        private void Start()
+
+        private void Update()
         {
-            ChangeWeapon(PlayerWeaponSlots.instance.GetWeapon());
+            if (PlayerWeaponSlots.instance.GetChangeWeaponFlag())
+            {
+                ChangeWeapon(PlayerWeaponSlots.instance.GetCurrentWeapon());
+            }
         }
 
         public virtual void CheckComboEnd()
@@ -50,6 +55,7 @@ namespace ProjectZephyr
         {
             DropWeapon();
             AssignWeapon(weaponPrefab);
+            weaponType = weapon.GetType().Name;
         }
 
         private void DropWeapon()

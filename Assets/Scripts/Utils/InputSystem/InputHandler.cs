@@ -50,8 +50,11 @@ public class InputHandler : MonoSingleton<InputHandler>, IBackTrackableInput
     }
 
     private void Update()
-    {
-        AddToBuffer(inputStack.RemoveFromStack(x => GetInputActionByContext(x).phase == InputActionPhase.Waiting));
+    {                                                   //InputActionPhase.Disabled = 0 and InputActionPhase.Waiting = 1
+                                                        //So checking (int)GetInputActionByContext(x).phase <= 1
+                                                        //Its checking if the input is non-available
+        AddToBuffer(inputStack.RemoveFromStack(x => (int)GetInputActionByContext(x).phase <= 1));
+        
     }
 
     public bool CheckInput(InputType type, InputActionPhase actionPhase) 
@@ -92,9 +95,35 @@ public class InputHandler : MonoSingleton<InputHandler>, IBackTrackableInput
     {
         inputActions = new PlayerInputActions();
 
+        EnableAllInputMaps();
+
         var movementInputHandler = new PlayerMovementInputHandler(this);
         var attackInputHandler = new PlayerAttackInputHandler(this);
+    }
 
+    public void DisableInputMaps(params InputActionMap[] toDisableInputActions)
+    {
+        foreach (var item in toDisableInputActions)
+        {
+            item.Disable();
+        }
+    }
+    public void EnableInputMaps(params InputActionMap[] toDisableInputActions)
+    {
+        foreach (var item in toDisableInputActions)
+        {
+            item.Enable();
+        }
+    }
+
+    public void EnableAllInputMaps()
+    {
+        inputActions.Enable();
+    }
+
+    public void DisableAllInputMaps(params InputActionMap[] toDisableInputActions)
+    {
+        inputActions.Disable();
     }
 
     public void InitializeStack()

@@ -9,8 +9,7 @@ namespace ProjectZephyr
         public CurcilarLinkedList<AttackFragment> normalAttackFragments { get; protected set; }
         public CurcilarLinkedList<AttackFragment> specialAttackFragments { get; protected set; }
         public CurcilarLinkedList<AttackFragment> weaponArtFragments { get; protected set; }
-
-
+        
         public List<CurcilarLinkedList<AttackFragment>> attackFragments { get; protected set; }
 
         public AttackFragment currentFragment { get; set; } = null;
