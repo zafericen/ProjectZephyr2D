@@ -15,7 +15,6 @@ namespace ProjectZephyr
         public override void OnEnter()
         {
             base.OnEnter();
-            Debug.Log("girdi");
         }
         public override void OnUpdate()
         {

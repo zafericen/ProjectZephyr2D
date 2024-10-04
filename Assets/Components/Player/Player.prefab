@@ -155,7 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b5fddd25cb7594685113e07194a32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 6418945125598597700, guid: 551537c55ce943640b5cabdcc9aa165c, type: 3}
 --- !u!114 &1682194368876287375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6817a51188590b942aa5570157ddc1b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotPrefab: {fileID: 7401049114578183601, guid: 24f10ed7bf8687d4cb5d13613638824b, type: 3}
 --- !u!1 &8571014928495302199
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +191,7 @@ GameObject:
   - component: {fileID: 6532028679482437646}
   - component: {fileID: 3118164735870054655}
   - component: {fileID: 1264200013761049481}
+  - component: {fileID: 7128800982450758980}
   m_Layer: 0
   m_Name: PlayerModel
   m_TagString: Untagged
@@ -288,3 +287,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7128800982450758980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571014928495302199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71735355afe19df4299fd5060038fc3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

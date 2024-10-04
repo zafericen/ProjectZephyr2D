@@ -49,7 +49,6 @@ namespace ProjectZephyr
             weapon.Attack(fragment.Value);
 
             lastFragmentTime = fragment.Value.FragmentTime();
-            Debug.Log(lastFragmentTime);
         }
 
         public void ChangeWeapon(GameObject weaponPrefab)

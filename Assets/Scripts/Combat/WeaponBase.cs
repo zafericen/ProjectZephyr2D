@@ -9,6 +9,7 @@ namespace ProjectZephyr
         public CurcilarLinkedList<AttackFragment> normalAttackFragments { get; protected set; }
         public CurcilarLinkedList<AttackFragment> specialAttackFragments { get; protected set; }
         public CurcilarLinkedList<AttackFragment> weaponArtFragments { get; protected set; }
+        
         public List<CurcilarLinkedList<AttackFragment>> attackFragments { get; protected set; }
 
         public AttackFragment currentFragment { get; set; } = null;
@@ -44,22 +45,8 @@ namespace ProjectZephyr
         protected abstract void InitializeNormalAttackFragment(GameObject attackPerformer);
         protected abstract void InitializeSpecialAttackFragment(GameObject attackPerformer);
         protected abstract void InitializeWeaponArtFragment(GameObject attackPerformer);
-
-        protected abstract void DealDamage(Health health);
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if(!IsAttacking())
-            {
-                return;
-            }
-
-            Health component = other.GetComponent<Health>();
-            if (component != null)
-            {
-                DealDamage(component);
-            }
-        }
     }
+
+
 
 }
