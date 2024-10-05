@@ -6,7 +6,7 @@ namespace ProjectZephyr
 {
     public class Sword_SAF : SpecialAttackFragment
     {
-        public Sword_SAF(GameObject o, string AnimatorPath) : base(o, AnimatorPath)
+        public Sword_SAF(GameObject o, AnimatorOverrideController overrideController) : base(o, overrideController)
         {
         }
 

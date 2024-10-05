@@ -6,9 +6,12 @@ using ProjectZephyr;
 using System;
 using System.Linq;
 
-public class InputHandler : MonoSingleton<InputHandler>, IBackTrackableInput
+
+namespace ProjectZephyr
 {
-    private Dictionary<Type, InputContext> stateToInputContextMap = new Dictionary<Type, InputContext>
+    public class InputHandler : MonoSingleton<InputHandler>, IBackTrackableInput
+    {
+        private Dictionary<Type, InputContext> stateToInputContextMap = new Dictionary<Type, InputContext>
         {
             { typeof(PlayerIdleState), InputContext.EmptyContext() },
             { typeof(PlayerWalkState), new InputContext { type = InputType.Walk, holdType = InputActionPhase.Performed } },
@@ -16,132 +19,132 @@ public class InputHandler : MonoSingleton<InputHandler>, IBackTrackableInput
             { typeof(PlayerDodgeState), new InputContext { type = InputType.Dodge, holdType = InputActionPhase.Performed } },
             { typeof(PlayerAttackState), new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed } },
         };
-    public InputStack<InputContext> inputStack { get; set; }
-    public PlayerInputActions inputActions { get; set; }
-    public NonHashableMap<InputContext, InputAction> inputContextToInputActionMap { get; set; }
+        public InputStack<InputContext> inputStack { get; set; }
+        public PlayerInputActions inputActions { get; set; }
+        public NonHashableMap<InputContext, InputAction> inputContextToInputActionMap { get; set; }
 
-    public InputContext[] buffer = new InputContext[12];
-    InputContext lastContext = new InputContext { };
-
-
-
-    private void Awake()
-    {
-        InitializeInputActions();
-
-        InitializeStack();
-
-        InitializeInputContextToInputActionMap();
-    }
-
-    public InputContext PlayerStateTypeToInputContext(Type type)
-    {
-        InputContext returnContext = InputContext.EmptyContext();
+        public InputContext[] buffer = new InputContext[12];
+        InputContext lastContext = new InputContext { };
 
 
-        if (!stateToInputContextMap.ContainsKey(type))
+
+        private void Awake()
         {
+            InitializeInputActions();
+
+            InitializeStack();
+
+            InitializeInputContextToInputActionMap();
+        }
+
+        public InputContext PlayerStateTypeToInputContext(Type type)
+        {
+            InputContext returnContext = InputContext.EmptyContext();
+
+
+            if (!stateToInputContextMap.ContainsKey(type))
+            {
+                return returnContext;
+            }
+
+            returnContext = stateToInputContextMap[type];
+
             return returnContext;
         }
 
-        returnContext = stateToInputContextMap[type];
+        private void Update()
+        {                                                   //InputActionPhase.Disabled = 0 and InputActionPhase.Waiting = 1
+                                                            //So checking (int)GetInputActionByContext(x).phase <= 1
+                                                            //Its checking if the input is non-available
+            AddToBuffer(inputStack.RemoveFromStack(x => (int)GetInputActionByContext(x).phase <= 1));
 
-        return returnContext;
-    }
+        }
 
-    private void Update()
-    {                                                   //InputActionPhase.Disabled = 0 and InputActionPhase.Waiting = 1
-                                                        //So checking (int)GetInputActionByContext(x).phase <= 1
-                                                        //Its checking if the input is non-available
-        AddToBuffer(inputStack.RemoveFromStack(x => (int)GetInputActionByContext(x).phase <= 1));
-        
-    }
-
-    public bool CheckInput(InputType type, InputActionPhase actionPhase) 
-    {
-        var input = GetInput(type,actionPhase);
-        if (input.type != InputType.None) return true;
-        return false;
-    }
-    public InputContext GetInput(InputType type, InputActionPhase actionPhase)
-    {
-        if(type == InputType.None && actionPhase == InputActionPhase.Disabled)
+        public bool CheckInput(InputType type, InputActionPhase actionPhase)
         {
+            var input = GetInput(type, actionPhase);
+            if (input.type != InputType.None) return true;
+            return false;
+        }
+        public InputContext GetInput(InputType type, InputActionPhase actionPhase)
+        {
+            if (type == InputType.None && actionPhase == InputActionPhase.Disabled)
+            {
+                return InputContext.EmptyContext();
+            }
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                if (buffer[i].type == type && buffer[i].holdType == actionPhase)
+                {
+                    var returnValue = buffer[i];
+                    //buffer[i].holdType = InputActionPhase.Disabled;
+                    return returnValue;
+                }
+            }
             return InputContext.EmptyContext();
         }
-        for (int i = 0; i < buffer.Length; i++)
+
+
+        private void AddToBuffer(InputContext inputContext)
         {
-            if (buffer[i].type == type && buffer[i].holdType == actionPhase)
+            for (int i = buffer.Length - 1; i > 0; i--)
             {
-                var returnValue = buffer[i];
-                //buffer[i].holdType = InputActionPhase.Disabled;
-                return returnValue;
+                buffer[i] = buffer[i - 1];
+            }
+            buffer[0] = inputContext;
+        }
+
+        public void InitializeInputActions()
+        {
+            inputActions = new PlayerInputActions();
+
+            EnableAllInputMaps();
+
+            var movementInputHandler = new PlayerMovementInputHandler(this);
+            var attackInputHandler = new PlayerAttackInputHandler(this);
+        }
+
+        public void DisableInputMaps(params InputActionMap[] toDisableInputActions)
+        {
+            foreach (var item in toDisableInputActions)
+            {
+                item.Disable();
             }
         }
-        return InputContext.EmptyContext();
-    }
-
-
-    private void AddToBuffer(InputContext inputContext)
-    {
-        for (int i = buffer.Length-1; i > 0; i--)
+        public void EnableInputMaps(params InputActionMap[] toDisableInputActions)
         {
-            buffer[i] = buffer[i-1];
+            foreach (var item in toDisableInputActions)
+            {
+                item.Enable();
+            }
         }
-        buffer[0] = inputContext;
-    }
 
-    public void InitializeInputActions()
-    {
-        inputActions = new PlayerInputActions();
-
-        EnableAllInputMaps();
-
-        var movementInputHandler = new PlayerMovementInputHandler(this);
-        var attackInputHandler = new PlayerAttackInputHandler(this);
-    }
-
-    public void DisableInputMaps(params InputActionMap[] toDisableInputActions)
-    {
-        foreach (var item in toDisableInputActions)
+        public void EnableAllInputMaps()
         {
-            item.Disable();
+            inputActions.Enable();
         }
-    }
-    public void EnableInputMaps(params InputActionMap[] toDisableInputActions)
-    {
-        foreach (var item in toDisableInputActions)
+
+        public void DisableAllInputMaps(params InputActionMap[] toDisableInputActions)
         {
-            item.Enable();
+            inputActions.Disable();
         }
-    }
 
-    public void EnableAllInputMaps()
-    {
-        inputActions.Enable();
-    }
-
-    public void DisableAllInputMaps(params InputActionMap[] toDisableInputActions)
-    {
-        inputActions.Disable();
-    }
-
-    public void InitializeStack()
-    {
-        inputStack = new InputStack<InputContext>
+        public void InitializeStack()
+        {
+            inputStack = new InputStack<InputContext>
         {
             InputContext.EmptyContext()
         };
-    }
+        }
 
-    InputAction GetInputActionByContext(InputContext context)
-    {
-        return inputContextToInputActionMap.GetValue(context);
-    }
+        InputAction GetInputActionByContext(InputContext context)
+        {
+            return inputContextToInputActionMap.GetValue(context);
+        }
 
-    public void InitializeInputContextToInputActionMap()
-    {
-        inputContextToInputActionMap = new NonHashableMap<InputContext, InputAction>()
+        public void InitializeInputContextToInputActionMap()
+        {
+            inputContextToInputActionMap = new NonHashableMap<InputContext, InputAction>()
         {
             { new InputContext{type = InputType.Walk, attackType = AttackInputType.None}, inputActions.Movement.Walking},
             { new InputContext{type = InputType.Jump, attackType = AttackInputType.None}, inputActions.Movement.Jump },
@@ -151,5 +154,6 @@ public class InputHandler : MonoSingleton<InputHandler>, IBackTrackableInput
             { new InputContext{type = InputType.Attack, attackType = AttackInputType.WeaponArt}, inputActions.Attack.WeaponArt},
             { new InputContext{type = InputType.Attack, attackType = AttackInputType.Ability}, inputActions.Attack.Ability}
         };
+        }
     }
 }

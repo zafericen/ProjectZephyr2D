@@ -3,28 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public interface IBackTrackableInput : IPlayerInputActionable
+
+namespace ProjectZephyr
 {
-    InputStack<InputContext> inputStack { get; set; }
+    public interface IBackTrackableInput : IPlayerInputActionable
+    {
+        InputStack<InputContext> inputStack { get; set; }
 
-    NonHashableMap<InputContext, InputAction> inputContextToInputActionMap { get; set; }
+        NonHashableMap<InputContext, InputAction> inputContextToInputActionMap { get; set; }
 
-    void InitializeInputContextToInputActionMap();
+        void InitializeInputContextToInputActionMap();
 
-    void InitializeStack();
+        void InitializeStack();
 
-}
+    }
 
-public interface IPlayerInputActionable
-{
-    PlayerInputActions inputActions { get; set; }
+    public interface IPlayerInputActionable
+    {
+        PlayerInputActions inputActions { get; set; }
 
-    void InitializeInputActions();
-}
+        void InitializeInputActions();
+    }
 
-public interface IInputActionAddable
-{
-    IBackTrackableInput trackableInput { get; set; }
+    public interface IInputActionAddable
+    {
+        IBackTrackableInput trackableInput { get; set; }
 
-    void InitializeInputActionMaps();
+        void InitializeInputActionMaps();
+    }
 }

@@ -3,29 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestWeapon : WeaponBase
+
+namespace ProjectZephyr
 {
-    protected override void InitializeNormalAttackFragment(GameObject o)
+    public class TestWeapon : WeaponBase
     {
-        normalAttackFragments = new CurcilarLinkedList<AttackFragment>( new List<AttackFragment>
+        protected override void InitializeNormalAttackFragment(GameObject o)
         {
-            new LavaSword_NAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/NA_1.overrideController"),
+            normalAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
+        {
+            new LavaSword_NAF(o,GetOverrideFromList(Attacks.NA,0)),
         });
-    }
+        }
 
-    protected override void InitializeSpecialAttackFragment(GameObject o)
-    {
-        specialAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
+        protected override void InitializeSpecialAttackFragment(GameObject o)
         {
-            new LavaSword_SAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/SA_1.overrideController"),
+            specialAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
+        {
+            new LavaSword_SAF(o,GetOverrideFromList(Attacks.SA,0)),
         });
-    }
+        }
 
-    protected override void InitializeWeaponArtFragment(GameObject o)
-    {
-        weaponArtFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
+        protected override void InitializeWeaponArtFragment(GameObject o)
         {
-            new LavaSword_WAF(o,"Assets/Components/TestWeapon/AnimatorOverrideControllers/WA_1.overrideController"),
+            weaponArtFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
+        {
+            new LavaSword_WAF(o,GetOverrideFromList(Attacks.WA,0)),
         });
+        }
     }
 }

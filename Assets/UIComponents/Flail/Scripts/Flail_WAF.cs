@@ -6,7 +6,7 @@ namespace ProjectZephyr
 {
     public class Flail_WAF : WeaponArtFragment
     {
-        public Flail_WAF(GameObject o, string AnimatorPath) : base(o, AnimatorPath)
+        public Flail_WAF(GameObject o, AnimatorOverrideController overrideController) : base(o, overrideController)
         {
         }
 

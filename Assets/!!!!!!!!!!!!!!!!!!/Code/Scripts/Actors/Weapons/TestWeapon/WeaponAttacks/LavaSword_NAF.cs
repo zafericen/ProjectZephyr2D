@@ -6,7 +6,7 @@ namespace ProjectZephyr
 {
     public class LavaSword_NAF : NormalAttackFragment
     {
-        public LavaSword_NAF(GameObject o, string AnimatorPath) : base(o, AnimatorPath)
+        public LavaSword_NAF(GameObject o, AnimatorOverrideController overrideController) : base(o, overrideController)
         {
         }
 

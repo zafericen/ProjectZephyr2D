@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilitySlot: MonoSingleton<AbilitySlot>
+namespace ProjectZephyr
 {
-    public List<GameObject> abilityHolders;
-
-
-    public GameObject GetAbility()
+    public class AbilitySlot : MonoSingleton<AbilitySlot>
     {
-        return abilityHolders[0];
+        public List<GameObject> abilityHolders;
+
+
+        public GameObject GetAbility()
+        {
+            return abilityHolders[0];
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace ProjectZephyr
 {
     public class Flail_NAF : NormalAttackFragment
     {
-        public Flail_NAF(GameObject o, string AnimatorPath) : base(o, AnimatorPath)
+        public Flail_NAF(GameObject o, AnimatorOverrideController overrideController) : base(o, overrideController)
         {
         }
 

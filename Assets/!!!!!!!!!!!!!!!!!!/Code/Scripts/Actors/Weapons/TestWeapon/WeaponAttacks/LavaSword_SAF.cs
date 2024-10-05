@@ -6,7 +6,7 @@ namespace ProjectZephyr
 {
     public class LavaSword_SAF : SpecialAttackFragment
     {
-        public LavaSword_SAF(GameObject o, string AnimatorPath) : base(o, AnimatorPath)
+        public LavaSword_SAF(GameObject o, AnimatorOverrideController overrideController) : base(o, overrideController)
         {
         }
 

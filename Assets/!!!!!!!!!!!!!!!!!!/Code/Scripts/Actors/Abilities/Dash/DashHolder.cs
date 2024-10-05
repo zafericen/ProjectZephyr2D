@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashHolder : AbilityHolderBase
+namespace ProjectZephyr
 {
-    protected override void InitializeAbilityFragment(GameObject attackPerformer)
+    public class DashHolder : AbilityHolderBase
     {
-        ability = new Dash(attackPerformer, "Assets/Components/TestWeapon/AnimatorOverrideControllers/WA_1.overrideController");
+        protected override void InitializeAbilityFragment(GameObject attackPerformer)
+        {
+            ability = new Dash(attackPerformer, overrideController);
+        }
     }
 }

@@ -13,11 +13,18 @@ namespace ProjectZephyr
 
         public float damageMultiplier = 1f;
 
-        public AttackFragment(GameObject attackPerformer, string AnimatorPath) 
+        //public AttackFragment(GameObject attackPerformer, string AnimatorPath) 
+        //{
+        //    this.attackPerformer = attackPerformer;
+        //    animator = attackPerformer.GetComponentInChildren<Animator>();
+        //    LoadAnimator(AnimatorPath);
+        //}
+
+        public AttackFragment(GameObject attackPerformer, AnimatorOverrideController overrideController)
         {
             this.attackPerformer = attackPerformer;
             animator = attackPerformer.GetComponentInChildren<Animator>();
-            LoadAnimator(AnimatorPath);
+            animatorOverride = overrideController;
         }
 
         public virtual void Perform()

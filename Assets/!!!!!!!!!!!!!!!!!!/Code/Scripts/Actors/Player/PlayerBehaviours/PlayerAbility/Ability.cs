@@ -3,43 +3,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability : MonoBehaviour
+namespace ProjectZephyr
 {
-    private AbilityHolderBase ability = null;
-
-    private void Start()
+    public class Ability : MonoBehaviour
     {
-        ChangeAbility(AbilitySlot.instance.GetAbility());
-    }
+        private AbilityHolderBase ability = null;
 
-    public void AbilityAttack()
-    {
-        ability.UseAbility();
-    }
-
-    public void ChangeAbility(GameObject abilityPrefab)
-    {
-        RemoveAbility();
-        AssignAbility(abilityPrefab);
-    }
-
-    private void RemoveAbility()
-    {
-        if (ability == null)
+        private void Start()
         {
-            return;
+            ChangeAbility(AbilitySlot.instance.GetAbility());
         }
 
-        var toDestroy = ability;
-        ability = null;
-        Destroy(toDestroy.gameObject);
+        public void AbilityAttack()
+        {
+            ability.UseAbility();
+        }
 
-    }
+        public void ChangeAbility(GameObject abilityPrefab)
+        {
+            RemoveAbility();
+            AssignAbility(abilityPrefab);
+        }
 
-    private void AssignAbility(GameObject abilityPrefab)
-    {
-        GameObject HolderObject = Instantiate(abilityPrefab, transform);
-        ability = HolderObject.GetComponent<AbilityHolderBase>();
-        ability.InitializeHolder(gameObject);
+        private void RemoveAbility()
+        {
+            if (ability == null)
+            {
+                return;
+            }
+
+            var toDestroy = ability;
+            ability = null;
+            Destroy(toDestroy.gameObject);
+
+        }
+
+        private void AssignAbility(GameObject abilityPrefab)
+        {
+            GameObject HolderObject = Instantiate(abilityPrefab, transform);
+            ability = HolderObject.GetComponent<AbilityHolderBase>();
+            ability.InitializeHolder(gameObject);
+        }
     }
 }

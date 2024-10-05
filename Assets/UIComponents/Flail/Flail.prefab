@@ -129,4 +129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d73876000e743d4786d959d0d26f891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animatorOverrideControllersNA:
+  - {fileID: 22100000, guid: 1432e9d76f2ec8e4cb459124995c8bea, type: 2}
+  animatorOverrideControllersSA:
+  - {fileID: 0}
+  animatorOverrideControllersWA:
+  - {fileID: 0}
+  animatorOverrideControllersComboAttacks: []
   weaponSprite: {fileID: 21300000, guid: 7166101ad3bfe2743b5e1c32144c00dc, type: 3}

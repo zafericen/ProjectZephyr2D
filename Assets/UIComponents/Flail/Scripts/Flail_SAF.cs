@@ -6,7 +6,7 @@ namespace ProjectZephyr
 {
     public class Flail_SAF : SpecialAttackFragment
     {
-        public Flail_SAF(GameObject o, string AnimatorPath) : base(o, AnimatorPath)
+        public Flail_SAF(GameObject o, AnimatorOverrideController overrideController) : base(o, overrideController)
         {
         }
 

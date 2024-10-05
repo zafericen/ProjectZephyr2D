@@ -4,7 +4,7 @@ namespace ProjectZephyr
 {
     public abstract class SpecialAttackFragment : AttackFragment
     {
-        protected SpecialAttackFragment(GameObject attackPerformer, string AnimatorPath) : base(attackPerformer, AnimatorPath)
+        protected SpecialAttackFragment(GameObject attackPerformer, AnimatorOverrideController overrideController) : base(attackPerformer, overrideController)
         {
         }
 

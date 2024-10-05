@@ -3,33 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : WeaponBase
+namespace ProjectZephyr
 {
-    //adapt to WeaponBase
-    public Sprite weaponSprite;
-    protected override void InitializeNormalAttackFragment(GameObject o)
+    public class Sword : WeaponBase
     {
-        normalAttackFragments = new CurcilarLinkedList<AttackFragment>( new List<AttackFragment>
+        //adapt to WeaponBase
+        public Sprite weaponSprite;
+        protected override void InitializeNormalAttackFragment(GameObject o)
         {
-            new LavaSword_NAF(o,"Assets/UIComponents/Sword/AnimatorOverrideControllers/NA_1.overrideController"),
-        });
-    }
-
-    protected override void InitializeSpecialAttackFragment(GameObject o)
-    {
-        specialAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
+            normalAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
         {
-            new LavaSword_SAF(o,"Assets/UIComponents/Sword/AnimatorOverrideControllers/SA_1.overrideController"),
+            new LavaSword_NAF(o,GetOverrideFromList(Attacks.NA,0)),
         });
-    }
+        }
 
-    protected override void InitializeWeaponArtFragment(GameObject o)
-    {
-        weaponArtFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
+        protected override void InitializeSpecialAttackFragment(GameObject o)
         {
-            new LavaSword_WAF(o,"Assets/UIComponents/Sword/AnimatorOverrideControllers/WA_1.overrideController"),
+            specialAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
+        {
+            new LavaSword_SAF(o,GetOverrideFromList(Attacks.SA,0)),
         });
+        }
+
+        protected override void InitializeWeaponArtFragment(GameObject o)
+        {
+            weaponArtFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>
+        {
+            new LavaSword_WAF(o,GetOverrideFromList(Attacks.WA,0)),
+        });
+        }
+
+
     }
-
-
 }

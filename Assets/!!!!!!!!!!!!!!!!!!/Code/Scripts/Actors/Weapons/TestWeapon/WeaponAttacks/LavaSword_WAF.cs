@@ -6,7 +6,7 @@ namespace ProjectZephyr
 {
     public class LavaSword_WAF : WeaponArtFragment
     {
-        public LavaSword_WAF(GameObject o, string AnimatorPath) : base(o, AnimatorPath)
+        public LavaSword_WAF(GameObject o, AnimatorOverrideController overrideController) : base(o, overrideController)
         {
         }
 
