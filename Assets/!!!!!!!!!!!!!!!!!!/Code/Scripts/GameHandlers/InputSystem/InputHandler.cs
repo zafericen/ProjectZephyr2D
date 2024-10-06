@@ -26,8 +26,6 @@ namespace ProjectZephyr
         public InputContext[] buffer = new InputContext[12];
         InputContext lastContext = new InputContext { };
 
-
-
         private void Awake()
         {
             InitializeInputActions();

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-    public class Ability : MonoBehaviour
+    public class Ability: MonoBehaviour
     {
         private AbilityHolderBase ability = null;
 

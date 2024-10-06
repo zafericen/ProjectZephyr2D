@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-    public class BossCombat : MonoBehaviour
+    public class BossCombat: MonoBehaviour
     {
         internal bool IsAttacking()
         {

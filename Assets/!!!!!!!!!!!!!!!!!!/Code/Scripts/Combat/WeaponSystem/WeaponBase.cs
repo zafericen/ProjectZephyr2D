@@ -21,7 +21,8 @@ namespace ProjectZephyr
         public CurcilarLinkedList<AttackFragment> normalAttackFragments { get; protected set; }
         public CurcilarLinkedList<AttackFragment> specialAttackFragments { get; protected set; }
         public CurcilarLinkedList<AttackFragment> weaponArtFragments { get; protected set; }
-        
+        protected List<ComboAttackFragment> comboAttackFragments { get; set; }
+
         public List<CurcilarLinkedList<AttackFragment>> attackFragments { get; protected set; }
 
         public AttackFragment currentFragment { get; set; } = null;
@@ -37,6 +38,7 @@ namespace ProjectZephyr
             InitializeNormalAttackFragment(attackPerformer);
             InitializeSpecialAttackFragment(attackPerformer);
             InitializeWeaponArtFragment(attackPerformer);
+            InitializeComboFragment(attackPerformer);
 
             attackFragments = new List<CurcilarLinkedList<AttackFragment>>
             {
@@ -57,6 +59,20 @@ namespace ProjectZephyr
         protected abstract void InitializeNormalAttackFragment(GameObject attackPerformer);
         protected abstract void InitializeSpecialAttackFragment(GameObject attackPerformer);
         protected abstract void InitializeWeaponArtFragment(GameObject attackPerformer);
+        protected abstract void InitializeComboFragment(GameObject attackPerformer);
+
+        //TODO: Do this in Interface
+        public ComboAttackFragment CheckComboStream(StreamList<AttackInputType> stream)
+        {
+            foreach (var item in comboAttackFragments)
+            {
+                if (item.IsComboAccomplished(stream))
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
 
 
         /// <summary>
@@ -80,8 +96,7 @@ namespace ProjectZephyr
 
             if(animators == null || index <0 || index >= animators.Count)
             {
-                Debug.LogError("Non acceptable input in weapon");
-                return null; 
+                throw new System.NullReferenceException("Non acceptable input in weapon. Animator Override List is null or it has not enough inputs");            
             }
 
             return animators[index];

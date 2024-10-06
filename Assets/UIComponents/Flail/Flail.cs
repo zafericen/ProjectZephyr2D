@@ -10,6 +10,15 @@ namespace ProjectZephyr
     {
         //adapt to WeaponBase
         public Sprite weaponSprite;
+
+        protected override void InitializeComboFragment(GameObject attackPerformer)
+        {
+            comboAttackFragments = new List<ComboAttackFragment>
+        {
+            new LavaSword_CA(attackPerformer,GetOverrideFromList(Attacks.Combo,0),new List<AttackInputType>{AttackInputType.Normal,AttackInputType.Special},AttackInputType.WeaponArt),
+        };
+        }
+
         protected override void InitializeNormalAttackFragment(GameObject o)
         {
             normalAttackFragments = new CurcilarLinkedList<AttackFragment>(new List<AttackFragment>

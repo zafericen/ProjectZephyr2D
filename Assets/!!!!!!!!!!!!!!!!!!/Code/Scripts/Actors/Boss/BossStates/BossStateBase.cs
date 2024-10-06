@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-    public class BossStateBase : MonoState
+    public class BossStateBase: MonoState
     {
         protected Animator animator;
         public BossStateBase(GameObject o) : base(o)

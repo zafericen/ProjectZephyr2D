@@ -12,7 +12,7 @@ namespace ProjectZephyr
         public override void OnEnter()
         {
             base.OnEnter();
-            combat.Attack(AttackType.SPECIAL_ATTACK);
+            combat.Attack(stateInputType);
         }
 
         public override void OnUpdate()
@@ -22,6 +22,7 @@ namespace ProjectZephyr
 
         public override void OnExit()
         {
+            base.OnExit();
         }
 
         protected override void SetStateInput()

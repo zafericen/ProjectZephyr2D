@@ -5,7 +5,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace ProjectZephyr
 {
-    public class Dash : AbilityFragment
+    public class Dash: AbilityFragment
     {
         public Dash(GameObject o, AnimatorOverrideController overrideController) : base(o, overrideController)
         {

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-    public class BossAttackState : BossStateBase
+    public class BossAttackState: BossStateBase
     {
         protected BossCombat combat;
         public BossAttackState(GameObject o) : base(o)

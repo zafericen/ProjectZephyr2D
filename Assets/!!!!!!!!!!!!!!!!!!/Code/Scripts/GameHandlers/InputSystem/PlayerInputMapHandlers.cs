@@ -17,6 +17,13 @@ namespace ProjectZephyr
             InitializeInputActionMaps();
         }
 
+        public PlayerAttackInputHandler(IBackTrackableInput trackableInput, IStream<AttackInputType> stream)
+        {
+            this.trackableInput = trackableInput;
+            lookDir = Vector2.zero;
+            InitializeInputActionMaps();
+        }
+
         public void InitializeInputActionMaps()
         {
             trackableInput.inputActions.Attack.AddCallbacks(this);
@@ -42,8 +49,8 @@ namespace ProjectZephyr
                 attackType = AttackInputType.Ability,
                 inputVector = lookDir,
             };
-
             trackableInput.inputStack.AddToStack(addContext);
+            
         }
 
         public void OnNormalAttack(InputAction.CallbackContext context)
@@ -56,6 +63,7 @@ namespace ProjectZephyr
                 inputVector = lookDir,
             };
             trackableInput.inputStack.AddToStack(addContext);
+
         }
 
         public void OnSpecialAttack(InputAction.CallbackContext context)
@@ -68,6 +76,7 @@ namespace ProjectZephyr
                 inputVector = lookDir,
             };
             trackableInput.inputStack.AddToStack(addContext);
+
         }
 
         public void OnWeaponArt(InputAction.CallbackContext context)
@@ -80,7 +89,9 @@ namespace ProjectZephyr
                 inputVector = lookDir,
             };
             trackableInput.inputStack.AddToStack(addContext);
+
         }
+
     }
     public class PlayerMovementInputHandler : PlayerInputActions.IMovementActions, IInputActionAddable
     {

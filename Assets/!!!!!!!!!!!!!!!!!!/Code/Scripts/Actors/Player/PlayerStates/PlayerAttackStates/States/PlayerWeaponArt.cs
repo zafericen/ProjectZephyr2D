@@ -12,7 +12,7 @@ namespace ProjectZephyr
         public override void OnEnter()
         {
             base.OnEnter();
-            combat.Attack(AttackType.WEAPON_ART);
+            combat.Attack(stateInputType);
         }
 
         public override void OnUpdate()

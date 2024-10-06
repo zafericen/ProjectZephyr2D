@@ -4,13 +4,6 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-
-    public enum AttackType
-    {
-        NORMAL_ATTACK,
-        SPECIAL_ATTACK,
-        WEAPON_ART,
-    }
     public class PlayerCombat : MonoBehaviour
     {
         public WeaponBase weapon { get; set; }
@@ -41,14 +34,36 @@ namespace ProjectZephyr
             }
         }
 
-        public void Attack(AttackType type)
+        private AttackFragment CheckComboFragment(AttackInputType type)
+        {
+            var comboAttack = weapon.CheckComboStream(AttackStreamHandler.instance.stream);
+            if(comboAttack == null || comboAttack.activasionAttack != type)
+            {
+                return null;
+            }
+
+            return comboAttack;
+        }
+
+        public void Attack(AttackInputType type)
         {
             CheckComboEnd();
             timer.Reset();
-            var fragment = weapon.attackFragments[(int)type].GetNext();
-            weapon.Attack(fragment.Value);
+            var potentialComboAttack = CheckComboFragment(type);
+            AttackFragment fragment;
+            if (potentialComboAttack == null)
+            {
+                fragment = weapon.attackFragments[(int)type - 1].GetNext().Value;
+            }
+            else
+            {
+                fragment = potentialComboAttack;
+                Debug.Log("eurika");
+            }
 
-            lastFragmentTime = fragment.Value.FragmentTime();
+            weapon.Attack(fragment);
+
+            lastFragmentTime = fragment.FragmentTime();
         }
 
         public void ChangeWeapon(GameObject weaponPrefab)

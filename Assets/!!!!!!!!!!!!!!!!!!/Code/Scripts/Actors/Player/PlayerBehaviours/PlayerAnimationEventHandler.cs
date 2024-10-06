@@ -21,7 +21,6 @@ namespace ProjectZephyr
         public void Attacking()
         {
             isAttacking = true;
-            Debug.Log(isAttacking);
         }
 
         public void Flash()

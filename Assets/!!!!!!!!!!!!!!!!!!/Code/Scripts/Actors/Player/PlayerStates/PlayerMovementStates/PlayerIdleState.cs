@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ProjectZephyr
 {
 
-    public partial class PlayerIdleState : PlayerStateBase
+    public partial class PlayerIdleState: PlayerStateBase
     {
         public PlayerIdleState(GameObject o) : base(o)
         {

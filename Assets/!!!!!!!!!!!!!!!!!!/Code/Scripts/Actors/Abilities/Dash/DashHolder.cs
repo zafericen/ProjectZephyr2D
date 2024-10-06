@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-    public class DashHolder : AbilityHolderBase
+    public class DashHolder: AbilityHolderBase
     {
         protected override void InitializeAbilityFragment(GameObject attackPerformer)
         {

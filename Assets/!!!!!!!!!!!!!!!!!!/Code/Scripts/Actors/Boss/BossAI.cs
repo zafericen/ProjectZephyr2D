@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-    public class BossAI : MonoBehaviour
+    public class BossAI: MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ProjectZephyr
 {
-    public class BossIdleState : BossStateBase
+    public class BossIdleState: BossStateBase
     {
         public BossIdleState(GameObject o) : base(o)
         {
