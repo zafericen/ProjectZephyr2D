@@ -37,7 +37,7 @@ namespace ProjectZephyr
         private AttackFragment CheckComboFragment(AttackInputType type)
         {
             var comboAttack = weapon.CheckComboStream(AttackStreamHandler.instance.stream);
-            if(comboAttack == null || comboAttack.activasionAttack != type)
+            if(comboAttack == null)
             {
                 return null;
             }

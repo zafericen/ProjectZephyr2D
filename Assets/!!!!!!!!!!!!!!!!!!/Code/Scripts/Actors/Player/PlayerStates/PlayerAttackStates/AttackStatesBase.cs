@@ -23,7 +23,13 @@ namespace ProjectZephyr
             //The reason I didn't put this in the constructor, because I kept getting crashdowns from unity 
             //and I think the reason is this code tried to access the Unity Class intance without scene started
             //I have no proof but I will keep this here in case of something happening
-            
+            if(streamHandler == null)
+            {
+                InitializeStream(AttackStreamHandler.instance);
+            }
+
+            streamHandler.AddStream(stateInputType);
+
             base.OnEnter();
         }
 
@@ -39,13 +45,6 @@ namespace ProjectZephyr
         public override void OnExit()
         {
             base.OnExit();
-
-            if (streamHandler == null)
-            {
-                InitializeStream(AttackStreamHandler.instance);
-            }
-
-            streamHandler.AddStream(stateInputType);
         }
 
         protected abstract void SetStateInput();

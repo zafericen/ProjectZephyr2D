@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectZephyr
 {
+    
     public class AttackStreamHandler: MonoSingleton<AttackStreamHandler>, IStream<AttackInputType>
     {
         public StreamList<AttackInputType> stream { get; set; }
