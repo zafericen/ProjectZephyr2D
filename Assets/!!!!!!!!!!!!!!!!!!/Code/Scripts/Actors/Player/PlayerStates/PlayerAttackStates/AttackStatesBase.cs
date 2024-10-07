@@ -29,8 +29,6 @@ namespace ProjectZephyr
                 InitializeStream(AttackStreamHandler.instance);
             }
 
-            streamHandler.AddStream(stateInputType);
-
             base.OnEnter();
         }
 
@@ -38,7 +36,6 @@ namespace ProjectZephyr
         {
             base.OnUpdate();
             isPerfectAttack = combat.weapon.IsPerfectAttacking();
-            Debug.Log(isPerfectAttack);
             if (!combat.weapon.IsAttacking())
             {
                 busy = false;
@@ -48,19 +45,46 @@ namespace ProjectZephyr
         public override void OnExit()
         {
             base.OnExit();
+            Debug.Log(isPerfectAttack);
             if (isPerfectAttack)
             {
-                combat.gameObject.GetComponentInChildren<PlayerAnimationEventHandler>().Flash();
-                combat.gameObject.GetComponentInChildren<PlayerAnimationEventHandler>().NotPerfectAttacking();
+                PerfectAttackLogic();
             }
+            else
+            {
+                streamHandler.stream.Clear();
+            }
+
             combat.gameObject.GetComponentInChildren<PlayerAnimationEventHandler>().NotAttacking();
         }
 
         protected abstract void SetStateInput();
 
+        protected virtual void PerfectAttackLogic()
+        {
+            //TODO: VFX
+            combat.gameObject.GetComponentInChildren<PlayerAnimationEventHandler>().NotPerfectAttacking();
+            sendContext.isPerfectAttack = true;
+            combat.gameObject.GetComponentInChildren<PlayerAnimationEventHandler>().Flash();
+            streamHandler.AddStream(stateInputType);
+
+        }
+
         public void InitializeStream(IStream<AttackInputType> stream)
         {
             streamHandler = stream;
+        }
+
+        public override bool ValidateInputAndUpdateContext(InputContext compareContext)
+        {
+            var gettedInputType = InputHandler.instance.GetInput(compareContext.type, compareContext.holdType);
+            
+            if(gettedInputType.attackType == compareContext.attackType)
+            {
+                sendContext.inputContext = gettedInputType;
+                return true;
+            }
+            return false;
         }
 
     }

@@ -16,7 +16,7 @@ namespace ProjectZephyr
             InitializeStream();
         }
 
-        public void InitializeStream(int capacity = 20)
+        public void InitializeStream(int capacity = 5)
         {
             stream = new StreamList<AttackInputType>(capacity);
         }

@@ -12,13 +12,11 @@ namespace ProjectZephyr
     {
         public override void InitialConnections()
         {
-            var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
 
-
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Normal }), typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Special }), typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.WeaponArt }), typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Ability }), typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState),Priority.Low));
         }
     }
@@ -28,13 +26,11 @@ namespace ProjectZephyr
 
         public override void InitialConnections()
         {
-            var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
 
-
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Normal }), typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Special }), typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.WeaponArt }), typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Ability }), typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState), Priority.Low));
 
         }
@@ -44,13 +40,11 @@ namespace ProjectZephyr
     {
         public override void InitialConnections()
         {
-            var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
 
-
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Normal }), typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Special }), typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.WeaponArt }), typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Ability }), typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState), Priority.Low));
 
         }
@@ -60,13 +54,11 @@ namespace ProjectZephyr
     {
         public override void InitialConnections()
         {
-            var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
 
-
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Normal }), typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Special }), typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.WeaponArt }), typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && ValidateInputAndUpdateContext(new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed, attackType = AttackInputType.Ability }), typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState), Priority.Low));
         }
     }

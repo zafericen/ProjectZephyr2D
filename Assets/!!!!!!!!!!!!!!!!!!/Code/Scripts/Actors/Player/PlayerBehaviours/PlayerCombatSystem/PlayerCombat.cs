@@ -34,22 +34,22 @@ namespace ProjectZephyr
             }
         }
 
-        private AttackFragment CheckComboFragment(StreamList<AttackInputType> stream)
+        private AttackFragment CheckComboFragment(StreamList<AttackInputType> stream, AttackInputType activasion)
         {
             var comboAttack = weapon.CheckComboStream(stream);
-            if(comboAttack == null)
+            if (comboAttack != null && comboAttack.CanAttackBePerformed(activasion))
             {
-                return null;
+                return comboAttack;
             }
 
-            return comboAttack;
+            return null;
         }
 
         public void Attack(AttackInputType type)
         {
             CheckComboEnd();
             timer.Reset();
-            var potentialComboAttack = CheckComboFragment(AttackStreamHandler.instance.stream);
+            var potentialComboAttack = CheckComboFragment(AttackStreamHandler.instance.stream,type);
             AttackFragment fragment;
             
             if (potentialComboAttack == null)

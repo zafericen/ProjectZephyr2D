@@ -12,10 +12,12 @@ namespace ProjectZephyr
         XHigh,
     }
 
+    //TODO: get rid of isPerfectAttack
     public struct StateContext
     {
         public Type typeOfState;
         public InputContext inputContext;
+        public bool isPerfectAttack;
     }
 
     public class Connection : IComparable<Connection>

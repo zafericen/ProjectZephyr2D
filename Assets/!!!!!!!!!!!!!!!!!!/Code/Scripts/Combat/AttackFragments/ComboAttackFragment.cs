@@ -9,10 +9,12 @@ namespace ProjectZephyr
     public abstract class ComboAttackFragment : AttackFragment
     {
         protected ComboStreamDetector detector;
+        public readonly AttackInputType activasionAttack;
         protected bool isLocked;
-        protected ComboAttackFragment(GameObject attackPerformer, AnimatorOverrideController overrideController, List<AttackInputType> comboStream) : base(attackPerformer, overrideController)
+        protected ComboAttackFragment(GameObject attackPerformer, AnimatorOverrideController overrideController, List<AttackInputType> comboStream, AttackInputType activasionAttack) : base(attackPerformer, overrideController)
         {
             detector = new ComboStreamDetector(comboStream);
+            this.activasionAttack = activasionAttack;
             isLocked = true;
         }
 
@@ -25,6 +27,18 @@ namespace ProjectZephyr
             return isAccomplished;
         }
 
+        public bool CanAttackBePerformed(AttackInputType activasion)
+        {
+            if (isLocked)
+            {
+                return false;
+            }
+            if (activasion == activasionAttack)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public override void Perform()
         {
