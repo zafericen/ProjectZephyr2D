@@ -40,11 +40,11 @@ namespace ProjectZephyr
         public override void OnUpdate()
         {
             base.OnUpdate();
-            attacksStateMachine.Run();
             if (attacksStateMachine.IsExit())
             {
                 busy = false;
             }
+            attacksStateMachine.Run();
         }
     }
 }

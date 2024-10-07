@@ -6,6 +6,7 @@ namespace ProjectZephyr
 
     public abstract class WeaponBase: MonoBehaviour
     {
+        GameObject attackPerformer;
         protected enum Attacks
         {
             NA,
@@ -35,6 +36,8 @@ namespace ProjectZephyr
 
         public virtual void InitializeWeapon(GameObject attackPerformer)
         {
+            this.attackPerformer = attackPerformer;
+
             InitializeNormalAttackFragment(attackPerformer);
             InitializeSpecialAttackFragment(attackPerformer);
             InitializeWeaponArtFragment(attackPerformer);
@@ -48,12 +51,13 @@ namespace ProjectZephyr
 
         public bool IsAttacking()
         {
-            if(currentFragment != null) 
-            {
-                return !currentFragment.IsAttackFinished();
-            }
 
-            return false;
+            return attackPerformer.GetComponentInChildren<PlayerAnimationEventHandler>().IsAttacking();
+        }
+
+        public bool IsPerfectAttacking()
+        {
+            return attackPerformer.GetComponentInChildren<PlayerAnimationEventHandler>().IsPerfectAttacking();
         }
 
         protected abstract void InitializeNormalAttackFragment(GameObject attackPerformer);
@@ -76,7 +80,7 @@ namespace ProjectZephyr
 
 
         /// <summary>
-        /// returns NULL if the index or the list couldnt be found. So be carefull
+        /// throws NULL exception if the index or the list couldnt be found. So be carefull
         /// </summary>
         /// <param name="attackOverrideList"></param>
         /// <param name="index"></param>

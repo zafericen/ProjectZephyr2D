@@ -9,6 +9,7 @@ namespace ProjectZephyr
     {
         protected PlayerCombat combat;
         protected AttackInputType stateInputType;
+        protected bool isPerfectAttack;
 
         public IStream<AttackInputType> streamHandler { get; set; }
 
@@ -36,6 +37,8 @@ namespace ProjectZephyr
         public override void OnUpdate()
         {
             base.OnUpdate();
+            isPerfectAttack = combat.weapon.IsPerfectAttacking();
+            Debug.Log(isPerfectAttack);
             if (!combat.weapon.IsAttacking())
             {
                 busy = false;
@@ -45,6 +48,12 @@ namespace ProjectZephyr
         public override void OnExit()
         {
             base.OnExit();
+            if (isPerfectAttack)
+            {
+                combat.gameObject.GetComponentInChildren<PlayerAnimationEventHandler>().Flash();
+                combat.gameObject.GetComponentInChildren<PlayerAnimationEventHandler>().NotPerfectAttacking();
+            }
+            combat.gameObject.GetComponentInChildren<PlayerAnimationEventHandler>().NotAttacking();
         }
 
         protected abstract void SetStateInput();

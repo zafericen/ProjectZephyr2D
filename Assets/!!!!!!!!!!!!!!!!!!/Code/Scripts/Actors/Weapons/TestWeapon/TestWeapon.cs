@@ -12,7 +12,7 @@ namespace ProjectZephyr
         {
             comboAttackFragments = new List<ComboAttackFragment>
         {
-            new LavaSword_CA(attackPerformer,GetOverrideFromList(Attacks.Combo,0),new List<AttackInputType>{AttackInputType.Normal,AttackInputType.Special,AttackInputType.WeaponArt},AttackInputType.WeaponArt),
+            new LavaSword_CA(attackPerformer,GetOverrideFromList(Attacks.Combo,0),new List<AttackInputType>{AttackInputType.Normal,AttackInputType.Special,AttackInputType.WeaponArt}),
         };
         }
 

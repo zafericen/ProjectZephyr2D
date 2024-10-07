@@ -15,10 +15,10 @@ namespace ProjectZephyr
             var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
 
 
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState),Priority.Low));
         }
     }
@@ -31,10 +31,10 @@ namespace ProjectZephyr
             var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
 
 
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState), Priority.Low));
 
         }
@@ -47,10 +47,10 @@ namespace ProjectZephyr
             var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
 
 
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState), Priority.Low));
 
         }
@@ -63,10 +63,10 @@ namespace ProjectZephyr
             var input = InputHandler.instance.GetInput(InputType.Attack, InputActionPhase.Performed);
 
 
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
-            connections.Add(new Connection(() => !busy && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Normal, typeof(PlayerNormalAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Special, typeof(PlayerSpecialAttackState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.WeaponArt, typeof(PlayerWeaponArtState)));
+            connections.Add(new Connection(() => (!busy || isPerfectAttack) && input.attackType == AttackInputType.Ability, typeof(PlayerAbilityState)));
             connections.Add(new Connection(() => !busy, typeof(ExitState), Priority.Low));
         }
     }

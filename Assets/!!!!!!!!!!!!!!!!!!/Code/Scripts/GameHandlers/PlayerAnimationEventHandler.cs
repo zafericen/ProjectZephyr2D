@@ -7,10 +7,11 @@ namespace ProjectZephyr
 {
 
     [RequireComponent(typeof(SimpleFlash))]
-    public class PlayerAnimationEventHandler : MonoBehaviour, IInvincible, IAttacking
+    public class PlayerAnimationEventHandler : MonoBehaviour, IInvincible, IAttacking, IPerfectAttacking
     {
         bool isInvincible;
         bool isAttacking;
+        bool perfectAttacking;
         SimpleFlash simpleFlash;
 
         private void Start()
@@ -51,6 +52,22 @@ namespace ProjectZephyr
         {
             isInvincible = false;
         }
+
+        public bool IsPerfectAttacking()
+        {
+            
+            return perfectAttacking;
+        }
+
+        public void PerfectAttacking()
+        {
+            perfectAttacking = true;
+        }
+
+        public void NotPerfectAttacking()
+        {
+            perfectAttacking = false;
+        }
     }
 
     interface IInvincible
@@ -74,5 +91,10 @@ namespace ProjectZephyr
     interface IPerfectAttacking
     {
 
+        public bool IsPerfectAttacking();
+
+        public void PerfectAttacking();
+
+        public void NotPerfectAttacking();
     }
 }
