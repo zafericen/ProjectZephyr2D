@@ -11,7 +11,7 @@ namespace ProjectZephyr
         public void Select()
         {
             Color tempColor = pieSliceImage.color;
-            tempColor.a = 1f;
+            tempColor.a = 0.8f;
             pieSliceImage.color = tempColor;
         }
         public void Deselect()

@@ -6,20 +6,21 @@ namespace ProjectZephyr
 {
     public class TestScript : MonoBehaviour
     {
-        public List<string> selectionList;
-        public UISetup uiSetupScript;
-        public PieMenu pieMenuScript;
+        public SelectionMenu selectionMenuScript;
+
+        public string selectedAbility;
+        public string selectedWeapon;
 
         // TODO: Singleton GameHandler
 
         void Awake()
         {
-            uiSetupScript.PieMenuSetup(selectionList);
+            selectionMenuScript.CreatePieMenu();
         }
 
         void Update()
         {
-            pieMenuScript.Selection(uiSetupScript.pieAngle);
+            selectionMenuScript.UpdatePieMenu();
         }
     }
 }
