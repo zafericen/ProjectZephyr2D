@@ -39,7 +39,7 @@ namespace ProjectZephyr
 
             foreach (var connection in current.connections)
             {
-                if (connection.Check() && DoesStateExists(connection.stateType) && !GetState(connection.stateType).IsBusy())
+                if (connection.Check() && DoesStateExists(connection.stateType))
                 {
                     ChangeState(connection.stateType);
                     break;

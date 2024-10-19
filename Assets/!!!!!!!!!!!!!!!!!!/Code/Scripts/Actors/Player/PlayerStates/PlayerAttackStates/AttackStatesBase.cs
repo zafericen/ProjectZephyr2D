@@ -35,7 +35,9 @@ namespace ProjectZephyr
         public override void OnUpdate()
         {
             base.OnUpdate();
+
             isPerfectAttack = combat.weapon.IsPerfectAttacking();
+
             if (!combat.weapon.IsAttacking())
             {
                 busy = false;
@@ -77,11 +79,11 @@ namespace ProjectZephyr
 
         public override bool ValidateInputAndUpdateContext(InputContext compareContext)
         {
-            var gettedInputType = InputHandler.instance.GetInput(compareContext.type, compareContext.holdType);
+            var gottenInputType = InputHandler.instance.GetInput(compareContext.type, compareContext.holdType);
             
-            if(gettedInputType.attackType == compareContext.attackType)
+            if(gottenInputType.attackType == compareContext.attackType)
             {
-                sendContext.inputContext = gettedInputType;
+                sendContext.inputContext = gottenInputType;
                 return true;
             }
             return false;
