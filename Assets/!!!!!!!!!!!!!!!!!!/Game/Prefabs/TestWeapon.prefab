@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorOverrideControllersNA:
-  - {fileID: 22100000, guid: 1432e9d76f2ec8e4cb459124995c8bea, type: 2}
+  - {fileID: 22100000, guid: 31fee8aa84e5bc849ae5a2e44dd65b6d, type: 2}
   animatorOverrideControllersSA:
   - {fileID: 22100000, guid: 31fee8aa84e5bc849ae5a2e44dd65b6d, type: 2}
   animatorOverrideControllersWA:

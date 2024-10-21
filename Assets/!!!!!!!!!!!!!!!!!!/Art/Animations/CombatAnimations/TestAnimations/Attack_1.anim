@@ -101,14 +101,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0
+  - time: 0.33333334
     functionName: PerfectAttacking
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 71735355afe19df4299fd5060038fc3f, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 0.5
     functionName: NotPerfectAttacking
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 71735355afe19df4299fd5060038fc3f, type: 3}

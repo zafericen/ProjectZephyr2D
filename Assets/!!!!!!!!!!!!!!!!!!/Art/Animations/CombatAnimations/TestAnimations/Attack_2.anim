@@ -99,7 +99,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.41666666
+  - time: 0.33333334
     functionName: NotPerfectAttacking
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 71735355afe19df4299fd5060038fc3f, type: 3}
