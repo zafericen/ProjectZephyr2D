@@ -31,7 +31,7 @@ namespace ProjectZephyr
 
     public class EnemyBehaviour : MonoBehaviour
     {
-        EnemyContext context;
+        public EnemyContext context { get; internal set; }
 
         private Dictionary<Type, float> probabilities = new Dictionary<Type, float>();
         private float totalProbability = 0;

@@ -8,17 +8,18 @@ namespace ProjectZephyr
 
     public class EnemyTeleport : EnemyMovement
     {
-
         [SerializeField]
         private float teleportTime = 1.0f;
 
         public bool isTeleporting { get; internal set; }
 
+        private Coroutine teleportCoroutine;
+
         public override void Move(Transform destination)
         {
             if (!isTeleporting)
             {
-                StartCoroutine(Teleport(destination));
+                teleportCoroutine = StartCoroutine(Teleport(destination));
             }
         }
 
@@ -31,6 +32,15 @@ namespace ProjectZephyr
             transform.position = destination.position;
 
             isTeleporting = false;
+        }
+
+        public void CancelTeleport()
+        {
+            if (isTeleporting && teleportCoroutine != null)
+            {
+                StopCoroutine(teleportCoroutine);
+                isTeleporting = false;
+            }
         }
     }
 
