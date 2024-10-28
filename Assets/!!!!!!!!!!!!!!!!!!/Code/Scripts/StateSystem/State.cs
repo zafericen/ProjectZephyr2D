@@ -1,67 +1,41 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using System;
 
 namespace ProjectZephyr
 {
 
-    public class State
+    public enum Priority
     {
-        protected bool busy;
-        protected StateContext recieveContext;
-        protected StateContext sendContext;
+        HIGH,
+        MEDIUM,
+        LOW,
+    };
 
-        public PriorityList<Connection> connections { get; } = new PriorityList<Connection>();
-
-        public virtual void OnEnter()
-        {
-            busy = true;
-        }
-
-        public virtual void OnUpdate()
-        {
-        }
-
-        public virtual void OnExit()
-        {
-            busy = false;
-        }
-
-        public virtual bool IsBusy()
-        {
-            return busy;
-        }
-
-        public void AddConnection(Connection connection)
-        {
-            connections.Add(connection);
-        }
-
-        public void TakeContext(StateContext context)
-        {
-            this.recieveContext = context;
-        }
-
-        public StateContext GiveContext()
-        {
-            return sendContext;
-        }
-
-        public virtual void InitialConnections()
-        {
-        }
+    public enum Status
+    {
+        SUCCESS,
+        FAILURE,
+        WORKING,
     }
 
-    public class MonoState : State
+    public class State : MonoBehaviour, IComparable<State>
     {
-        public MonoState(GameObject o)
+        protected Animator Animator;
+        [SerializeField]
+        protected Priority priority;
+
+        public Status status;
+
+        public virtual bool Check(Context context)
         {
-            InitialConnections();
+            return false;
         }
-    }
 
-
-    public class ExitState : State
-    {
+        public int CompareTo(State other)
+        {
+            if (other == null) return 1;
+            return priority.CompareTo(other.priority);
+        }
     }
 
 }

@@ -1,80 +1,49 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace ProjectZephyr
 {
 
-    public class StateMachine
+    [Serializable]
+    public class Context
     {
-        private Dictionary<Type, State> states = new Dictionary<Type, State>()
-        {
-            {typeof(ExitState), new ExitState()},
-        };
-
         public State current;
+    }
 
-        public StateMachine(Type starterStateName)
-        { 
-            current = states[starterStateName];
-            current.OnEnter();
-        }
+    public class StateMachine : MonoBehaviour
+    {
+        public Context context;
+        public List<State> states;
 
-        public StateMachine()
+        void Start()
         {
-            current = states[typeof(ExitState)];
-        }
-
-        public void ChangeState(Type type)
-        {
-            current.OnExit();
-            StateContext context = current.GiveContext();
-            current = states[type];
-            current.TakeContext(context);
-            current.OnEnter();
-        }
-
-        public virtual void Run()
-        {
-            current.OnUpdate();
-
-            foreach (var connection in current.connections)
+            states = new List<State>(GetComponents<State>());
+            states.Sort();
+            context.current = states[0];
+            for (int i = 1; i < states.Count; i++)
             {
-                if (connection.Check() && DoesStateExists(connection.stateType))
-                {
-                    ChangeState(connection.stateType);
-                    break;
-                }
+                states[i].enabled = false;
             }
         }
 
-        private State GetState(Type type)
+        void Update()
         {
-            return states[type];
-        }
-
-        protected bool DoesStateExists(Type type)
-        {
-            return states.ContainsKey(type);
-        }
-
-        public void AddState(Type type, State state)
-        {
-            states.Add(type, state);
-        }
-
-        public void RemoveState(Type type)
-        {
-            states.Remove(type);
-        }
-
-        public void AddConnection(Type where, Connection connection)
-        {
-            states[where].AddConnection(connection);
-        }
-
-        public bool IsExit()
-        {
-            return current is ExitState;
+            foreach (var state in states)
+            {
+                if (state != context.current && state.Check(context))
+                {
+                    if (context.current.status == Status.WORKING)
+                    {
+                        context.current.status = Status.FAILURE;
+                    }
+                    context.current.enabled = false;
+                    state.enabled = true;
+                    context.current = state;
+                    break;
+                }
+            }
         }
     }
 }

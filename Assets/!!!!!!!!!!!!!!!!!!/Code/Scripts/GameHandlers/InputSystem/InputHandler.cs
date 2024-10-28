@@ -13,11 +13,10 @@ namespace ProjectZephyr
     {
         private Dictionary<Type, InputContext> stateToInputContextMap = new Dictionary<Type, InputContext>
         {
-            { typeof(PlayerIdleState), InputContext.EmptyContext() },
-            { typeof(PlayerWalkState), new InputContext { type = InputType.Walk, holdType = InputActionPhase.Performed } },
-            { typeof(PlayerJumpState), new InputContext { type = InputType.Jump, holdType = InputActionPhase.Performed } },
-            { typeof(PlayerDodgeState), new InputContext { type = InputType.Dodge, holdType = InputActionPhase.Performed } },
-            { typeof(PlayerAttackState), new InputContext { type = InputType.Attack, holdType = InputActionPhase.Performed } },
+            { typeof(Idle), InputContext.EmptyContext() },
+            { typeof(PlayerMovement), new InputContext { type = InputType.Walk, holdType = InputActionPhase.Performed } },
+            { typeof(PlayerJump), new InputContext { type = InputType.Jump, holdType = InputActionPhase.Performed } },
+            { typeof(DodgeRoll), new InputContext { type = InputType.Dodge, holdType = InputActionPhase.Performed } },
         };
         public InputStack<InputContext> inputStack { get; set; }
         public PlayerInputActions inputActions { get; set; }
