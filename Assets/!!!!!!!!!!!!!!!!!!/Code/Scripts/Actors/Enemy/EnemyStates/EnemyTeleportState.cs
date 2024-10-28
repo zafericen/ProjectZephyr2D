@@ -23,11 +23,6 @@ namespace ProjectZephyr
             enemyTeleport.CancelTeleport();
             base.OnExit();
         }
-
-        public override void InitialConnections()
-        {
-            
-        }
     }
 
 }

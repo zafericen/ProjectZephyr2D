@@ -33,7 +33,7 @@ namespace ProjectZephyr
             current.OnEnter();
         }
 
-        public void Run()
+        public virtual void Run()
         {
             current.OnUpdate();
 
@@ -52,7 +52,7 @@ namespace ProjectZephyr
             return states[type];
         }
 
-        private bool DoesStateExists(Type type)
+        protected bool DoesStateExists(Type type)
         {
             return states.ContainsKey(type);
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ProjectZephyr
 {
 
-    public class EnemyStateBase : MonoState
+    public abstract class EnemyStateBase : MonoState
     {
         protected EnemyBehaviour enemyBehaviour;
 
@@ -17,6 +17,11 @@ namespace ProjectZephyr
         public override void OnExit()
         {
             enemyBehaviour.CalculateProbabilities();
+        }
+
+        public bool Roll(float probability)
+        {
+            return Random.value <= probability;
         }
     }
 

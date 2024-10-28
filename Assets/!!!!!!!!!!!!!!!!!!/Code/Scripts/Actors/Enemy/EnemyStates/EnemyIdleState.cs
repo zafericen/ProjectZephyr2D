@@ -16,6 +16,11 @@ namespace ProjectZephyr
             base.OnEnter();
             busy = false;
         }
+
+        public virtual float CalculateProbability(EnemyContext context)
+        {
+            return 0.5f;
+        }
     }
 
 }

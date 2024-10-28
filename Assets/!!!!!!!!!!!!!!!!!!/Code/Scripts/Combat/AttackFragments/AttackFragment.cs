@@ -10,6 +10,7 @@ namespace ProjectZephyr
         protected Animator animator;
         protected const string animationName = "Attack";
         public AnimatorOverrideController animatorOverride;
+        public float range = 1.0f;
 
         public float damageMultiplier = 1f;
 
