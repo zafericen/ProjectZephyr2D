@@ -20,7 +20,6 @@ namespace ProjectZephyr
 
     public class State : MonoBehaviour, IComparable<State>
     {
-        protected Animator Animator;
         [SerializeField]
         protected Priority priority;
 
