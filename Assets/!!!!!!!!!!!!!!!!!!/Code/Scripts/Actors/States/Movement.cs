@@ -17,6 +17,8 @@ namespace ProjectZephyr
         [SerializeField]
         protected Direction direction = Direction.Right;
 
+        public Direction Direction => direction;
+
         protected Rigidbody2D rb;
 
         public void Move(Vector2 inputVector)

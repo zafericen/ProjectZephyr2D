@@ -16,9 +16,9 @@ namespace ProjectZephyr
 
         [SerializeField]
         List<int> defenses = new List<int>()
-    {
-        50, 50,
-    };
+        {
+            50, 50,
+        };
 
         public void TakeDamage(float damage, DamageType damageType)
         {
