@@ -6,9 +6,10 @@ namespace ProjectZephyr
 
     public enum Priority
     {
-        HIGH,
-        MEDIUM,
         LOW,
+        MEDIUM,
+        HIGH,
+        TRANSITION,
     };
 
     public enum Status

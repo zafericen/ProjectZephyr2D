@@ -700,7 +700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 60686026565032559, guid: 63fffa76fe20fb442bf4f5ac8c35f94e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 60686026565032559, guid: 63fffa76fe20fb442bf4f5ac8c35f94e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -734,9 +734,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2882008199556670956, guid: 63fffa76fe20fb442bf4f5ac8c35f94e, type: 3}
+      propertyPath: priority
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3935531007406710869, guid: 63fffa76fe20fb442bf4f5ac8c35f94e, type: 3}
       propertyPath: jumpSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935531007406710869, guid: 63fffa76fe20fb442bf4f5ac8c35f94e, type: 3}
+      propertyPath: jumpWalkSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4691747367408165806, guid: 63fffa76fe20fb442bf4f5ac8c35f94e, type: 3}
       propertyPath: m_Name
