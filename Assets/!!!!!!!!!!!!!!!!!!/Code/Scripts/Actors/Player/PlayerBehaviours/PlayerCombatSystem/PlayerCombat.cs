@@ -14,7 +14,6 @@ namespace ProjectZephyr
 
         private float lastFragmentTime = 0;
 
-
         private void Update()
         {
             if (PlayerWeaponSlots.instance.GetChangeWeaponFlag())
