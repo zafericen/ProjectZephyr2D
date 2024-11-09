@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace ProjectZephyr
+namespace CBRN
 {
 
     [Serializable]
@@ -14,20 +14,33 @@ namespace ProjectZephyr
 
     public class StateMachine : MonoBehaviour
     {
-        public Context context;
-        public List<State> states;
-
+        [SerializeField]
+        private Context context;
+        private List<State> states;
+    
         void Start()
         {
             states = new List<State>(GetComponents<State>());
             states.Sort();
-            context.current = states[0];
-            for (int i = 1; i < states.Count; i++)
+            if (context.current == null)
+            {
+                if (states.Count == 0)
+                {
+                    context.current = null;
+                }
+                else
+                {
+                    context.current = states[states.Count - 1];
+                }
+            }
+            for (int i = 0; i < states.Count; i++)
             {
                 states[i].enabled = false;
             }
-        }
 
+            context.current.enabled = true;
+        }
+    
         void Update()
         {
             foreach (var state in states)
