@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ProjectZephyr
 {
 
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour , IDamageable
     {
         StateMachine stateMachine;
 
@@ -22,6 +22,17 @@ namespace ProjectZephyr
 
         void Update()
         {
+        }
+        
+        public float health = 100f;
+
+        public void TakeDamage(float damageMultiplier)
+        {
+            health -= 10f * damageMultiplier; // Adjust damage as needed
+            if (health <= 0)
+            {
+                Destroy(gameObject); // Handle enemy death
+            }
         }
     }
 

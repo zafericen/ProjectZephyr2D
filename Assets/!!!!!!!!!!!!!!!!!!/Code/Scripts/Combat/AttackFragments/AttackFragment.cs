@@ -8,6 +8,7 @@ namespace ProjectZephyr
     {
         protected GameObject attackPerformer;
         protected Animator animator;
+        protected Hitbox hitbox;
         protected const string animationName = "Attack";
         public AnimatorOverrideController animatorOverride;
         public float range = 1.0f;
@@ -26,12 +27,14 @@ namespace ProjectZephyr
             this.attackPerformer = attackPerformer;
             animator = attackPerformer.GetComponentInChildren<Animator>();
             animatorOverride = overrideController;
+            hitbox = attackPerformer.GetComponentInChildren<Hitbox>();
         }
 
         public virtual void Perform()
         {
             OverrideAnimator();
             PlayAnimator();
+            EnableHitbox();
             ApplyLogic();
         }
 
@@ -44,6 +47,12 @@ namespace ProjectZephyr
         public void OverrideAnimator()
         {
             animator.runtimeAnimatorController = animatorOverride;
+        }
+        
+        protected virtual void EnableHitbox()
+        {
+            float animationDuration = FragmentTime();
+            hitbox.EnableHitbox(animationDuration);
         }
 
         public bool IsAttackFinished()
