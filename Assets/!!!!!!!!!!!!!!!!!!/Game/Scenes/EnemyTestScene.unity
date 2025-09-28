@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 1488670717}
   - component: {fileID: 1488670716}
   - component: {fileID: 1488670719}
+  - component: {fileID: 1488670720}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -413,7 +414,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2.8125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -488,6 +489,30 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1488670720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488670715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_AssetsPPU: 64
+  m_RefResolutionX: 640
+  m_RefResolutionY: 360
+  m_CropFrame: 0
+  m_GridSnapping: 0
+  m_FilterMode: 0
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1 &1558861820
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,24 +755,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1423377536145155943, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1423377536145155943, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1423377536145155943, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1423377536145155943, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.79
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 1423377536145155943, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.99
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 1423377536145155943, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -781,12 +794,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1423377536145155943, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3118164735870054655, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_SpriteSortPoint
+      propertyPath: m_DrawMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6505969055839902895, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
@@ -797,33 +806,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6532028679482437646, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6532028679482437646, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6532028679482437646, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6532028679482437646, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.514
-      objectReference: {fileID: 0}
-    - target: {fileID: 6532028679482437646, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.757
-      objectReference: {fileID: 0}
     - target: {fileID: 8205385416877806655, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1488670717}
     - target: {fileID: 8590455962916364247, guid: 4722080f519a01144a9786e4e94b71d6, type: 3}
       propertyPath: m_Mass
-      value: 0.1818887
+      value: 0.05977247
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

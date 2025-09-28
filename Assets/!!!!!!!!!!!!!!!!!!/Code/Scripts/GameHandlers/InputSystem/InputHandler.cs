@@ -97,9 +97,8 @@ namespace ProjectZephyr
             inputActions = new PlayerInputActions();
 
             EnableAllInputMaps();
-
-            var movementInputHandler = new PlayerMovementInputHandler(this);
-            var attackInputHandler = new PlayerAttackInputHandler(this);
+            _ = new PlayerMovementInputHandler(this);
+            _ = new PlayerAttackInputHandler(this);
         }
 
         public void DisableInputMaps(params InputActionMap[] toDisableInputActions)

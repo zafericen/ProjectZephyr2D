@@ -9,5 +9,5 @@ AnimatorOverrideController:
   m_Name: NA_1
   m_Controller: {fileID: 9100000, guid: 24037ad39289d3c48afc0f70c4796235, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: d893da4ff569b754b998b9b5ce1e1e5e, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: d893da4ff569b754b998b9b5ce1e1e5e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d580f1d1a428cb040b4d98afe8ba4e60, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 11822cbe6f25108459fd2ef98cc9255c, type: 2}
